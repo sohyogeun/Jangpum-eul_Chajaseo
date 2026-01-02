@@ -1,0 +1,49 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.O_back{
+    width: 1500px;
+    height: 2000px;
+    margin: 0px auto;
+}
+.O_Name{
+    width: 1100px;
+    height: 1000px;
+    margin-left: 50px;
+    float: left;
+}
+.O_Name h4{
+    margin: 0px;
+}
+.O_T_B{
+    width: 800px;
+    height: 500px;
+    /* background-color: aquamarine; */
+    margin: 0px auto;
+    margin-top: 20px;
+}
+.O_T_B_L{
+    width: 400px;
+    height: 500px;
+    border-right: 1px solid black;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+}
+.list-title{
+    color: blue;
+}
+.O_T_B_R{
+    width: 400px;
+    height: 500px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+}

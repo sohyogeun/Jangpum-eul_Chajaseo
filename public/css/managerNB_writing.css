@@ -1,0 +1,73 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.NB_W_back{
+    width: 1500px;
+    height: 1000px;
+    margin: 0px auto;
+}
+.NB_W_Name{
+    width: 1200px;
+    height: 1000px;
+    /* background-color: azure; */
+    float: left;
+}
+.NB_W_Name h4{
+    margin: 0px;
+}
+.NB_W_list{
+    width: 1000px;
+    height: 700px;
+    /* border: 1px solid #e5e5e5; */
+    float: left;
+    margin-left: 50px;
+}
+.NB_W_listName{
+    width: 300px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    background-color: #f7f7f7;
+    float: left;
+    display: flex;
+    text-align: left;
+    justify-content: left;
+    align-items: center;
+}
+.NB_W_listNameOne{
+    width: 698px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    float: left;
+}
+.NB_W_T{
+    width: 1000px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    background-color: #f7f7f7;
+}
+.NB_W_button{
+    width: 1000px;
+    height: 50px;
+    border-top: 1px solid #e5e5e5;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+    margin-left: 50px;
+}
+.NB_W_button button{
+    border-radius: 10px;
+}
+.NB_W_button
+#header-container *,
+#admin-menuTwo-container * {
+    font-size: revert;
+    font-weight: revert;
+    color: revert;
+}

@@ -1,0 +1,78 @@
+div{
+    box-sizing: border-box;
+}
+body{
+  margin: 0;
+}
+.faq {
+  max-width: 980px;
+  margin: 32px auto;
+  padding: 0 20px;
+  color: #111;
+}
+
+/* 헤더 + 가는 굵은 라인 */
+.faq-head h3 {
+  margin: 0 0 10px;
+  font-size: 20px;          /* 스샷처럼 작게 */
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+.faq-divider {
+  height: 3px;              /* 진한 상단 라인 */
+  background: #111;
+  margin-bottom: 14px;
+}
+
+/* 회색 탭 느낌의 제목/내용 헤더 */
+.faq-table-head {
+  display: inline-flex;     /* 넓게 늘리지 않고 탭처럼만 보이게 */
+  gap: 8px;
+  margin: 8px 0 6px;
+}
+.faq-table-head .th {
+  background: #e7e9ee;     /* 연회색 */
+  border: 1px solid #cfd3da;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 6px 14px;
+  color: #333;
+}
+
+/* 리스트 라인 스타일 */
+.faq-list {
+  list-style: none;
+  padding: 0;
+  margin: 0px 0 0;
+}
+.faq-list .row {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr; /* 제목 / 내용 */
+  align-items: center;
+  min-height: 38px;          /* 스샷처럼 공간만 있는 얇은 줄 느낌 */
+  border-bottom: 1px solid #dfe3ea;   /* 얇은 회색 라인 */
+}
+.faq-list .row .title,
+.faq-list .row .content {
+  font-size: 10px;
+  color: #333;
+  padding: 3px 5px;
+}
+
+/* 마우스 올렸을 때만 아주 은은하게 */
+.faq-list .row:hover {
+  background: #fafbfc;
+}
+/* inquiry.css */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, "Noto Sans KR", Arial, sans-serif; color:#111; }
+/* 바디 스크롤 잠금(모달 열렸을 때) */
+body.is-modal-open { overflow: hidden; }
+
+/* 패널 안쪽 컨텐츠 패딩은 네가 가진 스타일 유지 */
+.fys-modal__panel { width: min(800px, 92vw); max-height: 90vh; }
+
+/* iframe을 패널 높이에 맞게 채우기 */
+.fys-modal__content { padding: 0; }                   /* 필요시 */
+#fysFrame { width: 100%; height: calc(90vh - 20px); border: 0; display: block; }
+

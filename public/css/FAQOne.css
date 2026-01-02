@@ -1,0 +1,86 @@
+/* 기본 스타일 */
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: system-ui, "Noto Sans KR", Arial, sans-serif;
+    color: #111;
+    background-color: #f0f2f5;
+}
+
+.FYS1-head-back{
+    position: fixed
+}
+.faq {
+    width: 374px;   /* 너비 고정 (원하는 값으로 조절 가능) */
+    /* height: 500px; */ /* 높이 고정은 내용 잘릴 수 있어 주석 처리 */
+    margin: 32px auto;
+    padding: 24px 30px;
+    /* background-color: #ffffff;
+    border: 1px solid #dfe3ea; */
+    border-radius: 8px;
+}
+
+/* "자주묻는 질문" 헤더 */
+.faq-head h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.faq-divider {
+    height: 3px;
+    background: #111;
+    margin-bottom: 14px;
+}
+
+/* "제목", "내용" 회색 탭 */
+.faq-table-head {
+    display: inline-flex;
+    gap: 8px;
+    margin: 8px 0 6px;
+}
+.faq-table-head .th {
+    background: #e7e9ee;
+    border: 1px solid #cfd3da;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 6px 14px;
+    color: #333;
+}
+
+/* FAQ 목록 스타일 */
+.faq-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.faq-list .row {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* 제목 / 내용 비율 */
+    align-items: center;
+    min-height: 42px;
+    border-bottom: 1px solid #dfe3ea;
+}
+.faq-list .row .title,
+.faq-list .row .content {
+    font-size: 14px;
+    color: #333;
+    padding: 8px 10px;
+}
+.faq-list .row:hover {
+    background: #fafbfc;
+}
+
+/* 하단 조작 버튼 스타일 */
+.faq-button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    border-radius: 4px;
+    margin: 5px;
+    background-color: #fff;
+}
+.faq-button:hover {
+    background-color: #f6f8fa;
+}

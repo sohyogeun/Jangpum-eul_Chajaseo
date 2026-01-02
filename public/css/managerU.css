@@ -1,0 +1,146 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.U_back{
+    width: 1500px;
+    height: 2000px;
+    margin: 0px auto;
+}
+.U_Name{
+    width: 1000px;
+    height: 1500px;
+    margin-left: 50px;
+    float: left;
+}
+.U_Name h4{
+    margin: 0px;
+    margin-bottom: 15px;
+}
+.U_inventory{
+    width: 800px;
+    height: 100px;
+    /* border: 1px solid #e5e5e5; */
+    float: left;
+}
+.U_inventoryName{
+    width: 100px;
+    height: 50px;
+    border:1px solid #e5e5e5;
+    float: left;
+    background-color: #f7f7f7;
+}
+.U_inventoryName P{
+    margin: 0px;
+    margin-top: 10px;
+    text-align: center;
+}
+.U_selectBox{
+    float: left;
+    width: 200px;
+    width: 50px;
+}
+/* 부모 wrapper의 크기 */
+.select-wrapper {
+    float: left;
+    width: 300px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+
+    /* 원하는 너비로 설정 */
+}
+
+/* 안의 select 태그가 부모 너비를 꽉 채우도록 설정 */
+.select-wrapper select{
+    /* 혹은 #logo-select */
+    width: 100px;
+    height: 30px;
+    /* 높이도 꽉 채우려면 추가 */
+    box-sizing: border-box;
+    /* 테두리나 패딩이 있어도 삐져나가지 않게 함 */
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    text-align: center;
+}
+.text_name{
+    width: 100px;
+    height: 30px;
+    margin-left: 30px;
+    border-radius: 10px;
+    border-color: #e5e5e5;
+}
+.U_serch{
+    width: 200px;
+    height: 100px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-left: none; 
+}
+.U_serch button{
+    width: 80px;
+    height: 50px;
+    background-color: black;
+    color: white;
+}
+.U_list{
+    margin-top: 300px;
+    float: left;
+}
+.list-group, .list-group-horizontal{
+    width: 1200px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    border-radius: 0px !important;
+}
+.list-group-item{
+    border-radius: 0px !important;
+}
+.back .list-group-item {
+    background-color: #f0f0f0;
+    /* 원하는 색상으로 변경 */
+
+    /* 배경색에 맞춰 테두리색도 바꿔주는 것이 좋습니다. 
+      (안 그러면 하얀색 테두리가 남을 수 있음)
+    */
+}
+.one{
+    width: 80px;
+    height: 50px;
+    font-size: 13px;
+}
+/* .one ul{
+
+} */
+.tow{
+    width: 110px;
+    height: 50px;
+    font-size: 13px;
+    padding: 5px 5px;
+}
+.three{
+    width: 150px;
+    height: 50px;
+    font-size: 13px;
+    padding: 5px 5px;
+}
+.list-group-item button{
+    border-radius: 10px;
+}
+.U_S_E{
+    float: right;
+    margin-top: 50px;
+}
+#header-container *,
+#admin-menuOne-container * {
+    font-size: revert;
+    font-weight: revert;
+    color: revert;
+}

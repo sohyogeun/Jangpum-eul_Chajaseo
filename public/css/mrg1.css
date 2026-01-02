@@ -1,0 +1,56 @@
+/* 기본 */
+*{box-sizing:border-box}
+html,body{margin:0;font-family:system-ui,"Noto Sans KR",Arial,sans-serif;color:#111;background:#fff}
+.page{max-width:980px;margin:24px auto 80px;padding:0 16px}
+
+/* 진행 단계 */
+.steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:12px 0 24px}
+.step{background:#e9eef4;color:#7a8699;text-align:center;padding:12px;border-radius:4px;font-weight:700}
+.step.is-active{background:#2f6fb6;color:#fff}
+
+/* 섹션 */
+.section{margin-top:18px}
+.section__title{font-size:16px;margin:18px 0 8px}
+
+/* 약관 */
+.agree-card{background:#f7f9fc;border:1px solid #dfe6ee;border-radius:4px;padding:10px 12px;margin-bottom:12px}
+.agree-label{display:block;font-weight:700;margin-bottom:8px}
+.agree-text{width:100%;height:150px;border:1px solid #dfe6ee;border-radius:4px;background:#fff;padding:10px;resize:vertical}
+.agree-check{margin-top:8px}
+.req{color:#d33;font-weight:700}
+
+/* 폼(표 형태 라인) */
+.form{border-top:2px solid #111;margin-top:14px}
+.row{display:grid;grid-template-columns:160px 1fr;align-items:center;border-bottom:1px solid #ebf0f5;min-height:52px}
+.row>label{padding:10px 12px;color:#444}
+.field-inline{padding:8px 12px;display:flex;flex-direction:column;gap:4px}
+.field-inline input[type="text"],
+.field-inline input[type="password"],
+.field-inline input[type="email"],
+.field-inline select{height:38px;border:1px solid #d7e0ea;border-radius:3px;padding:0 10px}
+
+/* 전화/휴대폰 */
+.phone,.mobile{flex-direction:row;align-items:center;gap:6px}
+.phone input,.mobile input{width:120px}
+.mobile select{height:38px;border:1px solid #d7e0ea;border-radius:3px;padding:0 8px}
+.dash{color:#9aa7b7}
+
+/* 주소 */
+.address{gap:8px}
+.zip{display:flex;gap:8px}
+.btn-line{height:38px;padding:0 12px;border:1px solid #b9c8da;background:#fff;border-radius:3px;cursor:pointer}
+.btn-line:hover{background:#f3f6fa}
+
+/* 안내문/힌트 */
+.hint{color:#9aa7b7;font-size:12px;margin:0}
+
+/* 제출 */
+.actions{display:flex;justify-content:center;padding:20px 0}
+.btn-primary{background:#2f6fb6;color:#fff;border:0;border-radius:4px;height:44px;min-width:180px;font-weight:800;cursor:pointer}
+.btn-primary:hover{filter:brightness(.95)}
+
+/* 반응형 */
+@media (max-width:640px){
+  .row{grid-template-columns:1fr}
+  .row>label{padding-bottom:0}
+}

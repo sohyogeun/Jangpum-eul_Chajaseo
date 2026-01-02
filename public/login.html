@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  
+  <meta charset="UTF-8" />
+  
+  <title>로그인</title>
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/head.css" />
+  <link rel="stylesheet" href="css/end.css" />
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
+  charset="utf-8"></script>
+  
+  <script src="js/head_log.js" defer></script>
+  <!-- <script src="js/naverLogin.js" defer></script> -->
+  <script src="js/comend.js" defer></script>
+  <script src="js/end.js" defer></script>
+  <script src="js/login.js" defer></script>
+  <!-- <script src="js/callback.js" defer></script> -->
+
+</head>
+<body>
+  <div class="main_back">
+
+    <header id="site_header"></header>
+  
+    <main class="login-wrap">
+      <h1 class="login-title">로그인</h1>
+  
+      <form class="login-form" autocomplete="on">
+        <label class="field">
+          <span class="icon">👤</span>
+          <input type="text" placeholder="아이디를 입력해 주세요." name="userid" required />
+        </label>
+  
+        <label class="field">
+          <span class="icon">🔒</span>
+          <!-- 비밀번호는 password 타입으로 -->
+          <input type="password" placeholder="비밀번호를 입력해 주세요." name="password" required />
+        </label>
+  
+        <button type="submit" class="btn primary">로그인</button>
+        <a href="/api/auth/naver" class="btn social naver">
+          <img src="img/네이버.jpeg" aria-hidden="true" />
+          네이버 아이디로 로그인
+          </a>
+  
+        <div class="links">
+          <a href="mrg.html">회원가입</a>
+          <span class="sep">|</span>
+          <a href="find-id.html">아이디 찾기</a>
+          <span class="sep">|</span>
+          <a href="find-pw.html">비밀번호 찾기</a>
+        </div>
+      </form>
+      <div id="welcomeScreen" style="display: none; text-align: center; color: #333;">
+        <h2 style="font-size: 24px; margin-bottom: 20px;">
+          <span id="welcomeNickname"></span>님, 환영합니다.
+        </h2>
+        <p>메인 페이지로 이동합니다...</p>
+      </div>
+    </main>
+  </div>
+  <div class="end_back">
+    <header id="end">
+    </header>
+</div>
+</body>
+</html>

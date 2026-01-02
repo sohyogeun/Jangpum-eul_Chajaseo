@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>화장품 비교</title>
+  <link rel="stylesheet" href="css/compare.css">
+  <link rel="stylesheet" href="css/end.css">
+
+  <script src="js/comend.js"></script>
+  <script src="js/end.js"></script>
+</head>
+<body>
+  <div class="com-head">
+    <button class="mainHom" id="mpg">
+      장품을 찾아서
+    </button>
+  </div>
+
+  <div class="com-background">
+    <div class="com-background-save" id="compare-container">
+      <!-- JS로 박스 자동 생성 -->
+    </div>
+  </div>
+  
+  <div>
+    <button class="saveBTN">저장</button>
+  </div>
+
+          <div class="end_back">
+            <header id="end">
+            </header>
+        </div>
+
+</body>
+</html>
+
+  <script>
+    // 박스 생성 함수
+    function createProductBox(img, name, ingredient, skinType, price) {
+      return `
+        <div class="com-background1">
+          <div class="product-img">
+            <img src="${img}" alt="${name}">
+          </div>
+          <div class="product-name">${name}</div>
+          <div class="product-ingredient">주성분: ${ingredient}</div>
+          <div class="product-skin">피부타입: ${skinType}</div>
+          <div class="product-price">가격: ${price}</div>
+        </div>
+      `;
+    }
+
+    // 데이터
+    const products = [
+      { img:"img/p1.jpg", name:"화장품 이름1", ingredient:"주성분A", skinType:"지성", price:"20,000원" },
+      { img:"img/p2.jpg", name:"화장품 이름2", ingredient:"주성분B", skinType:"건성", price:"25,000원" },
+      { img:"img/p3.jpg", name:"화장품 이름3", ingredient:"주성분C", skinType:"민감성", price:"30,000원" },
+      { img:"img/p4.jpg", name:"화장품 이름4", ingredient:"주성분D", skinType:"복합성", price:"22,000원" },
+      { img:"img/p5.jpg", name:"화장품 이름5", ingredient:"주성분E", skinType:"모든피부", price:"27,000원" }
+    ];
+
+    // HTML에 추가
+    const container = document.getElementById("compare-container");
+    products.forEach(product => {
+      container.innerHTML += createProductBox(
+        product.img,
+        product.name,
+        product.ingredient,
+        product.skinType,
+        product.price
+      );
+    });
+  </script>

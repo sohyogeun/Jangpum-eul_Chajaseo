@@ -1,0 +1,149 @@
+/* 기본 */
+.main_back{
+    width: 1200px;
+    height: 1700px;
+    margin: 0px auto;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: #111; font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans KR', Arial, sans-serif; }
+img { display: block; max-width: 100%; height: auto; }
+
+/* 래퍼 */
+.mrg-wrap{
+  max-width: 760px;
+  margin: 100px auto 80px;
+  padding: 0 20px;
+
+}
+
+/* 타이틀 */
+.mrg-title{
+  margin: 0 0 24px;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: .2px;
+}
+
+/* 단계 표시 (스샷 느낌의 라운드 탭) */
+.mrg-steps{
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 28px;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.mrg-steps li{
+  padding: 10px 18px;
+  border: 1px solid #d6d9df;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #f7f8fa;
+  color: #6b7280;
+}
+.mrg-steps li.on{
+  background: #fff;
+  color: #111;
+  border-color: #111;
+}
+
+/* 14세 체크 바 */
+.mrg-age{
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+.age-check{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+.age-check input{ width: 18px; height: 18px; }
+
+/* 옵션 카드 리스트 */
+.mrg-options{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+/* 카드 공통 */
+.option-card{
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: box-shadow .15s ease, border-color .15s ease, transform .05s ease;
+}
+.option-card:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+}
+.option-card:not(:disabled):hover{
+  border-color: #111;
+  box-shadow: 0 2px 10px rgba(17,17,17,.08);
+}
+.option-card:active{
+  transform: translateY(1px);
+}
+
+/* 아이콘 */
+.option-card .icon{
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+}
+.option-card .icon img{
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* 텍스트 */
+.option-card .text{ display: flex; flex-direction: column; gap: 2px; }
+.option-card .text strong{ font-size: 16px; font-weight: 700; }
+.option-card .text em{ font-style: normal; font-size: 13px; color: #6b7280; }
+
+/* 화살표 */
+.option-card .arrow{
+  font-size: 22px;
+  line-height: 1;
+  opacity: .7;
+}
+
+/* 네이버 스타일(살짝 강조 줄무늬 느낌) */
+.option-card.naver{
+  position: relative;
+  overflow: hidden;
+}
+.option-card.naver::before{
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 6px;
+  background: #19ce60; /* 네이버 그린 */
+}
+
+/* 반응형 */
+@media (min-width: 700px){
+  .mrg-options{ gap: 16px; }
+  .option-card{ padding: 18px 22px; }
+}
+/* 선택 비활성 상태 시 시각/동작 차단 */
+.option-card.is-disabled {
+  pointer-events: none;
+  opacity: .5;
+}

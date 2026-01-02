@@ -1,0 +1,70 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.SSback{
+    width: 1500px;
+    height: 2000px;
+    margin: 0px auto;
+}
+.SSname_back{
+    width: 1050px;
+    /* 950px에서 1050px로 늘리기 */
+    height: 1800px;
+    /* background-color: antiquewhite; */
+    float: left;
+    margin-left: 50px;
+    margin-bottom: 60px;
+}
+.SSname_back h3{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+
+    margin: 0px;
+    /* ▼▼▼ 요청사항 적용 ▼▼▼ */
+    width: 950px;
+    /* 테이블과 너비 맞춤 */
+    box-sizing: border-box;
+    /* 패딩, 테두리를 너비에 포함 */
+}
+.SSsuve{
+    width: 200px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    background-color: whitesmoke;
+    float: left;
+}
+p{
+    text-align: left;
+    margin: 5px;
+}
+.SSad{
+    width: 400px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    float: left;
+}
+.SSadA{
+    width: 800px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    float: left;
+}
+.SSadB{
+    width: 200px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    float: left;
+}
+.save{
+    width: 1000px;
+    height: 50px;
+    float: left;
+    border: 1px solid gainsboro;
+    text-align: center;
+}

@@ -1,0 +1,76 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.DS_back{
+    width: 1500px;
+    height: 2000px;
+    margin: 0px auto;
+}
+.DS_Name{
+    width: 1100px;
+    height: 1500px;
+    /* border: 1px solid #e5e5e5; */
+    float: left;
+    margin-left: 50px;
+}
+.DS_Name h4{
+    margin: 0px;
+}
+.DS_NameOne{
+    width: 1100px;
+    height: 50px;
+    display: flex;
+}
+.DS_NameOne a{
+    margin-left: auto;
+    margin-right: 100px;
+    border-radius: 10px;
+    width: 100px;
+    height: 25px;
+}
+.list-group, .list-group-horizontal{
+    width: 1000px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    border-radius: 0px !important;
+}
+.list-group-item{
+    border-radius: 0px !important;
+}
+.back .list-group-item {
+    background-color: #f0f0f0;
+    /* 원하는 색상으로 변경 */
+
+    /* 배경색에 맞춰 테두리색도 바꿔주는 것이 좋습니다. 
+      (안 그러면 하얀색 테두리가 남을 수 있음)
+    */
+}
+.one{
+    width: 100px;
+    height: 50px;
+}
+/* .one ul{
+
+} */
+.tow{
+    width: 300px;
+    height: 50px;
+}
+.three{
+    width: 180px;
+    height: 50px;    
+}
+.DS_b button{
+    background: none;
+    border: 0px;
+}
+#header-container *,
+#admin-menu-container * {
+    font-size: revert;
+    font-weight: revert;
+    color: revert;
+}

@@ -1,0 +1,95 @@
+div{
+    box-sizing: border-box;
+}
+body{
+    margin: 0%;
+}
+.main-backroud{
+  width: 100%;
+  height: 1300px;
+}
+
+/* 배경 이미지 */
+.QNA-picture {
+  width: 1200px;
+  height: 400px;
+  margin: 0px auto;
+  background-color: #111;
+  background-image: url('../img/laura-chouette-.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* 버튼 3개 구역 */
+.QNA1 {
+  width: 1200px;
+  min-height: 100px;
+  margin: 0px auto;
+  background-color: #111;
+  display: flex;
+  justify-content: center;   /* 가로 중앙 */
+  align-items: center;       /* 세로 중앙 */
+  gap: 50px;                 /* 버튼 사이 간격 */
+  padding: 0 20px;           /* 좌우 여백 */
+  flex-wrap: wrap;           /* 작은 화면에서는 줄바꿈 */
+}
+.my-wep,
+.my-story,
+.my-target {
+  flex: 1 1 120px;           /* 최소 120px, 공간 차지 */
+  max-width: 200px;          /* 너무 커지지 않게 */
+  height: 50px;
+  background-color: #cfd8e3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+#wep { font-size: 25px; }
+#storytwo, #targetThree { font-size: 20px; }
+
+.mw-Back{
+  width: 1200px;
+  height: 600px;
+  margin: 0px auto;
+  border-left: 1px solid #cfd8e3;
+  border-right: 1px solid #cfd8e3;
+}
+/* 메인 카드 */
+.mw {
+  width: 100%;
+  max-width: 600px;          /* 큰 화면에서도 적당히 제한 */
+  height: 500px;
+  border: 1px solid black;
+  background-color: antiquewhite;
+  margin: 60px auto 0;
+  border-radius: 30px;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .name button {
+    font-size: 20px;
+  }
+  #wep { font-size: 20px; }
+  #story, #target { font-size: 16px; }
+  .mw {
+    height: auto;           /* 모바일에서는 높이 자동 */
+  }
+}
+/* 활성 탭 강조 */
+.QNA1 button.is-active { outline: 2px solid #222; font-weight: 700; border-radius: 30px; background: white;color: #007bff;}
+.QNA1 button{
+  border-radius: 30px;
+}
+/* 미디어쿼리에서 올바른 id로 교체 */
+@media (max-width: 768px) {
+  #wep { font-size: 20px; }
+  #storytwo, #targetThree { font-size: 16px; }
+  .mw { height: auto; }
+}
+
+/* 탭 내용 기본 타이포(선택) */
+.mw-inner { padding: 20px; }
+.mw-title { margin: 0 0 10px; font-size: 22px; }
+.mw-body p { margin: 8px 0; line-height: 1.6; }

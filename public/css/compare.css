@@ -1,0 +1,149 @@
+/* ========== 기본 설정 (모든 해상도 공통) ========== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+.main_back{
+  width: 1500px;
+  height: 1000px;
+  margin: 0px auto;
+}
+
+html { 
+  /* 기본 폰트 사이즈를 기준으로 clamp가 계산되도록 */
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 헤더 */
+.com-head {
+  width: 1500px;
+  min-height: 70px;
+  margin: 0px auto;                 /* 고정 height 대신 최소 높이 */
+  background-color: aliceblue;
+  border: 1px solid black;
+  display: grid;                    /* 수평/수직 가운데 정렬 */
+  place-items: center;
+  padding: 8px 12px;
+}
+.mainHom{
+  background-color: transparent;
+  border: 0;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bold;
+}
+.com-name { 
+  text-align: center; 
+  font-size: clamp(18px, 2.2vw, 30px); /* 뷰포트에 따라 유동 폰트 */
+  margin: 0;                         /* top:-30px 제거 → 안전한 정렬 */
+}
+/* 바탕 컨테이너 */
+.com-background {
+  width: min(1200px, 92vw);         /* 초대형/소형 화면 모두 대응 */
+  min-height: 60vh;                 /* 픽셀 고정보다 비율 기반 */
+  background-color: #ddd;
+  margin: 20px auto;
+  padding: clamp(12px, 2vw, 24px);
+  border-radius: 12px;
+  position: relative;
+}
+
+/* 카드 영역: grid로 자동 칼럼 수 조정 */
+.com-background-save {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(12px, 2.5vw, 24px);
+  align-items: start;
+}
+
+/* 카드 */
+.com-background1 {
+  width: 100%;                      /* 그리드가 폭을 관리 */
+  background: #fff;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: clamp(12px, 1.8vw, 16px);
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.com-background1:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.16);
+}
+
+/* 사진 */
+.product-img img {
+  width: 100%;
+  aspect-ratio: 4 / 3;              /* 고정 height 대신 비율로 안정 */
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* 텍스트 구역 */
+.product-name {
+  font-size: clamp(16px, 1.6vw, 18px);
+  font-weight: 700;
+  margin-top: 10px;
+}
+.product-ingredient,
+.product-skin,
+.product-price {
+  font-size: clamp(12px, 1.3vw, 14px);
+  margin-top: 6px;
+  word-break: keep-all;             /* 한글 줄바꿈 안정화 */
+}
+.saveBTN{
+  width: 70px;
+  height: 40px;
+  float: right;
+  position: relative;
+  right: 620px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  z-index: 10;
+  cursor: pointer;
+  
+}
+
+/* ========== 브레이크포인트 (세부 미세조정) ========== */
+/* 태블릿 이하 */
+@media (max-width: 1024px) {
+  .com-head { padding: 6px 10px; }
+}
+
+/* 모바일(좁은 폭) */
+@media (max-width: 600px) {
+  .com-background {
+    width: 94vw;
+    margin: 12px auto;
+    padding: 12px;
+    border-radius: 10px;
+  }
+  .com-background-save {
+    grid-template-columns: 1fr;     /* 한 칼럼으로 쭉 */
+    gap: 12px;
+  }
+  .product-img img {
+    aspect-ratio: 16 / 10;          /* 세로 공간 확보 */
+  }
+}
+
+/* 초대형 모니터(울트라와이드/4K) */
+@media (min-width: 1440px) {
+  .com-background {
+    width: min(1320px, 86vw);       /* 너무 넓어지지 않게 상한선 */
+  }
+  .com-background-save {
+    gap: 28px;
+  }
+}

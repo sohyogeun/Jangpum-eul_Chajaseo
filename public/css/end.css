@@ -1,0 +1,101 @@
+/* ===== QNA / 공지 배너 ===== */
+
+/* 전체 가로로 쭉 깔리는 배너 */
+.main-body5 {
+  width: 100%;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #f2f2f2;
+  background-color: #fff;
+}
+
+/* 내용은 가운데 1200px 안에만 배치 */
+.main-body5-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 왼쪽: 타이틀 / 오른쪽: 메뉴 */
+  font-size: 13px;
+}
+
+/* 왼쪽 텍스트 (장품을 찾아서) */
+.body5_name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+}
+
+/* 오른쪽 메뉴 영역 */
+.main-body5-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* | 구분선 */
+.footer-divider {
+  color: #d5d5d5;
+  font-size: 12px;
+}
+
+/* QNA / 공지사항 링크 디자인 */
+.footer-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 13px;
+  color: #666;
+  text-decoration: none;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* ===== 하단 푸터 섹션 스타일 ===== */
+
+/* 전체 푸터 배경 + 위쪽 선 */
+.site-footer {
+  width: 100%;
+  border-top: 1px solid #f2f2f2;
+  background-color: #ffffff;
+  margin-top: 0;
+}
+
+/* 내용은 1200px 안에서 가운데 정렬 */
+.site-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px 30px;
+}
+
+/* 정보 목록 (대표자, 주소 등) */
+.site-footer-inner ul {
+  list-style: none;              /* ● 불릿 제거 */
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;                 /* 가로로 쭉 나열 */
+  flex-wrap: wrap;               /* 길면 자동 줄바꿈 */
+  gap: 6px 24px;                 /* 세로 6, 가로 24 간격 */
+  justify-content: center;       /* 가운데 정렬 */
+}
+
+/* 각 항목 텍스트 */
+.site-footer-inner ul li {
+  font-size: 12px;
+  color: #777;
+}
+
+/* 저작권 텍스트 */
+.site-footer-inner .copyright {
+  text-align: center;
+  font-size: 11px;
+  color: #aaa;
+  margin: 0;
+}

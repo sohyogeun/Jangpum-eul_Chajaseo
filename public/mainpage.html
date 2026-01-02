@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>장품을 찾아서 메인페이지</title>
+    
+    <link href="css/mainpage.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/head.css">
+    <link rel="stylesheet" href="css/end.css">
+    
+    <link rel="stylesheet" href="css/FysOne.css">
+    <link href="css/FysOne.css" rel="stylesheet">
+    <script src="js/gotoSite.js" defer></script>
+    
+    <script src="js/include.js" defer></script>
+    <script src="js/head_log.js"></script>
+    <script src="js/comend.js" defer></script>
+    <script src="js/skinPreview.js" defer></script>
+    <script src="js/FindYourSkinOne.js" defer></script>
+    <script src="js/mySkin.js" defer></script>
+    <script src="js/Monday.js" defer></script>
+    <script src="js/end.js" defer></script>
+</head>
+    
+<body>
+    <form>
+        <div class="Ch_item"></div>
+    </form>
+        
+    <header id="site_header"></header>
+        
+        <div class="main-body1"></div>
+        <div class="main-background">
+        <!-- js로 HTML로 만든뒤 BeautifulSoup으로 크룰링해서 db에 저장 안하고 사이트 자체에 저장하는 방식으로 허가-->
+        <div class="mb2_3">
+            <div class="main-body2-3">
+                <div class="my_site_Name">
+                    <h4>어느 사이트를 가볼까?</h4>
+                </div>
+                
+                <!-- ✅ JS가 채워 넣을 자리 -->
+                <div class="go_site" id="go-site-list"></div>
+                
+                <div class="go_site_btns">
+                    <button type="button" id="site-prev">〈 이전</button>
+                    <span id="site-page"></span>
+                    <button type="button" id="site-next">다음 〉</button>
+                </div>
+            </div>
+            
+                        
+                        <!-- 🔹 오른쪽 : 오늘의 화장품 영역(제목 + 카드 + 버튼까지 한 세트) -->
+                        <div class="monday-area">
+                            <div class="main-body2-2-name">
+                                <h4>오늘의 화장품 만나 보세요</h4>
+                            </div>
+                            
+                            <form id="mondayForm"></form>
+                            
+                            <div class="monday-controls">
+                                <button type="button" id="mondayPrev">〈 이전</button>
+                                <span id="mondayPageInfo"></span>
+                                <button type="button" id="mondayNext">다음 〉</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-body2">
+                        <div class="check"></div>
+
+                        <div class="skin-layout">
+                            <div class="body2_name">
+                            <p>내 피부형을 아는데?</p>
+                            </div>
+
+                            <div class="skin-buttons" id="button">
+                            <button id="oily" type="button" class="skin-btn" data-skin="oily">지성</button>
+                            <button id="dry" type="button" class="skin-btn" data-skin="dry">건성</button>
+                            <button id="combo" type="button" class="skin-btn" data-skin="combo">복합성</button>
+                            <button id="normal" type="button" class="skin-btn" data-skin="normal">중성</button>
+                            </div>
+
+                            <!-- ✅ 버튼 아래에 위치할 미리보기 -->
+                            <div class="skin-preview" id="skin-preview">
+                            <h4 id="skin-preview-title"></h4>
+                            <p id="skin-preview-text"></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    
+                </div>
+                    <div class="end_back">
+                        <header id="end"></header>
+                    </div>
+            </body>
+            </html>
+<script>
+const FYS = document.getElementById('FYSSelf');
+const ModalSession = document.querySelector('.Modal-session');
+
+document.addEventListener('click', function(e) {
+
+   
+    const targetButton = e.target.closest('#FYSSelf');
+
+
+    if (targetButton) {
+        console.log("버튼 클릭 성공!"); 
+        
+        const modal = document.querySelector('.Modal-session');
+        if (modal) {
+            modal.style.visibility = 'visible';
+        } else {
+            console.error("모달을 찾을 수 없습니다.");
+        }
+    }
+});
+
+</script>

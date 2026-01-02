@@ -1,0 +1,63 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.DSAdd_back{
+    width: 1500px;
+    height: 1500px;
+    margin: 0px auto;
+}
+.DSAdd_Name{
+    width: 1100px;
+    height: 1300px;
+    float: left;
+    margin-left: 50px;
+}
+.DSAdd_Name h4{
+    margin: 0px;
+}
+.SSsuve{
+    width: 200px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    background-color: whitesmoke;
+    float: left;
+}
+p{
+    text-align: left;
+    margin: 5px;
+}
+.SSad{
+    width: 400px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    float: left;
+}
+.SSadA{
+    width: 800px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    float: left;
+}
+.SSadB{
+    width: 200px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    float: left;
+}
+.DSAdd_save{
+    width: 1000px;
+    height: 80px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+}
+.DSAdd_save button{
+    padding: 5px 30px;
+}

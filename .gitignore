@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# env (비밀키/DB주소)
+.env
+.env.*
+
+# python venv
+.venv/
+
+# logs & build
+*.log
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+desktop.ini
+public/img/desktop.ini

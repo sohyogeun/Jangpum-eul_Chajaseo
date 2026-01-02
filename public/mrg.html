@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>회원가입</title>
+  <link href="css/mrg.css" rel="stylesheet">
+  <link href="css/mrg1.css" rel="stylesheet">
+  <link href="css/head.css" rel="stylesheet">
+  <link href="css/end.css" rel="stylesheet">
+
+  <script src="js/mrg.js" defer></script>
+  <script src="js/signup-api.js" defer></script>
+  <script src="js/comend.js" defer></script>
+  <script src="js/head_log.js" defer></script>
+  <script src="js/end.js" defer></script>
+    <!-- ① 다음 주소 API -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<!-- ② 내 js -->
+<script src="js/kakaoAPI.js" defer></script>
+
+</head>
+<body>
+  
+  <header id="site_header"></header>
+  
+  <div class="main_back">
+        <div class="mrg-wrap">
+          <h1 class="mrg-title">회원가입</h1>
+      
+          <!-- 단계 표시 -->
+          <ol class="mrg-steps" aria-label="가입 단계">
+            <li class="on">회원유형</li>
+            <li>약관동의 및 정보입력</li>
+            <li>가입완료</li>
+          </ol>
+      
+          <!-- ✅ 교체될 영역 -->
+          <div id="mrg-content">
+            <!-- 14세 체크 + 버튼 -->
+            <div class="mrg-age">
+              <label class="age-check">
+                <input type="checkbox" id="age14" />
+                <span>만 14세 이상입니까?</span>
+              </label>
+            </div>
+      
+            <div class="mrg-options">
+              <button type="button" class="option-card" id="mrg1" disabled>
+                <span class="icon"><img src="img/cellphon.jpeg" alt=""></span>
+                <span class="text">
+                  <strong>일반회원 가입하기</strong>
+                  <em>(만 14세 이상)</em>
+                </span>
+                <span class="arrow">›</span>
+              </button>
+      
+              <button class="option-card naver" id="mrg_naver" disabled>
+                <span class="icon"><img src="img/아이핀.jpeg" alt=""></span>
+                <span class="text">
+                  <strong>네이버 아이디로 회원 가입하기</strong>
+                </span>
+                <span class="arrow">›</span>
+              </button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="end_back">
+    <header id="end">
+    </header>
+    <div id="mrg-content"></div>
+</div>
+</body>
+</html>

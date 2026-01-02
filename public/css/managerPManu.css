@@ -1,0 +1,78 @@
+div {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0%;
+}
+.P_bu_li {
+    width: 250px;
+    height: 2000px;
+    /* border-right: 1px solid black; */
+    position: relative;
+    float: left;
+}
+.P_Name {
+    width: 250px;
+    border-bottom: 1px solid black;
+    text-align: center;
+    margin-top: 30px;
+}
+.P_bu_li {
+    width: 250px;
+    height: 2000px;
+    /* border-right: 1px solid black; */
+    position: relative;
+    float: left;
+}
+.P_buttonOne {
+    width: 250px;
+    height: 140px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0px;
+}
+
+.P_buttonTwo {
+    width: 250px;
+    height: 100px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0px;
+}
+
+.P_buttonThree{
+    width: 250px;
+    height: 150px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0px;
+}
+
+.P_buttonFour {
+    width: 250px;
+    height: 50px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.P_bu_li button {
+    background: none;
+    border: none;
+    border-bottom: 1px solid gainsboro;;
+}
+
+.P_bu_li button:hover {
+    background-color: gainsboro;
+}

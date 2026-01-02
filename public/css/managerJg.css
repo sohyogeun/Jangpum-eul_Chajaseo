@@ -1,0 +1,49 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.JgBack{
+    width: 1500px;
+    height: 1000px;
+    margin: 0px auto;
+}
+.JgName{
+    width: 1200px;
+    height: 80px;
+    margin: 0px auto;
+}
+.JgINBack{
+    width: 1200px;
+    height: 800px;
+    border: 1px solid black;
+    margin: 0px auto;
+}
+.JgBTN{
+    width: 1200px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.JgBTN button{
+  width: 100px;
+  height: 30px;
+  margin-left: 20px;
+  margin-top: 20px;
+  background-color: #fff;
+}
+.bannerBTN:hover,
+.bannerBTN.active{
+  background-color: black;
+  color: #fff;
+  outline: none;
+}
+.jgchart{
+    width: 1000px;
+    height: 500px;
+    border: 1px solid black;
+    margin: 0px auto;
+}

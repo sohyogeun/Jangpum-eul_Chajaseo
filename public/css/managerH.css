@@ -1,0 +1,31 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.M_h{
+    width: 1500px;
+    height: 80px;
+    /* background-color: beige; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+.M_h_bu button{
+    padding: 10px 10px;
+    cursor: pointer;
+    margin: 10px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    border: 1px solid yellow;
+}
+.M_h_bu button:hover{
+    background-color: aliceblue;
+}
+.M_h_bu{
+    position: relative;
+    top: 20px;
+    margin-left: 20px;
+}

@@ -1,0 +1,131 @@
+<main class="page">
+    <!-- 진행 단계 -->
+    <nav class="steps" aria-label="가입 진행 단계">
+      <div class="step">STEP1. 회원유형</div>
+      <div class="step is-active">STEP2. 약관동의 및 정보입력</div>
+      <div class="step">STEP3. 가입완료</div>
+    </nav>
+
+    <!-- 약관동의 -->
+    <section class="section">
+      <h2 class="section__title">약관동의</h2>
+      <div class="agree-card">
+        <label for="tos" class="agree-label">이용약관</label>
+        <textarea id="tos" class="agree-text" readonly>
+제1조 (목적)
+이 약관은 (주)장품을찾아서(이하 '회사')가 제공하는 서비스의 이용과 관련하여 회원과 회사의 권리, 의무 및 책임사항을 규정합니다.
+...
+        </textarea>
+        <div class="agree-check">
+          <label><input type="checkbox" id="tosCheck" required /> 이용약관에 동의합니다. <span class="req">(필수)</span></label>
+        </div>
+      </div>
+
+      <div class="agree-card">
+        <label for="privacy" class="agree-label">개인정보 수집 및 이용</label>
+        <textarea id="privacy" class="agree-text" readonly>
+1. 수집 항목: 이름, 이메일, 연락처 등
+2. 이용 목적: 회원관리 및 서비스 제공
+3. 보유 기간: 관계 법령에 따른 보관 기간 준수
+...
+        </textarea>
+        <div class="agree-check">
+          <label><input type="checkbox" id="privacyCheck" required /> 개인정보 수집 및 이용에 동의합니다. <span class="req">(필수)</span></label>
+        </div>
+      </div>
+    </section>
+
+    <!-- 회원정보 입력 -->
+    <section class="section">
+      <h2 class="section__title">회원정보 입력</h2>
+
+      <form class="form" action="/signup" method="post" novalidate>
+        <div class="row">
+          <label for="userid">아이디</label>
+          <div class="field-inline">
+            <input id="userid" name="userid" type="text" placeholder="영문/숫자 6~20자" required />
+            <small class="hint">아이디는 영소문자와 숫자 조합 (6~20자)</small>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="pw">비밀번호</label>
+          <div class="field-inline">
+            <input id="pw" name="pw" type="password" placeholder="8자 이상, 숫자/영문 포함" required />
+            <small class="hint">특수문자 사용 가능</small>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="pw2">비밀번호 확인</label>
+          <div class="field-inline">
+            <input id="pw2" name="pw2" type="password" placeholder="비밀번호 재입력" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="name">고객명</label>
+          <div class="field-inline">
+            <input id="name" name="name" type="text" placeholder="홍길동" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <label>전화번호</label>
+          <div class="field-inline phone">
+            <input type="text" placeholder="02" />
+            <span class="dash">-</span>
+            <input type="text" placeholder="123" />
+            <span class="dash">-</span>
+            <input type="text" placeholder="4567" />
+          </div>
+        </div>
+
+        <div class="row">
+          <label>휴대폰</label>
+          <div class="field-inline mobile">
+            <select>
+              <option>010</option><option>011</option><option>016</option>
+            </select>
+            <span class="dash">-</span>
+            <input type="text" placeholder="1234" />
+            <span class="dash">-</span>
+            <input type="text" placeholder="5678" />
+          </div>
+        </div>
+
+        <div class="row">
+          <label>주소</label>
+          <div class="field-inline address">
+            <div class="zip">
+              <input type="text" placeholder="우편번호" />
+              <button type="button" class="btn-line">우편번호 찾기</button>
+            </div>
+            <input type="text" placeholder="기본주소" />
+            <input type="text" placeholder="상세주소" />
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="email">이메일</label>
+          <div class="field-inline">
+            <input id="email" name="email" type="email" placeholder="you@example.com" />
+          </div>
+        </div>
+
+        <div class="row">
+          <label>정보 수신</label>
+          <div class="field-inline radios">
+            <label><input type="radio" name="notice" value="all" /> 이메일&SMS 수신</label>
+            <label><input type="radio" name="notice" value="email" /> 이메일 수신</label>
+            <label><input type="radio" name="notice" value="sms" /> SMS만 수신</label>
+            <label><input type="radio" name="notice" value="none" checked /> 수신안함</label>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary">회원가입</button>
+        </div>
+      </form>
+    </section>
+  </main>

@@ -1,0 +1,178 @@
+/* ========== 기본 ========== */
+html, body { margin: 0; font-family: system-ui, "Noto Sans KR", Arial, sans-serif; color:#111; }
+div { box-sizing: border-box; }
+
+/* ========== 히어로 이미지 ========== */
+.main-background{
+  width: 1500px;
+  height: 1900px;
+  margin: 0px auto;
+}
+.QNA-picture{
+  width: 1200px;
+  height: 300px;
+  margin: 0 auto;
+  background: #111 url('../img/laura-chouette-.jpg') center/cover no-repeat;
+}
+
+/* ========== 상단 탭 바(FAQ/공지사항) ========== */
+.QNA1{
+  width: 1200px;
+  min-height: 150px;
+  margin: 0 auto;
+  background:#111;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  gap: 18px;
+}
+
+/* 탭 버튼 */
+.QNA-FAQ, .QNA-csc{
+  min-width: 100px;
+  height: 48px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: 1px solid #cfd8e3;
+  background:#e7edf6;
+  color:#111;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.QNA-FAQ:hover, .QNA-csc:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.2);
+}
+/* 활성 탭 강조 */
+.QNA-FAQ.is-active, .QNA-csc.is-active{
+  background:#cfd8e3;
+  outline:2px solid #cfd8e3;
+}
+
+/* ========== 카테고리 4버튼(탭 아래) ========== */
+.QNA-body2-2{
+  width: 100%;
+  max-width: 1200px;
+  margin: 6px auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+.QNA-body2-2 input[type='button']{
+  width: 100%;
+  max-width: 180px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid #d2dae6;
+  background:#fff;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(0,0,0,.08);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease, color .12s ease;
+}
+.QNA-body2-2 input[type='button']:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  background:#111; color:#fff; border-color:#111;
+}
+
+/* ========== 중앙 검색 박스 ========== */
+.QNA-body1{ width: 980px; background:#cfd8e3; padding: 40px 0 24px; }
+.QNA-body2{ width: 420px; margin: 0 auto; }
+.QNA-body2-1{
+  width: 100%;
+  padding: 14px;
+  background:#fff;
+  border: 1px solid #dbe2ec;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(16,24,40,.08);
+}
+.QNA-body2-1 form{ display: flex; gap: 10px; }
+.QNA-body2-1 input{
+  flex:1; height:44px; padding:0 14px;
+  border:1px solid #d1dae6; border-radius:10px; font-size:15px; outline:none;
+}
+.QNA-body2-1 button{
+  height:44px; padding:0 18px; border-radius:10px;
+  background:#111; color:#fff; font-weight:600; border:none; cursor:pointer;
+  transition: filter .15s ease;
+}
+.QNA-body2-1 button:hover{ filter:brightness(.9); }
+
+/* ========== FAQ 리스트 ========== */
+.faq{
+  max-width: 980px;
+  margin: 32px auto;
+  padding: 0 20px;
+  border-left: 1px solid #cfd8e3;
+  border-right: 1px solid #cfd8e3;
+}
+.faq-head h3{
+  margin: 0 0 10px;
+  font-size: 25px; font-weight: 700; letter-spacing: .2px;
+}
+.faq-divider{ height: 3px; background:#111; margin-bottom: 14px; }
+.faq-table-head{ display:inline-flex; gap:8px; margin:8px 0 6px; }
+.faq-table-head .th{
+  background:#e7e9ee; border:1px solid #cfd3da; border-radius:4px;
+  font-size:14px; padding:6px 14px; color:#333;
+}
+.faq-list{ list-style:none; padding:0; margin:10px 0 0; }
+.faq-list .row{
+  display:grid; grid-template-columns: 1.2fr 2fr;
+  align-items:center; min-height:38px; border-bottom:1px solid #dfe3ea;
+}
+.faq-list .row .title, .faq-list .row .content{ font-size:15px; color:#333; padding:4px 6px; }
+.faq-list .row:hover{ background:#fafbfc; }
+
+/* ========== 1:1 상담 폼 ========== */
+.inquiry {
+  background:#dedede;
+  padding: 60px 16px 80px;
+  position: relative;
+
+  /* ✅ 추가 부분 (1500px 고정 폭 + 가운데 정렬) */
+  width: 1200px;
+  margin: 0 auto;
+  /* end.css에 일시 테스트 */
+
+}
+.form{ max-width: 720px; margin: 0 auto; }
+.badge{
+  position:absolute; left:50%; top:18px; transform: translateX(-50%);
+  background:#fff; border:1px solid #d4d7de; padding:10px 18px;
+  border-radius: 999px; font-size:12px; font-weight:600; color:#333;
+}
+.field{ margin-bottom: 18px; }
+.field label{ display:block; font-size:13px; color:#333; margin: 0 0 6px 6px; }
+input[type="text"], input[type="email"], input[type="password"], select, textarea{
+  width:100%; border:1px solid #d6dbe4; background:#fff; border-radius:4px; padding:12px 14px; font-size:14px; outline:none;
+}
+.actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:6px; }
+.primary{
+  border:1px solid #111; background:#111; color:#fff; padding:10px 16px; border-radius:6px; cursor:pointer;
+}
+.ghost{
+  border:1px solid #cfd3da; background:#fff; color:#333; padding:10px 16px; border-radius:6px; cursor:pointer;
+}
+.primary:hover{ filter: brightness(.95); }
+.ghost:hover{ background:#f6f7fa; }
+
+/* ========== 반응형 ========== */
+@media (max-width: 1200px){
+  .QNA-picture, .QNA1{ width: 96%; }
+}
+@media (max-width: 1024px){
+  .QNA-body2-2{ grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+}
+@media (max-width: 560px){
+  .QNA-body2-2{ grid-template-columns: 1fr; max-width: 420px; }
+  .QNA-picture{ height: min(300px, 60vh); }
+  .QNA-body2{ width: min(420px, 92vw); }
+}

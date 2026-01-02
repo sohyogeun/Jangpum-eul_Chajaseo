@@ -1,0 +1,114 @@
+
+.product-detail-container {
+    display: flex;
+    /* 이미지를 왼쪽에, 정보를 오른쪽에 배치 */
+    flex-wrap: wrap;
+    /* 화면이 좁아지면 줄바꿈 */
+    gap: 40px;
+    /* 이미지 영역과 정보 영역 사이의 간격 */
+
+    max-width: 1200px;
+    /* 페이지 최대 너비 */
+    margin: 20px auto;
+    /* 페이지 가운데 정렬 */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+/* 1. 왼쪽: 이미지 영역 */
+.product-image-area {
+    flex: 1;
+    /* 왼쪽 영역 (비율 1) */
+    min-width: 300px;
+    /* 최소 너비 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-product-image {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.thumbnail-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    /* 썸네일도 좁아지면 줄바꿈 */
+    gap: 10px;
+    justify-content: center;
+}
+
+.thumbnail-gallery .thumbnail-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    /* 이미지가 찌그러지지 않게 */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.thumbnail-gallery .thumbnail-image:hover {
+    opacity: 0.7;
+}
+
+/* 2. 오른쪽: 정보 영역 */
+.product-info-area {
+    flex: 1.5;
+    /* 오른쪽 영역 (비율 1.5, 더 넓게) */
+    min-width: 300px;
+    /* 최소 너비 */
+}
+
+.product-name {
+    font-size: 1.8rem;
+    /* 10px 기준이 아닌 rem 단위 권장 */
+    font-weight: 600;
+    margin: 0;
+}
+
+.product-subname {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 4px;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #d00;
+    /* 가격 강조 */
+    margin-bottom: 20px;
+}
+
+.product-divider {
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+.product-section {
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.section-content {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.7;
+    /* 줄 간격 */
+    margin: 0;
+}

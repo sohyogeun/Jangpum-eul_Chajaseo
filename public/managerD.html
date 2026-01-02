@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>대쉬보드</title>
+    <link href="css/managerD.css" rel="stylesheet">
+    <link href="css/managerH.css" rel="stylesheet">
+    
+    <script src="js/managerCM.js" defer></script>
+    <script src="js/managerH.js" defer></script>
+    <script src="js/managerD.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="M_background">
+        <header id="header-container"></header>
+        <div class="D_back">
+            <!-- 방문 횟수, 피부 비율, 오늘의 계시판 현황(1대1상담), 신규회원, 검색채널(구글, 다음, 네이버),
+            접속환경(모바일, PC), 회원들이 많이 찾는 회사, 화장품  -->
+            <h4 class="name">대쉬보드</h4>
+            <div class="todayBox">
+                <div class="todayandre">
+                    <p class="todayname">오늘의 계시판</p>
+                    <button class="reply">답장줘</button>    
+                </div>
+                <div class="oneandone">
+                    <p>1:1상담</p>
+                </div>
+                    <div class="todayBoxUser">gd</div>
+                    <div class="todayBoxUser">gd</div>
+                    <div class="todayBoxUser">gd</div>
+                    <div class="todayBoxUser">gd</div>
+                    <div class="todayBoxUser">gd</div>
+            </div>
+            <div class="newUserBox">
+                <div class="newUserBoxP">
+                    <p class="todayname">신규회원</p>
+                    <a href="managerU.html">
+                        <button class="reply">빨리회원확인해</button>    
+                    </a>
+                </div>
+                <div class="newUserDateName">
+                    <p class="newUserDateNameid">아이디</p>
+                    <p class="newUserDateNamerating">등급</p>
+                    <p class="newUserDateNames">이름</p>
+                    <p class="newUserDateNameEmali">이메일</p>
+                    <p class="newUserDateNamerating">접속회수</p>
+                    <p class="newUserDateNamerating">포인트</p>
+                    <p class="newUserDateNameOneDay">가입날짜</p>
+                    <div class="newUserDate"></div>
+                </div>
+                <div class="newUserDateNameBox"></div>
+            </div>
+            <!-- 통계는 나중에 자바스크립으로 만들기 -->
+            <div class="dashboard-container">
+                <div class="chart-box">
+                    <h2>검색 채널</h2>
+                    <canvas id="searchChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h2>접속 환경</h2>
+                    <canvas id="accessChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h2>인기 조회 상품</h2>
+                    <canvas id="productsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

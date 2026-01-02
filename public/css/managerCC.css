@@ -1,0 +1,43 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+
+.CCNameback{
+    width: 1200px;
+    height: 500px;
+    /* border: 1px solid black; */
+}
+.CCNameOne{
+    width: 1200px;
+    height: 50px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+}
+.oneone{
+    width: 250px;
+    height: 50px;
+    border: 1px solid #e0e0e0;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+}
+.twetwe{
+    width: 950px;
+    height: 50px;
+    border: 1px solid #e0e0e0;
+    
+    /* 핵심: 부모에게 flex를 줍니다 */
+    display: flex; 
+    
+    /* 세로 중앙 정렬 */
+    align-items: center; 
+    
+    /* 그룹(div) 사이의 간격을 30px로 설정 */
+    gap: 100px; 
+    
+    /* (선택사항) 왼쪽 여백을 좀 주고 싶다면 */
+    padding-left: 20px;
+}

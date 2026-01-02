@@ -1,0 +1,115 @@
+/* ========== 기본 설정 ========== */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, "Noto Sans KR", Arial, sans-serif; color: #111; }
+
+/* ========== 상단 비주얼 ========== */
+.QNA-picture {
+  width: 1200px;
+  height: 300px;
+  margin: 0 auto;
+  background: #111 url('../img/laura-chouette-.jpg') center/cover no-repeat;
+}
+
+/* ========== 상단 탭 (FAQ / 공지사항) ========== */
+.QNA1 {
+  width: 1200px;
+  height: 100px;
+  background-color: #111;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.QNA-FAQ {
+  width: 100px;
+  height: 50px;
+  background-color: #cfd8e3;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  font-size: 22px;
+  font-weight: bold;
+  color: #111;
+}
+
+.QNA-FAQ:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ========== 공지사항 리스트 영역 ========== */
+.faq {
+  max-width: 980px;
+  margin: 32px auto;
+  padding: 0 20px;
+  color: #111;
+  border-left: 1px solid #cfd8e3;
+  border-right: 1px solid #cfd8e3;
+}
+
+/* 제목 + 구분선 */
+.faq-head h3 {
+  margin: 18px 0 6px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.faq-divider {
+  height: 3px;
+  background: #000;
+  margin-bottom: 14px;
+}
+
+/* 회색 탭 라벨 */
+.faq-table-head {
+  display: inline-flex;
+  gap: 8px;
+  margin: 8px 0 6px;
+}
+
+.faq-table-head .th {
+  background: #e7e9ee;
+  border: 1px solid #cfd3da;
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 6px 14px;
+  color: #333;
+}
+
+/* 리스트 영역 */
+.faq-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 24px;
+}
+
+.faq-list .row {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  align-items: center;
+  min-height: 40px;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.faq-list .row .title,
+.faq-list .row .content {
+  font-size: 15px;
+  color: #333;
+  padding: 8px 6px;
+}
+
+.faq-list .row:hover {
+  background: #fafbfc;
+}
+
+/* ========== 반응형 ========== */
+@media (max-width: 1200px) {
+  .QNA-picture, .QNA1 { width: 96%; }
+}
+
+@media (max-width: 560px) {
+  .faq { padding: 0 12px; }
+}

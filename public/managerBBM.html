@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 관리</title>
+    <link rel="stylesheet" href="css/managerBBM.css">
+    <link href="CSS/managerH.css" rel="stylesheet">
+    <link href="CSS/managerCC.css" rel="stylesheet">
+    <link href="CSS/managerNB_E_Manu.css" rel="stylesheet">
+
+    <script src="js/managerCM.js" defer></script>
+    <script src="js/managerH.js" defer></script>
+    <script src="js/managerCC.js" defer></script>
+</head>
+<body>
+    <div class="BBM_Back">
+        <header id="header-container"></header>
+        <nav id="admin-menuTwo-container"></nav>
+         <div class="BBM_Views">
+
+             <div class="BBM_Name">
+                 <div class="BBM_Name_one">
+                     <p>컨텐츠 관리</p>
+                     <button id="CC">컨텐츠 생성</button>
+                    </div>
+                    <div class="BBM_Name_title">
+                        <table>
+                            <tbody>
+                                <tr class="column">
+                                    <th class="one">번호</th>
+                                    <th class="twe">code</th>
+                                    <th class="three">게시판</th>
+                                    <th class="twe">구분</th>
+                                    <th class="twe">스킨</th>
+                                    <th class="one">정보</th>
+                                    <th class="one">글</th>
+                                    <th class="twe">생성날짜</th>
+                                    <th class="one">관리</th>
+                                </tr>
+                                <tr>
+                                    <th class="one">1</th>
+                                    <th class="twe"></th>
+                                    <th class="three"></th>
+                                    <th class="twe"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                    <th class="one"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                </tr>
+                                <tr>
+                                    <th class="one">2</th>
+                                    <th class="twe"></th>
+                                    <th class="three"></th>
+                                    <th class="twe"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                    <th class="one"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                </tr>
+                                <tr>
+                                    <th class="one">3</th>
+                                    <th class="twe"></th>
+                                    <th class="three"></th>
+                                    <th class="twe"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                    <th class="one"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                </tr>
+                                <tr>
+                                    <th class="one">4</th>
+                                    <th class="twe"></th>
+                                    <th class="three"></th>
+                                    <th class="twe"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                    <th class="one"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                </tr>
+                                <tr>
+                                    <th class="one">5</th>
+                                    <th class="twe"></th>
+                                    <th class="three"></th>
+                                    <th class="twe"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                    <th class="one"></th>
+                                    <th class="twe"></th>
+                                    <th class="one"></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="Reference">
+                            <p>※참고사항</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="CCBack">
+                <div class="CCName">
+                    <p>컨텐츠 생성</p>
+                    <button id="BBM">게시판 관리</button>
+                </div>
+                
+                <div class="CCNameback">
+                    
+                    <!-- 유형 -->
+                    <div class="CCNameOne">
+                        <div class="oneone"><p>유형</p></div>
+                        <div class="twetwe">
+                            <div>
+                                <input type="radio" name="boardType" id="boardType1">
+                                <label for="boardType1">일반 게시판</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="boardType" id="boardType2">
+                                <label for="boardType2">자료실</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="boardType" id="boardType3">
+                                <label for="boardType3">갤러리</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 게시판 이름 -->
+                    <div class="CCNameOne">
+                        <div class="oneone"><p>이름</p></div>
+                        <div class="twetwe">
+                            <div>
+                                <input type="text" name="boardName">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 권한 -->
+                    <div class="CCNameOne">
+                        <div class="oneone"><p>권한</p></div>
+                        <div class="twetwe">
+                            <div>
+                                <label>읽기 권한 : </label>
+                                <select name="permRead">
+                                    <option>제한없음</option>
+                                    <option>회원이상</option>
+                                    <option>관리자</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>쓰기 권한 : </label>
+                                <select name="permWrite">
+                                    <option>제한없음</option>
+                                    <option>회원이상</option>
+                                    <option>관리자</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>수정권한 : </label>
+                                <select name="permEdit">
+                                    <option>제한없음</option>
+                                    <option>회원이상</option>
+                                    <option>관리자</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>삭제권한 : </label>
+                                <select name="permDelete">
+                                    <option>제한없음</option>
+                                    <option>회원이상</option>
+                                    <option>관리자</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- (아마) 보존기간? -->
+                    <div class="CCNameOne">
+                        <div class="oneone"><p>이름</p></div>
+                        <div class="twetwe">
+                            <div>
+                                <input type="text" name="keepDays" value="1">
+                                <label>일</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 게시판 사용 -->
+                    <div class="CCNameOne">
+                        <div class="oneone"><p>게시판사용</p></div>
+                        <div class="twetwe">
+                            <div>
+                                <input type="radio" name="boardUse" id="boardUse1" value="Y">
+                                <label for="boardUse1">사용</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="boardUse" id="boardUse2" value="N">
+                                <label for="boardUse2">미사용</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 꼬릿말 기능 -->
+                    <div class="CCNameOne">
+                        <div class="oneone"><p>꼬릿말기능</p></div>
+                        <div class="twetwe">
+                            <div>
+                                <input type="radio" name="footerUse" id="footerUse1" value="Y">
+                                <label for="footerUse1">사용</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="footerUse" id="footerUse2" value="N">
+                                <label for="footerUse2">미사용</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>  
+        </div>
+    </body>
+</html>

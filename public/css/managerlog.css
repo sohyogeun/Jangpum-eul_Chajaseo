@@ -1,0 +1,58 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.malogback{
+    width: 1000px;
+    height: 300px;
+    /* background-color: aqua; */
+    margin: 0px auto;
+    margin-top: 150px;
+}
+.malogName{
+    width: 350px;
+    height: 50px;   
+    border-bottom: 1px solid black;
+    margin: 0px;
+    float: left;
+}
+.malogName p{
+    margin: 0px;
+    font-size: 13px;
+}
+.malogName h4{
+    margin: 0px;
+}
+.malogTitle{
+    width: 650px;
+    height: 50px;
+    float: left;
+    margin: 0px;
+    border-bottom: 1px solid black;
+}
+.malogTitle p{
+    margin: 0px;
+}
+.MidPass{
+    width: 1000px;
+    height: 200px;
+    /* background-color: azure; */
+    float: left;
+    /* border: 1px solid black; */
+}
+.maUser {
+    /* 1. Flex 컨테이너로 만듭니다 */
+    display: flex;
+    /* 2. (선택) 자식 요소들의 세로 높이를 맞춰줍니다 */
+    align-items: center;
+    /* 3. (선택) 요소들 사이에 간격을 줍니다 */
+    gap: 10px;
+    /* 4. Flex 컨테이너 자체를 중앙 정렬합니다 */
+    width: fit-content;
+    /* 👈 중요: 400px 대신 내용물 크기에 맞춤 */
+    margin: 0 auto;
+    /* 👈 좌우 중앙 정렬 */
+    margin-top: 60px;
+}

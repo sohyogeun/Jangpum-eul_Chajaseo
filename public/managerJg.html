@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>접속통계</title>
+    <link href="css/managerJg.css" rel="stylesheet">
+    <link href="css/managerH.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/air-datepicker@3.3.5/air-datepicker.min.css" rel="stylesheet">
+
+    <script src="js/managerCM.js" defer></script>
+    <script src="js/managerH.js" defer></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.3.5/air-datepicker.min.js"></script>
+    <script src="js/managerJg.js" defer></script>
+</head>
+<body>
+    <div class="JgBack">
+        <header id="header-container"></header>
+        <div class="JgName">
+            <h4>접속 통계</h4>
+        </div>
+        <div class="JgINBack">
+            <div class="JgBTN">
+                <button type="button" class="bannerBTN" id="ByTimeZone">시간대별</button>
+                <button type="button" class="bannerBTN" id="ByCountry">국가별</button>
+                <button type="button" class="bannerBTN" id="Glance">일별</button>
+                <button type="button" class="bannerBTN" id="Monthly">월별</button>
+                <button type="button" class="bannerBTN" id="ByYear">년도별</button>
+                <button type="button" class="bannerBTN" id="ByOperatingSystem">운영체계별</button>
+                <button type="button" class="bannerBTN" id="searchEngine">검색엔진</button>
+                <button type="button" class="bannerBTN" id="AccessLog">접속로그</button>
+            </div>
+            <div class="jgchart">
+                <input type="text" id="airDatepicker" placeholder="날짜 클릭">
+                <div id="columnchart_material" style="margin-top: 20px;"></div>
+            </div>
+        </div>  
+    </div>
+</body>
+</html>

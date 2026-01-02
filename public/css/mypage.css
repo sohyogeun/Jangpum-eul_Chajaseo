@@ -1,0 +1,412 @@
+/* ===== 공통 리셋 ===== */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  color: #111;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+  background: #f8fafc;
+}
+
+/* ===== 크기 유지 ===== */
+.main-background {
+  width: 1500px;
+  height: 1200px;
+  margin: 0 auto;
+}
+.mypageBack1 { width: 1200px; height: 100px; margin: 0px auto;}
+.menuMypage  { width: 1200px; height: 1000px; display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 24px;margin: 0px auto; }
+.menuBox     { width: 200px; height: 500px; }
+
+/* ===== 상단 타이틀 ===== */
+.mypageBack1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #e5e7eb;
+  background: linear-gradient(180deg, #ffffff, #f6f9fc);
+}
+.myPagename {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #1f2937;
+}
+
+/* ===== 좌측 메뉴 카드 ===== */
+.menuBox {
+  background: #fff;
+  border: 1px solid #e4e9f1;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(17, 24, 39, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+.menuTitle {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+/* ===== 메뉴 버튼 ===== */
+.menuBtn {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e4e9f1;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f2937;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.menuBtn:hover {
+  background: #f7faff;
+  border-color: #cfd8e3;
+  box-shadow: 0 4px 10px rgba(17, 24, 39, 0.06);
+}
+.menuBtn:active {
+  transform: translateY(1px);
+}
+.menuBtn.is-active {
+  background: linear-gradient(135deg, #7da9f7, #a5bffb);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(125, 169, 247, 0.25);
+}
+
+/* ===== 우측 콘텐츠 패널 ===== */
+.mypageBack2 {
+  background: #fff;
+  border: 1px solid #e4e9f1;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(17, 24, 39, 0.05);
+  padding: 28px;
+  min-height: 600px;
+  overflow: auto;
+  position: relative;
+}
+.mypageBack2::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 0;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #7da9f7, #a5bffb);
+  opacity: 0.7;
+}
+
+/* ===== 빈 상태 안내 ===== */
+.emptyState {
+  display: grid;
+  place-content: center;
+  text-align: center;
+  height: 100%;
+  color: #6b7280;
+  animation: fadeIn 0.3s ease;
+}
+.emptyState h3 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 18px;
+}
+.emptyState p {
+  font-size: 14px;
+  color: #777;
+}
+.emptyState::before {
+  content: "✨";
+  font-size: 30px;
+  display: block;
+  margin-bottom: 6px;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== 포커스 ===== */
+.menuBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(125, 169, 247, 0.25);
+}
+
+/* ===== “나만의 화장품” 카드도 동일 톤 ===== */
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 10px;
+}
+.brand-card {
+  background: #fff;
+  border: 1px solid #e4e9f1;
+  border-radius: 12px;
+  padding: 20px 14px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(17, 24, 39, 0.04);
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+}
+.brand-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+}
+.brand-card img {
+  width: 100%;
+  max-width: 180px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+.brand-card h4 {
+  font-size: 16px;
+  margin: 6px 0 4px;
+}
+.brand-card p {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+
+/* ===== 우측 콘텐츠 패널 ===== */
+.mypageBack2 {
+  min-height: 500px; /* 여유 */
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+  padding: 24px;
+  overflow: auto;
+}
+
+/* 빈 상태 안내 */
+.emptyState {
+  display: grid;
+  place-content: center;
+  height: 100%;
+  text-align: center;
+  gap: 8px;
+}
+.emptyState h3 { margin: 0; font-size: 18px; }
+.emptyState p  { margin: 0; color: #666; font-size: 14px; }
+
+/* ===== (선택) 포커스 접근성 ===== */
+.menuBtn:focus { outline: 2px solid #111; outline-offset: 2px; }
+/* ===== 회원정보 수정 폼 ===== */
+.edit-info {
+  width: 100%;
+  padding: 20px 30px;
+}
+.edit-info h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 8px;
+}
+
+.edit-form table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.edit-form th {
+  text-align: left;
+  width: 160px;
+  padding: 10px 6px;
+  font-weight: 500;
+  vertical-align: middle;
+  color: #333;
+}
+.edit-form td {
+  padding: 6px 0;
+}
+.edit-form input[type="text"],
+.edit-form input[type="password"],
+.edit-form input[type="email"] {
+  height: 34px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 8px;
+  font-size: 14px;
+}
+.edit-form input:disabled {
+  background: #f8f8f8;
+  color: #666;
+}
+.edit-form span {
+  color: #e63946;
+  margin-left: 4px;
+}
+.zip-btn {
+  margin-left: 8px;
+  padding: 6px 10px;
+  background: #f6f6f6;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.edit-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+.save-btn, .cancel-btn {
+  padding: 8px 20px;
+  margin: 0 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.save-btn { background: #111; color: #fff; }
+.cancel-btn { background: #ddd; color: #111; }
+.save-btn:hover { background: #333; }
+.cancel-btn:hover { background: #ccc; }
+
+/* ===== 회원탈퇴 영역 ===== */
+/* 푸터 래퍼: 버튼은 가운데, 탈퇴 링크는 구석 */
+.form-foot { margin-top: 20px; position: relative; }
+
+/* 기존 액션 버튼 영역 그대로 사용 */
+.edit-actions { text-align: center; }
+
+/* 구석(오른쪽 아래)에 작은 텍스트 링크 */
+.withdraw-link {
+  position: absolute;
+  right: 0;
+  bottom: -4px;         /* 살짝 아래로 붙이기 */
+  font-size: 12px;
+  color: #9aa0a6;       /* 연한 회색 */
+  text-decoration: none;
+}
+.withdraw-link:hover {
+  text-decoration: underline;
+  color: #6b7280;
+}
+.withdraw-link:focus {
+  outline: 2px solid #111; outline-offset: 2px; /* 접근성 */
+}
+
+/* ===== 1:1 상담 공통 ===== */
+.counsel { width: 100%; }
+.c-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.c-head h2 { margin: 0; font-size: 20px; font-weight: 700; }
+.c-hint { margin: 8px 0 0; color: #666; font-size: 12px; }
+
+/* 버튼들 */
+.btn-replies, .btn-back {
+  padding: 8px 14px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fff; cursor: pointer;
+  transition: box-shadow .15s ease, transform .06s ease;
+}
+.btn-replies:hover, .btn-back:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.btn-replies:active, .btn-back:active { transform: translateY(1px); }
+
+/* 테이블 */
+.counsel-table {
+  width: 100%; border-collapse: collapse; background: #fff;
+  border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden;
+}
+.counsel-table thead th {
+  background: #f7f7f8; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 14px; color: #333;
+  border-bottom: 1px solid #e5e7eb;
+}
+.counsel-table tbody td {
+  padding: 10px 12px; font-size: 14px; border-bottom: 1px solid #f1f3f5;
+}
+.counsel-table tbody tr:last-child td { border-bottom: 0; }
+
+.c-id { white-space: nowrap; color: #666; }
+.c-title { font-weight: 500; }
+.c-date { white-space: nowrap; color: #666; font-size: 13px; }
+.c-summary { color: #333; }
+.c-from { color: #444; font-weight: 500; }
+
+.c-status { font-size: 12px; padding: 2px 8px; border-radius: 999px; display: inline-block; }
+.c-status.answered { background: #ecfdf5; color: #047857; border: 1px solid #bbf7d0; }
+.c-status.pending  { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+
+.counsel-table .empty { text-align: center; color: #777; padding: 28px 0; }
+
+/* ===== 나만의 화장품 ===== */
+.myproduct {
+  padding: 30px 40px;
+}
+.myproduct-head {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.myproduct-head h2 {
+  font-size: 24px;
+  margin: 0;
+}
+.myproduct-head p {
+  color: #555;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* 브랜드 카드 그리드 */
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+.brand-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+  padding: 20px 14px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.brand-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.brand-card img {
+  width: 100%;
+  max-width: 180px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+.brand-card h4 {
+  margin: 6px 0 4px;
+  font-size: 16px;
+}
+.brand-card p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 14px;
+}
+
+/* 버튼 (현재 비활성화 상태) */
+.brand-card button {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: not-allowed;
+  color: #888;
+  font-size: 13px;
+}
+
+/* 안내 문구 */
+.coming-soon {
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+  margin-top: 40px;
+  font-style: italic;
+}

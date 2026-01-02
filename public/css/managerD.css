@@ -1,0 +1,134 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.M_background{
+    width: 1500px;
+    height: 2000px;
+    /* background-color: antiquewhite; */
+    margin: 0px auto;
+}
+.name{
+    text-align: center;
+    padding: 10px;
+    background-color: azure;
+    border-radius: 10px;
+    border-bottom: 1px solid black;
+}
+.D_back{
+    width: 1000px;
+    height: 1500px;
+    background-color: white;
+    margin: 0px auto;
+}
+.todayBox{
+    width: 500px;
+    height: 230px;
+    /* background-color: beige; */
+    margin: 0px auto;
+}
+.todayandre{
+    display: flex;
+    /* 요소들을 가로로 배치합니다. */
+    align-items: center;
+    /* 요소들을 세로 중앙에 정렬합니다. */
+     gap: 10px;
+     margin: 0px auto;
+     background-color: aliceblue;
+}
+.reply{
+    margin: 1px;
+    margin-left: 330px;
+    border-radius: 10px;
+}
+.todayname{
+    font-weight: bold;
+    margin: 0px;
+}
+.oneandone{
+    width: 500px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.oneandone p{
+    margin: 0px;
+    text-align: center;
+}
+.todayBoxUser{
+    border-bottom: 1px solid black;
+    border-bottom-style: dotted;
+}
+.newUserBox{
+    width: 1000px;
+    height: 300px;
+    /* background-color: aliceblue; */
+    margin: 0px auto;
+}
+.newUserDateName{
+    width: 1000px;
+    display: flex;
+    text-align: center;
+}
+.newUserDateNameid{
+    width: 130px;
+    height: 30px;
+    border: 1px solid black;
+    margin: 0px;
+}
+.newUserDateNamerating{
+    width: 80px;
+    height: 30px;
+    border: 1px solid black;
+    margin: 0px; 
+}
+.newUserDateNames{
+    width: 100px;
+    height: 30px;
+    border: 1px solid black;
+    margin: 0px;     
+}
+.newUserDateNameEmali{
+    width: 400px;
+    height: 30px;
+    border: 1px solid black;
+    margin: 0px;     
+}
+.newUserDateNameOneDay{
+    width: 120px;
+    height: 30px;
+    border: 1px solid black;
+    margin: 0px;      
+}
+.newUserBoxP{
+    width: 1000px;
+    height: 50px;
+    display: flex;
+    /* 요소들을 가로로 배치합니다. */
+    align-items: center;
+    /* 요소들을 세로 중앙에 정렬합니다. */
+    gap: 500px;
+    margin: 0px auto;
+    background-color: aliceblue;
+}
+.newUserDateNameBox{
+    width: 1000px;
+    height: 200px;
+    /* background-color: aquamarine; */
+    border: 1px solid black;
+}
+.dashboard-container {
+    display: flex;
+    justify-content: space-around;
+    /* 차트 사이 간격 */
+    flex-wrap: wrap;
+    /* 화면 작아지면 줄바꿈 */
+}
+.chart-box {
+    width: 30%;
+    /* 각 차트가 차지할 너비 */
+    min-width: 350px;
+    /* 최소 너비 */
+    text-align: center;
+}

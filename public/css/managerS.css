@@ -1,0 +1,180 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.S_back{
+    width: 1500px;
+    width: 1500px;
+    margin: 0px auto;
+}
+.S_Name{
+    width: 1000px;
+    height: 1000px;
+    /* background-color: antiquewhite; */
+    margin-left: 50px;
+    float: left;
+}
+.S_Name h4{
+    margin: 0px;
+}
+.S_na{
+    width: 998px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    background-color: antiquewhite;
+}
+.S_na P{
+    text-align: center;
+    margin: 14px;
+}
+.S_add{
+    width: 1000px;
+    height: 300px;
+    /* border: 1px solid #e5e5e5; */
+    float: left;
+}
+.S_addOne{
+    width: 200px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    background-color: whitesmoke;
+    float: left;
+}
+.S_addOne p{
+    margin: 10px;
+}
+.S_addOne_one{
+    width: 798px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    align-items: center;
+    float: left;
+}
+.S_addOne_one input{
+    margin: 15px;
+}
+.S_addTwo{
+    width: 300px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    float: left;
+}
+.S_addTwo_one{
+    width: 298px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    float: left;
+}
+.S_naOne{
+    width: 998px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    float: left;
+    background-color: antiquewhite;
+}
+.S_naOne P{
+    text-align: center;
+    margin: 14px;  
+}
+.S_ButtonName{
+    width: 200px;
+    height: 150px;
+    border: 1px solid #e5e5e5;
+    background-color: whitesmoke;
+    float: left;
+}
+.S_ButtonName p{
+    text-align: center;
+    margin: 50px;
+}
+.S_selectBox{
+    width: 298px;
+    height: 150px;
+    border:1px solid #e5e5e5;
+    float: left;
+}
+/* 셀렉트 박스를 감싸는 부모 요소 */
+.select-wrapper {
+    position: relative;
+    width: 220px;
+    top: 45px;
+    left: 15px;
+    /* 원하는 너비로 조절 */
+}
+
+/* 기본 <select> 스타일링 */
+#logo-select {
+    /* 브라우저 기본 스타일 초기화 */
+    appearance: none;
+    /* 표준 속성 */
+    -webkit-appearance: none;
+    /* 크롬, 사파리 */
+    -moz-appearance: none;
+    /* 파이어폭스 */
+
+    /* 새로운 스타일 적용 */
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    /* 오른쪽 여백은 화살표 공간 */
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* IE 10/11 용 화살표 숨기기 */
+#logo-select::-ms-expand {
+    display: none;
+}
+
+/* 커스텀 화살표 만들기 (가상 요소 ::after 사용) */
+.select-wrapper::after {
+    content: '▼';
+    /* 간단한 텍스트 화살표 */
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #555;
+
+    /* 이 화살표가 클릭되는 것을 방지 */
+    pointer-events: none;
+}
+
+/* <select>가 포커스(클릭)되었을 때 테두리 스타일 */
+#logo-select:focus {
+    outline: none;
+    border-color: #007bff;
+    /* 파란색 테두리 */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* <option> 태그 스타일 (일부 브라우저에서만 적용) */
+#logo-select option {
+    padding: 8px;
+}
+.S_ButtonImg{
+    width: 300px;
+    height: 150px;
+    border:1px solid #e5e5e5;
+    float: left;
+}
+.S_Save{
+    width: 998px;
+    height: 50px;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    float: left;
+}
+.S_Save button{
+    padding: 5px 30px;
+    margin-top: 10px;
+}

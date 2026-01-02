@@ -1,0 +1,120 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.BBM_Back{
+    width: 1500px;
+    height: 500px;
+    margin: 0px auto;
+}
+.BBM_Views {
+  position: relative;      /* 내부 애들을 absolute로 겹치기 위한 기준 */
+  width: 1200px;
+  margin: 0px auto;
+  float: left;
+}
+.BBM_Name{
+    width: 1200px;
+    height: 2000px;
+    float: left;
+    margin-left: 30px;
+}
+.CCBack{
+    display: none;       /* JS에서 켰다 껐다 할 부분 */
+    width: 1200px;
+    min-height: 2000px;
+    float: left;
+    margin-left: 30px;
+}
+.CCName{
+    width: 1200px;
+    height: 50px;
+    display: flex;
+    /* justify-content를 부모 클래스로 옮겨주세요 */
+    justify-content: space-between;
+
+    /* 텍스트와 버튼의 높이를 중간으로 맞추려면 아래 속성도 추가하면 좋습니다 */
+    align-items: center;
+}
+.BBM_Name_one{
+    width: 1200px;
+    height: 50px;
+    display: flex;
+    /* justify-content를 부모 클래스로 옮겨주세요 */
+    justify-content: space-between;
+
+    /* 텍스트와 버튼의 높이를 중간으로 맞추려면 아래 속성도 추가하면 좋습니다 */
+    align-items: center;
+}
+.BBM_Name_one button{
+    margin-right: 30px;
+}
+
+.BBM_Name p{
+    margin: 0px;
+    margin-bottom : 20px;
+    font-size: 20px;
+}
+.BBM_Name_title{
+    width: 1200px;
+    height: 50px;
+}
+.BBM_Name_title table {
+    width: 1172px;
+    /* 요청하신 전체 너비 */
+    border-collapse: collapse;
+    /* 테두리 사이 공백 없애기 (필수) */
+    border-spacing: 0;
+    margin: 0 auto;
+    /* (선택) 테이블을 화면 중앙에 배치하려면 추가 */
+}
+
+/* 2. 제목(th)과 내용(td)의 높이 설정 */
+.BBM_Name_title table th,
+.BBM_Name_title table td {
+    height: 50px;
+    /* 요청하신 한 줄의 높이 */
+    border: 1px solid #e0e0e0;
+    /* 테두리 선 (필요에 따라 색상 변경) */
+    text-align: center;
+    /* 텍스트 가운데 정렬 */
+    padding: 0;
+    /* 안쪽 여백 초기화 (높이 50px을 정확히 맞추기 위해) */
+    box-sizing: border-box;
+    /* 테두리 두께를 높이에 포함시킴 */
+    font-weight: normal;
+}
+.column th{
+    background-color: #f0f0f0;
+}
+.one{
+    width: 90px;
+    height: 50px;
+    border: 1px solid black;
+    float: left;
+}
+.twe{
+    width: 150px;
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    float: left;
+}
+.three{
+    width: 200px;
+    height: 50px;
+    border: 1px solid black;
+    float: left;
+    text-align: center;
+}
+.Reference{
+    margin: 0px auto;
+    border-bottom: 1px solid blue;
+    color: blue;
+    margin-top: 100px;
+}
+.CCBack {
+  display: none; /* 처음에는 안 보이게 */
+}

@@ -1,0 +1,68 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.E_back{
+    width: 1500px;
+    height: 2000px;
+    margin: 0px auto;
+}
+.E_name{
+    width: 1000px;
+    height: 1000px;
+    float: left;
+    margin-left: 50px;
+}
+.E_name p{
+    margin: 0px;
+}
+.E_Btn_serch{
+    width: 1000px;
+    height: 50px;
+    justify-content: center;
+    float: left;
+    display: flex;
+    margin-top: 30px;
+}
+.E_Btn_serchOne{
+    width: 700px;
+    text-align: center;
+}
+.E_Btn_serchOne input{
+    margin-left: 20px;
+}
+.E_Btn_serchTwe{
+    width: 300px;
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 1. 테이블 전체 설정: 테두리가 겹치지 않게 한 줄로 만듦 */
+table {
+    border-collapse: collapse; /* 핵심: 셀 간 간격 없애기 */
+    width: 100%; /* 전체 너비 */
+}
+
+/* 2. 행(tr) 설정: flex를 제거하세요! */
+.E_Tone {
+    background-color: #f0f0f0;
+    /* display: flex;  <-- 이거 지우세요 */
+}
+
+/* 3. 셀(td) 설정: float를 제거하세요! */
+td {
+    border: 1px solid #e0e0e0;
+    padding: 0; /* 필요하면 여백 조정 */
+    box-sizing: border-box; /* 테두리 포함 크기 계산 */
+}
+
+.one {
+    width: 30px;
+    height: 50px;
+}
+.twe { width: 80px; height: 50px; }
+.three { width: 250px; height: 50px;}
+.four { width: 147px; height: 50px;}

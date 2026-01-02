@@ -1,0 +1,139 @@
+div {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+@font-face {
+  font-family: 'JoseonPalace';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGs.woff') format('woff');
+  font-weight: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-display: swap;
+}
+#mpg{
+  font-family: 'JoseonPalace', 'Noto Sans KR', sans-serif;
+}
+/* ===== 헤더 전체 ===== */
+.main-head {
+  width: 1500px;
+  max-width: 1500px;          /* 기존 1500 유지 */
+  height: 50px;
+  background-color: aliceblue;
+  border-bottom: 1px solid black;
+  display: flex;              /* 수평 정렬 */
+  flex-wrap: nowrap;          /* 줄바꿈 금지 */
+  align-items: center;        /* 세로 가운데 정렬 */
+  justify-content: space-between; /* 좌우 배치 */
+  padding: 0 40px;            /* 좌우 여백 */
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+
+/* ===== 로고 버튼 ===== */
+.name button {
+  font-size: 30px;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 100px;
+}
+
+/* ===== 기본 버튼 ===== */
+button {
+  margin: 0 15px;             /* 위아래 마진 제거, 좌우만 유지 */
+  background: transparent;
+  border: none;
+  color: #111;
+  padding: 6px 10px;
+  transition: background-color .15s ease, color .15s ease;
+}
+
+/* ===== 가운데 메뉴 영역 ===== */
+.head-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;             /* 남는 공간만 유연하게 차지 */
+  gap: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;        /* 줄바꿈 방지 */
+}
+
+/* ===== 오른쪽 영역 (마이페이지 등) ===== */
+.main_head_right {
+  width: 900px;
+  height: 50px;
+  float: none;                /* flex 충돌 방지 */
+}
+
+/* ===== 오른쪽 버튼 묶음 ===== */
+.sine {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  margin-right: 100px;
+}
+.sinelo { display: inline-block; } /* 로그인 버튼 */
+.sineOne { display: none; }        /* 마이페이지/로그아웃 */
+
+body.logged-in .sinelo { display: none; }
+body.logged-in .sineOne { display: inline-block; } /* block 원하면 block으로 */
+
+/* style.css */
+
+/* 기본 스타일 초기화 (좋은 습관입니다) */
+body, h1, p, a, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 크기 계산을 쉽게 만듭니다 */
+    font-family: 'PyeojinGothic', 'Noto Sans KR', sans-serif;
+}
+
+/* --- 헤더 스타일 --- */
+
+
+.main-head .name a {
+    text-decoration: none;   
+    color: #212529;                
+    font-size: 24px;               
+}
+
+
+.main-head .main_head_right {
+    display: flex;                 
+    gap: 20px;                  
+}
+
+
+.main-head .main_head_right button {
+    background: none;              
+    border: none;              
+    cursor: pointer;           
+    font-size: 16px;           
+    color: #495057;               
+    padding: 5px;                  
+}
+
+
+.main-head .main_head_right button:hover {
+    color: #007bff;           
+}
+
+body:not(.logged-in) #FYSSelf,
+body:not(.logged-in) #button {
+  opacity: 0.5;
+  /* 흐리게 */
+  cursor: not-allowed;
+  /* 마우스 커서 변경 */
+  pointer-events: none;
+  /* 클릭 이벤트 자체를 막음 */
+} 

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>디자인 관리</title>
+    <link href="css/managerDSN.css" rel="stylesheet">
+    <link href="css/managerH.css" rel="stylesheet">
+
+    <script src="js/managerCM.js" defer></script>
+    <script src="js/managerH.js" defer></script>
+    <script src="js/DNS.js" defer></script>
+    <script src="js/DNStwe.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="DNS_Back">
+        <header id="header-container"></header>
+        <div class="DSNBtn">
+            <h4>pc 디자인관리</h4>
+        </div>
+        <div class="bannerBack">
+            <div class="Dbtnlist">
+                <button type="button" class="bannerBTN" id="mainbanner">메인 베너</button>
+                <button type="button" class="bannerBTN" id="event">이벤트</button>
+                <button type="button" class="bannerBTN" id="CscBanner">고객센터 베네</button>
+                <button type="button" class="bannerBTN" id="brandBanner">브랜드 베너</button>
+            </div>
+            <div class="mainbanner">
+                <div id="one">
+                    <div class="mainbannerBTN">
+                        <button type="button" id="mainBTN-1">메인 베너</button>
+                        <button type="button" id="mainBTN-2">내피부 아는데</button>
+                        <button type="button" id="mainMySkinBTN">오늘의 화장품 top10</button>
+                    </div>
+                    <div class="mainIMG"></div>
+                    
+                    <div class="Skins" style="display: none;">
+                        <div class="mainMySkin"></div>
+    
+                        <div class="BtnMySkin">
+                            <button id="btnPrev">이전</button>
+                            <button id="btnNext">다음</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="eventLink-back" style="display: none;" id="twe">
+                <div class="eventLink-btn">
+                    <button class="EBtnM">메인</button>
+                    <button class="EBtnS">서브</button>
+                </div>
+                <div class="eventLink-main" style="display: none;">
+                    <div class="eventLinkOne"></div>
+                    <div class="eventLinktwe"></div>
+                    <div class="eventLinkthree"></div>
+                    <div class="eventLinkfour"></div>
+                </div>
+                <div class="eventLink-serve" style="display: none;">
+                    <button >올리브영</button>
+                    <button >아모레퍼시픽</button>
+                    <button >이니스프리</button>
+                    <button >제로이드</button>
+                    <div id="product-container">
+                        <div class="serveOne"></div>
+                        <div class="servetwe"></div>
+                        <div class="servethree"></div>
+                        <div class="servefour"></div>
+                        <div class="servefive"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+            <div class="BImg_title Csc" style="display: none;">
+                <p>고객센터 베너</p>
+                <div class="bannerIMG">
+                    <img id="dynamic-preview-${data.id}" alt="배너 미리보기" style="display:none; max-width:100%;">
+                </div>
+            
+                <div class="BImg_title_one">
+                    <input type="file" id="dynamic-file-${data.id}" accept="image/*">
+                    <button type="button">저장</button>
+                </div>    
+            </div>
+            <div class="BImg_title bdBanner" style="display: none;">
+                <p>브랜드 베너</p>
+                <div class="bannerIMG">
+                    <img id="dynamic-preview-${data.id}" alt="배너 미리보기" style="display:none; max-width:100%;">
+                </div>
+            
+                <div class="BImg_title_one">
+                    <input type="file" id="dynamic-file-${data.id}" accept="image/*">
+                    <button type="button">저장</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+
+$('#CscBanner').on('click', function(){
+    $('.mainbanner, .Skins, .eventLink-back, .bdBanner').hide();
+    $('.Csc').css('display', 'block'); 
+});
+
+$('#brandBanner').on('click', function(){
+    $('.mainbanner, .Skins, .eventLink-back, .Csc').hide();
+    $('.bdBanner').css('display', 'block'); 
+});
+
+</script>

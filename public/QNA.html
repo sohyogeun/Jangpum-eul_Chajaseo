@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>QNA화면</title>
+
+    <!-- CSS -->
+    <link href="css/QNA.css" rel="stylesheet" />
+    <link href="css/head.css" rel="stylesheet" />
+    <link href="css/end.css" rel="stylesheet" />
+
+    <!-- JS -->
+     <script src="js/qna.js" defer></script>
+    <script src="js/head_log.js" defer></script>
+    <script src="js/comend.js" defer></script>
+    <script src="js/end.js" defer></script>
+
+  </head>
+  <body>
+    <div class="main-background">
+      <!-- 공통 헤더 -->
+      <header id="site_header"></header>
+
+      <!-- 상단 이미지 -->
+      <div class="QNA-picture" aria-label="고객센터 배너 이미지"></div>
+
+      <!-- 상단 탭 -->
+      <div class="QNA1">
+        <button class="QNA-csc" id="Notice" aria-label="공지사항 탭">공지사항</button>
+        <div class="QNA-body2-2" role="group" aria-label="FAQ 카테고리">
+          <input type="button" value="top10" id="top10" aria-label="TOP10 보기" />
+          <input type="button" value="기타문의" id="CSC" aria-label="기타문의 보기" />
+          <input type="button" value="회원/멤버십" id="USER" aria-label="회원/멤버십 보기" />
+          <input type="button" value="신고/제보" id="NFT" aria-label="신고/제보 보기" />
+        </div>
+      </div>
+
+      <!-- 검색 + FAQ -->
+      <section class="faq" aria-labelledby="faq-title">
+        <div class="QNA-body1">
+          <div class="QNA-body2">
+            <div class="QNA-body2-1">
+              <form>
+                <input type="text" placeholder="궁금한 내용을 적어주세요" aria-label="FAQ 검색어" />
+                <button type="submit" aria-label="FAQ 검색">찾기</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-head">
+          <h3 id="faq-title">TOP 10</h3>
+          <div class="faq-divider"></div>
+        </div>
+
+        <div class="faq-table-head" aria-hidden="true">
+          <span class="th">제목</span>
+          <span class="th">내용</span>
+        </div>
+
+        <ul class="faq-list">
+          <li class="row">
+            <span class="title">회원가입이 안돼요</span>
+            <span class="content">이메일 인증이 오지 않을 때</span>
+          </li>
+          <li class="row">
+            <span class="title">비밀번호를 잊었어요</span>
+            <span class="content">재설정하는 방법</span>
+          </li>
+          <li class="row"><span></span><span></span></li>
+          <li class="row"><span></span><span></span></li>
+          <li class="row"><span></span><span></span></li>
+          <li class="row"><span></span><span></span></li>
+          <li class="row"><span></span><span></span></li>
+          <li class="row"><span></span><span></span></li>
+          <li class="row"><span></span><span></span></li>
+          <li class="row"><span></span><span></span></li>
+        </ul>
+      </section>
+
+      <!-- 1:1 상담 폼 -->
+      <section class="inquiry" aria-labelledby="inquiry-title">
+        <div class="badge" id="inquiry-title">1:1 상담</div>
+        <form class="form">
+          <div class="field">
+            <label for="category">문의분류</label>
+            <select id="category" required>
+              <option value="" selected disabled>선택하세요</option>
+              <option>회원/계정</option>
+              <option>주문/결제</option>
+              <option>환불/교환</option>
+              <option>기타문의</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="title">문의제목</label>
+            <input id="title" type="text" placeholder="제목을 입력하세요" required />
+          </div>
+          <div class="field">
+            <label for="content">문의내용</label>
+            <textarea id="content" rows="6" placeholder="자세히 적어주세요" required></textarea>
+          </div>
+          <div class="actions">
+            <button type="submit" class="primary">보내기</button>
+            <button type="reset" class="ghost">초기화</button>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="end_back">
+      <header id="end"></header>
+    </div>
+  </body>
+</html>

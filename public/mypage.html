@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>마이페이지</title>
+
+  <!-- 기존 CSS들 (순서 유지) -->
+  <link href="css/mypage.css" rel="stylesheet"/>
+  <link href="css/head.css" rel="stylesheet"/>
+  <link href="css/end.css" rel="stylesheet"/>
+  <link href="css/myconmetics.css" rel="stylesheet" />
+
+  <link href="css/FysOne.css" rel="stylesheet">
+  <script src="js/FindYourSkinOne.js" defer></script>
+  <script src="js/gotoSite.js" defer></script>
+
+  <script src="js/comend.js" defer></script>
+  <script src="js/head_log.js" defer></script>
+  <script src="js/include.js" defer></script>
+  <script src="js/end.js" defer></script>
+  <script src="js/oneVSone.js" defer></script>
+  <script src="js/myconmetics.js" defer></script>
+  <script src="js/mypage.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <form>
+      <div class="Ch_item"></div>
+  </form>
+  
+  <div class="main-background">
+    <header id="site_header"></header>
+    <!-- 상단 타이틀 바(크기 유지) -->
+    <div class="mypageBack">
+      <div class="mypageBack1">
+        <p class="myPagename">마이페이지</p>
+      </div>
+
+      <!-- 본문 영역(크기 유지) -->
+      <div class="menuMypage">
+        <!-- 좌측 메뉴 카드(크기 유지) -->
+        <aside class="menuBox" aria-label="마이페이지 메뉴">
+          <section class="suve">
+            <h4 class="menuTitle">회원정보</h4>
+            <button id="editInfoBtn" class="menuBtn">회원정보 수정</button>
+          </section>
+
+          <section class="suve">
+            <h4 class="menuTitle">게시글 모음집</h4>
+            <button id="counselBtn" class="menuBtn">1대1 상담 내용 및 답장</button>
+          </section>
+
+          <section class="suve">
+            <h4 class="menuTitle">나를 꾸미다</h4>
+            <button id="FYS"     class="menuBtn">나의 피부</button>
+            <button id="myProductBtn"  class="menuBtn">나만의 화장품</button>
+          </section>
+        </aside>
+
+        <!-- 우측 콘텐츠 패널(크기 유지) -->
+        <main class="mypageBack2" aria-live="polite">
+          <!-- 여기에 선택한 메뉴에 따라 콘텐츠가 들어갈 예정 -->
+          <div class="emptyState">
+            <h3>원하시는 메뉴를 선택하세요</h3>
+            <p>좌측 메뉴에서 항목을 클릭하면 내용이 이 영역에 표시됩니다.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <header id="end"></header>
+  </footer>
+</body>
+</html>
