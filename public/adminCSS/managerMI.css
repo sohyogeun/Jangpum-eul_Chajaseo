@@ -1,0 +1,112 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.T_Back{
+    width: 1500px;
+    height: 100px;
+    margin: 0px auto;
+}
+.T_name{
+    width: 1000px;
+    height: 1000px;
+    float: left;
+    margin-left: 50px;
+}
+.T_nameOne{
+    width: 1000px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.T_nameOne p{
+    margin-bottom: 50px;
+}
+.T_nameTwe{
+    width: 1000px;
+    height: 500px;
+    /* border: 1px solid black; */
+    float: left;
+}
+.T_nameTwe_One{
+    width: 1000px;
+    height: 50px;
+    border: 1px solid black;
+    margin: 0px auto;
+    float: left;
+}
+.T_nameTwe_One_one{
+    width: 90px;
+    height: 50px;
+    border: 1px solid black;
+    float: left;
+}
+.T_nameTwe_One_twe{
+    width: 200px;
+    height: 50px;
+    border: 1px solid black;
+    float: left; 
+}
+.T_nameTwe_One_three{
+    width: 500px;
+    height: 50px;
+    border: 1px solid black;
+    float: left;
+}
+.T_nameTwe td{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: 1px solid #e0e0e0;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #e0e0e0;
+}
+.column{
+    background-color: #f0f0f0;
+}
+.NB_E_B{
+    width: 1000px;
+    height: 200px;
+    /* border: 1px solid #e5e5e5; */
+    float: left;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.NB_E_B button{
+    margin-right: 20px;
+    border-radius: 10px;
+    margin-bottom: 100px;
+}
+#header-container *,
+#admin-menuTwo-container * {
+    font-size: revert;
+    font-weight: revert;
+    color: revert;
+}
+#summernote { width: 1000px; }          /* 전체 폭 */
+.note-editor.note-frame { width: 1000px; }
+
+#detail-box{
+  clear: both;            /* ✅ float 영향 끊기 (이게 핵심) */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#detail-box .detail-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 12px;
+}
+
+#detail-box .detail-title{
+  white-space: nowrap;    /* ✅ 글자 세로로 찢어지는거 방지 */
+}

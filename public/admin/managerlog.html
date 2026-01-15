@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+
+  <title>관리자 로그인</title>
+  <link href="../adminCSS/managerlog.css" rel="stylesheet">
+</head>
+<body>
+  <div class="malogback">
+    <div class="malogName">
+      <p>관리자 로그인</p>
+      <h4>장품을찾아서</h4>
+    </div>
+
+    <div class="malogTitle">
+      <p>관리자 접속을 위한 인증 단계입니다.</p>
+      <p>관리자 아이디와 비밀번호를 정확히 입력해주세요.</p>
+    </div>
+
+    <div class="MidPass">
+      <!-- ✅ from → form -->
+      <form class="maUser" id="adminLoginForm">
+        <label id="maId">Id
+          <!-- ✅ input에 id 부여 -->
+          <input type="text" id="adminId">
+        </label>
+
+        <label id="maPw">Pw
+          <!-- ✅ input에 id 부여 -->
+          <input type="password" id="adminPass">
+        </label>
+
+        <!-- ✅ 버튼에 id 부여 -->
+        <button type="button" id="btnLogin">확인</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ✅ script는 하나만, body 끝에 -->
+  <script>
+    document.getElementById("btnLogin")?.addEventListener("click", async () => {
+      const adminId = document.getElementById("adminId").value.trim();
+      const adminPass = document.getElementById("adminPass").value;
+
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ adminId, adminPass }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok) {
+        location.href = "/admin/managerD.html";
+      } else {
+        alert("로그인 실패");
+      }
+    });
+  </script>
+</body>
+</html>

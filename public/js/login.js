@@ -25,6 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(err);
       alert('네트워크/서버 오류');
     }
-  }, { once: true });
+  });
 });
 

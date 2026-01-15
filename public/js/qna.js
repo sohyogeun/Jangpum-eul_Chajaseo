@@ -92,3 +92,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const firstBtn = buttons[0];
   if (firstBtn) renderList(firstBtn.id, firstBtn.value);
 });
+
+
+document.getElementById("inquiryForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const payload = {
+    category: document.getElementById("category").value,
+    title: document.getElementById("title").value.trim(),
+    content: document.getElementById("content").value.trim(),
+  };
+
+  // 간단 검증
+  if (!payload.category || !payload.title || !payload.content) {
+    alert("모든 항목을 입력해 주세요.");
+    return;
+  }
+
+  const res = await fetch("/api/inquiries", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    alert(data.message || "저장 실패");
+    return;
+  }
+
+  alert("문의가 접수되었습니다!");
+  e.target.reset();
+});
+

@@ -79,33 +79,39 @@
       </section>
 
       <!-- 1:1 상담 폼 -->
-      <section class="inquiry" aria-labelledby="inquiry-title">
-        <div class="badge" id="inquiry-title">1:1 상담</div>
-        <form class="form">
-          <div class="field">
-            <label for="category">문의분류</label>
-            <select id="category" required>
-              <option value="" selected disabled>선택하세요</option>
-              <option>회원/계정</option>
-              <option>주문/결제</option>
-              <option>환불/교환</option>
-              <option>기타문의</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="title">문의제목</label>
-            <input id="title" type="text" placeholder="제목을 입력하세요" required />
-          </div>
-          <div class="field">
-            <label for="content">문의내용</label>
-            <textarea id="content" rows="6" placeholder="자세히 적어주세요" required></textarea>
-          </div>
-          <div class="actions">
-            <button type="submit" class="primary">보내기</button>
-            <button type="reset" class="ghost">초기화</button>
-          </div>
-        </form>
-      </section>
+       <!-- 1:1 상담 폼 -->
+<section class="inquiry" aria-labelledby="inquiry-title">
+  <div class="badge" id="inquiry-title">1:1 상담</div>
+
+  <form class="form" id="inquiryForm">
+    <div class="field">
+      <label for="category">문의분류</label>
+      <select id="category" required>
+        <option value="" selected disabled>선택하세요</option>
+        <option value="회원/계정">회원/계정</option>
+        <option value="화장품 비교 문의">화장품/비교</option>
+        <option value="나의 피부 문의">나의 피부</option>
+        <option value="기타문의">기타 문의</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="title">문의제목</label>
+      <input id="title" type="text" placeholder="제목을 입력하세요" required />
+    </div>
+
+    <div class="field">
+      <label for="content">문의내용</label>
+      <textarea id="content" rows="6" placeholder="자세히 적어주세요" required></textarea>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="primary">보내기</button>
+      <button type="reset" class="ghost">초기화</button>
+    </div>
+  </form>
+</section>
+
     </div>
     <div class="end_back">
       <header id="end"></header>

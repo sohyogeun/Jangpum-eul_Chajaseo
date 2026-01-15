@@ -1,0 +1,207 @@
+div {
+    box-sizing: border-box;
+}
+body {
+    margin: 0%;
+}
+.NB_E_Back{
+    width: 1500px;
+    height: 500px;
+    margin: 0px auto;
+}
+.NB_E_Name{
+    width: 1000px;
+    height: 600px;
+    /* background-color: antiquewhite; */
+    float: left;
+    margin-left: 50px;
+    margin-bottom: 60px;
+}
+.NB_E_Name h4{
+    margin: 0px;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+.NB_E_C_back{
+    width: 650px;
+    height: 50px;
+    float: left;
+}
+.NB_E_E{
+    width: 1000px;
+    height: 250px;
+    margin-top: 30px;
+}
+.NB_E_Setting{
+    width: 350px;
+    height: 50px;
+    float: left;
+    display: flex;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.list-group, .list-group-horizontal{
+    width: 1000px;
+    height: 40px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    border-radius: 0px !important;
+}
+.list-group-item{
+    border-radius: 0px !important;
+}
+.back .list-group-item {
+    background-color: #f0f0f0;
+    /* 원하는 색상으로 변경 */
+
+    /* 배경색에 맞춰 테두리색도 바꿔주는 것이 좋습니다. 
+      (안 그러면 하얀색 테두리가 남을 수 있음)
+    */
+}
+.one{
+    width: 100px;
+    height: 40px;
+}
+.two{
+    width: 150px;
+    height: 40px;
+}
+.three{
+    width: 300px;
+    height: 40px;    
+}
+.four{
+    width: 200px;
+    height: 40px; 
+}
+.DS_b button{
+    background: none;
+    border: 0px;
+}
+#header-container *,
+#admin-menuTwo-container * {
+    font-size: revert;
+    font-weight: revert;
+    color: revert;
+}
+.NB_E_U{
+    width: 1000px;
+    height: 100px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.NB_E_U button{
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+.NB_E_B{
+    width: 1000px;
+    height: 200px;
+    /* border: 1px solid #e5e5e5; */
+    float: left;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.NB_E_B button{
+    margin-right: 20px;
+    border-radius: 10px;
+    margin-bottom: 100px;
+}
+.NB_B_reference{
+    width: 1000px;
+    height: 30px;
+    border-bottom: 1px solid black;
+    float: left;
+}
+.NB_B_referenceOne p{
+    margin: 0px;
+}
+.write_back{
+    width: 1000px;
+    height: 1000px;
+    float: left;
+    margin-left: 50px;
+}
+
+/* ✅ 하단 상세 박스 */
+/* ✅ 상세보기(read-view) 하단 박스 정렬/폭 고정 */
+#read-view{
+  clear: both;
+  width: 100%;
+  margin-top: 18px;
+}
+
+/* read-view가 class="read_back"라면 안전하게 한번 더 */
+#read-view.read_back{
+  width: 100%;
+}
+
+/* ✅ 카드 박스 */
+.read-card{
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* ✅ 상단: "상세보기" 좌측 / "닫기" 우측 */
+.read-head{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.read-title{
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+  white-space: nowrap;   /* 글자 줄바꿈 방지 */
+}
+
+.read-close{
+  min-width: 64px;       /* ✅ 세로로 쪼개지는 원인 제거 */
+  padding: 6px 10px;
+  border: 1px solid #999;
+  background: #fff;
+  border-radius: 6px;
+  white-space: nowrap;   /* ✅ "닫기" 줄바꿈 방지 */
+}
+
+/* ✅ 제목 박스(툴 느낌) */
+.read-subject{
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e5e5e5;
+  background: #f7f7f7;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* ✅ 메타 정보 */
+.read-meta{
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+/* ✅ 내용 영역 */
+.read-content{
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  padding: 15px;
+  min-height: 220px;
+  box-sizing: border-box;
+}
