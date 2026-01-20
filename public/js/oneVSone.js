@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       createdAt: '2024-09-02 15:21',
       status: 'answered', // answered | pending
       replies: [
-        { at: '2024-09-03 11:02', from: '헤브샵 상담사', summary: '세럼 용량 조절과 수분크림 권장' },
+        { at: '2024-09-03 11:02', from: '장품을 찾아서 상담사', summary: '세럼 용량 조절과 수분크림 권장' },
       ],
     },
     {
@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
       createdAt: '2024-09-21 18:44',
       status: 'answered',
       replies: [
-        { at: '2024-09-22 10:00', from: '헤브샵 상담사', summary: '2~3시간 간격, 톤업형 주의' },
-        { at: '2024-09-22 17:26', from: '헤브샵 상담사', summary: '수정메이크업 팁 추가' },
+        { at: '2024-09-22 10:00', from: '장품을 찾아서 상담사', summary: '2~3시간 간격, 톤업형 주의' },
+        { at: '2024-09-22 17:26', from: '장품을 찾아서 상담사', summary: '수정메이크업 팁 추가' },
       ],
     },
   ];

@@ -100,25 +100,71 @@ const isProd = process.env.NODE_ENV === "production";
 app.use(
   helmet({
     contentSecurityPolicy: {
+      useDefaults: true,
       directives: {
-        defaultSrc: ["'self'"],
-        baseUri: ["'self'"],
-        objectSrc: ["'none'"],
+        // 기본값
+        "default-src": ["'self'"],
 
-        connectSrc: isProd
-          ? ["'self'"]
-          : ["'self'", "http://localhost:8080", "ws://localhost:8080"],
+        // ✅ 이미지 허용 (올리브영 + 다음 + 네이버 리소스 대비)
+        "img-src": [
+          "'self'",
+          "data:",
+          "https://image.oliveyoung.co.kr",
+          "https://t1.daumcdn.net",
+          "https://static.nid.naver.com",
+        ],
 
-        // ✅ 관리자 페이지에 inline <script> 있으면 unsafe-inline 필요
-        scriptSrc: ["'self'", "'unsafe-inline'", "https://code.jquery.com", "https://cdn.jsdelivr.net"],
-        styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        // 스타일/폰트
+        "style-src": [
+          "'self'",
+          "'unsafe-inline'",
+          "https://cdn.jsdelivr.net",
+          "https://code.jquery.com",
+        ],
+        "font-src": ["'self'", "data:", "https://cdn.jsdelivr.net"],
 
-        imgSrc: ["'self'", "data:", "https:"],
-        fontSrc: ["'self'", "data:", "https://cdn.jsdelivr.net"],
+        // ✅ API 호출(내 서버 + 네이버 로그인 통신 대비)
+        "connect-src": [
+          "'self'",
+          "https://nid.naver.com",
+          "https://openapi.naver.com",
+        ],
+
+        // ✅ 스크립트 허용 (다음 + 네이버 SDK 추가!)
+        "script-src": [
+          "'self'",
+          "'unsafe-inline'",
+          "data:",
+          "https://code.jquery.com",
+          "https://cdn.jsdelivr.net",
+          "https://www.gstatic.com",
+          "https://www.google.com",
+          "https://t1.daumcdn.net",
+          "https://static.nid.naver.com",
+        ],
+        "script-src-elem": [
+          "'self'",
+          "'unsafe-inline'",
+          "https://code.jquery.com",
+          "https://cdn.jsdelivr.net",
+          "https://www.gstatic.com",
+          "https://www.google.com",
+          "https://t1.daumcdn.net",
+          "https://static.nid.naver.com",
+        ],
+
+        // ✅ 다음 우편번호 + 네이버 로그인 프레임/팝업 대비
+        "frame-src": [
+          "'self'",
+          "https://postcode.map.daum.net",
+          "https://t1.daumcdn.net",
+          "https://nid.naver.com",
+        ],
       },
     },
   })
 );
+
 
 // ✅ 그 다음에 가드/정적서빙
 app.use("/admin", adminGuardRouter);

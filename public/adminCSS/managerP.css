@@ -1,12 +1,12 @@
 div {
     box-sizing: border-box;
 }
-body {
-    margin: 0%;
+html, body {
+  margin: 0;
 }
 .P_back{
     width: 1500px;
-    height: 2000px;
+    height: 1000px;
     margin: 0px auto;
 }
 .ma_in{
