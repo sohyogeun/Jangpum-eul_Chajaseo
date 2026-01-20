@@ -27,7 +27,10 @@
         <div class="comparison">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
             <h4>${slotLabels[i]}</h4>
-            <button onclick="window.removeSlot(${i})" style="font-size:12px; background:#ffebec; border:none; cursor:pointer; padding:2px 8px; border-radius:4px;">🗑삭제</button>
+            <button data-action="remove" data-index="${i}"
+              style="font-size:12px; background:#ffebec; border:none; cursor:pointer; padding:2px 8px; border-radius:4px;">
+              🗑삭제
+            </button>
           </div>
           <a href="${item.product_url || '#'}" target="_blank">
             <img class="cpsIMG" src="${item.image_url}" alt="${item.name}" style="width:100px;height:100px;object-fit:cover;">
@@ -70,6 +73,15 @@
   // [3] 이벤트 리스너 (검색 버튼만 담당)
   // -----------------------------------------------------------
   document.addEventListener('click', async (e) => {
+     const btn = e.target.closest('button[data-action]');
+  if (btn) {
+    const action = btn.dataset.action;
+    const index = Number(btn.dataset.index);
+
+    if (action === 'pick') window.pickProduct(index);
+    if (action === 'remove') window.removeSlot(index);
+    return;
+  }
     // 검색 버튼 클릭 시
     if (e.target.id === 'searchBtn') {
         const searchInput = document.getElementById('searchInput');
@@ -104,9 +116,9 @@
                         <strong style="font-size:14px; display:block;">${p.name}</strong>
                         <span style="font-size:12px; color:#666;">${p.brand} | ${displayPrice}원</span>
                     </div>
-                    <button onclick="window.pickProduct(${index})" 
-                        style="padding:8px 15px; cursor:pointer; background:#333; color:#fff; border:none; border-radius:4px; font-weight:bold;">
-                        선택
+                    <button data-action="pick" data-index="${index}"
+                      style="padding:8px 15px; cursor:pointer; background:#333; color:#fff; border:none; border-radius:4px; font-weight:bold;">
+                      선택
                     </button>
                 </div>`;
             }).join('');
@@ -124,6 +136,7 @@
   
   // (1) 검색 결과에서 선택했을 때 호출되는 함수
   window.pickProduct = function(index) {
+    console.log("✅ pickProduct 실행됨:", index);
     // 저장해둔 배열에서 꺼냅니다.
     const product = currentSearchResults[index];
     
@@ -140,8 +153,6 @@
     mySlots[emptyIndex] = product;
     renderSlots(); // 화면 갱신
     
-    // 선택 후 검색창 좀 깔끔하게 비우고 싶다면 아래 주석 해제
-    // document.getElementById('searchResultList').innerHTML = ''; 
   };
 
   // (2) 비교함에서 삭제 버튼

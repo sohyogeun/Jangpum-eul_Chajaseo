@@ -110,115 +110,139 @@ router.post('/login', async (req, res) => {
 });
 
 
-// [★ 2. 여기에 네이버 로그인 관련 라우트 2개 추가 ★]
+ // ✅ 1) 로그아웃: GET /api/auth/out
+router.get("/out", (req, res) => {
+  const isProd = process.env.NODE_ENV === "production";
 
-  // 3) 네이버 로그인 시작: GET /api/auth/naver
-  // (프론트엔드에서 <a href="/api/auth/naver">네이버로 로그인</a> 버튼 클릭 시)
-  router.get('/naver', (req, res) => {
-    const naverClientId = process.env.NAVER_CLIENT_ID;
+  const cookieOpts = {
+    path: "/",
+    httpOnly: true,
+    sameSite: "lax",
+    secure: isProd,
+  };
 
-    console.log('읽어온 Naver Client ID:', naverClientId);
-    // server.js가 실행되는 주소 (예: http://localhost:8080)
-    const serverUrl = process.env.SERVER_URL || 'http://localhost:8080';
-    
-    // 네이버에 등록한 'Callback URL'과 정확히 일치해야 합니다.
-    const redirectURI = encodeURIComponent(`${serverUrl}/api/auth/naver/callback`);
-    
-    // CSRF 공격 방지용 state (세션을 쓴다면 세션에 저장/비교 권장)
-    const state = crypto.randomBytes(16).toString('hex'); 
-    
-    const api_url = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=${redirectURI}&state=${state}`;
-    
-    res.redirect(api_url); // 네이버 로그인 페이지로 리다이렉트
+  res.setHeader("Cache-Control", "no-store");
+
+  req.session.destroy((err) => {
+    // ✅ 1) clearCookie (옵션 맞춰서)
+    res.clearCookie("heve.sid", cookieOpts);
+
+    // ✅ 2) 브라우저가 확실히 지우게 한번 더 만료 쿠키 내려주기
+    res.cookie("heve.sid", "", { ...cookieOpts, maxAge: 0 });
+
+    if (err) {
+      console.error("logout destroy err:", err);
+      return res.status(500).json({ ok: false });
+    }
+
+    // ✅ redirect 하지 말고 여기서 끝 (redirect가 새 세션 만들기도 함)
+    return res.status(204).end();
   });
-
-  // 4) 네이버 로그인 콜백: GET /api/auth/naver/callback
-  // (네이버 로그인이 성공하면, 네이버가 이 주소로 사용자를 리다이렉트시킴)
-  router.get('/naver/callback', async (req, res) => {
-  const naverClientId = process.env.NAVER_CLIENT_ID;
-  const naverClientSecret = process.env.NAVER_CLIENT_SECRET;
-  const { code, state } = req.query;
-
-  const token_api_url =
-    `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${naverClientId}&client_secret=${naverClientSecret}&code=${code}&state=${state}`;
-  const profile_api_url = 'https://openapi.naver.com/v1/nid/me';
-
-  try {
-    // 1) 토큰 받기
-    const tokenRes = await axios.get(token_api_url);
-    const accessToken = tokenRes.data.access_token;
-
-    if (!accessToken) {
-      throw new Error('네이버 토큰 발급 실패');
-    }
-
-    // ❌❌❌ 여기 있던 세션/redirect는 user가 없어서 터짐 + 너무 일찍 redirect됨
-    // req.session.user = { userId: user.userId, name: user.name, email: user.email };
-    // await new Promise((resolve, reject) =>
-    //   req.session.save(err => (err ? reject(err) : resolve()))
-    // );
-    // const clientUserId = user.userId;
-    // res.redirect(`/login-handler.html?userId=${clientUserId}`);
-
-    // 2) 프로필 받기
-    const profileRes = await axios.get(profile_api_url, {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    });
-
-    const naverProfile = profileRes.data.response;
-    if (!naverProfile || !naverProfile.id) {
-      throw new Error('네이버 프로필 조회 실패');
-    }
-
-    // 3) DB에서 유저 찾기/생성
-    let user = await users.findOne({ naverId: naverProfile.id });
-
-    if (!user) {
-      const existingEmailUser = await users.findOne({ email: naverProfile.email });
-
-      if (existingEmailUser) {
-        await users.updateOne(
-          { _id: existingEmailUser._id },
-          { $set: { naverId: naverProfile.id, updatedAt: new Date() } }
-        );
-        user = await users.findOne({ _id: existingEmailUser._id });
-      } else {
-        const now = new Date();
-        const newUserDoc = {
-          userId: `naver_${naverProfile.id.substring(0, 10)}`,
-          name: naverProfile.name || '네이버회원',
-          email: naverProfile.email,
-          phone: naverProfile.mobile || null,
-          naverId: naverProfile.id,
-          password: null,
-          skinType: null,
-          createdAt: now,
-          updatedAt: now,
-        };
-        await users.insertOne(newUserDoc);
-
-        // ✅ insertOne 후 DB에서 다시 읽어오는 게 가장 안전
-        user = await users.findOne({ naverId: naverProfile.id });
-      }
-    }
-
-    // ✅✅✅ 4) 여기서 user는 확정된 상태 → 이제 세션 저장
-    req.session.user = { userId: user.userId, name: user.name, email: user.email };
-    await new Promise((resolve, reject) =>
-      req.session.save(err => (err ? reject(err) : resolve()))
-    );
-
-    console.log('네이버 로그인 성공:', user.email);
-
-    // ✅ redirect는 딱 1번만!
-    return res.redirect(`/login-handler.html?userId=${encodeURIComponent(user.userId)}`);
-
-  } catch (err) {
-    console.error('NAVER CALLBACK ERR:', err.message);
-    console.error(err.response?.data);
-    return res.status(500).json({ ok: false, error: '네이버 로그인 처리 중 서버 오류' });
-  }
 });
 
+
+
+  // ✅ 2) 네이버 로그인 시작: GET /api/auth/naver (강제는 ?force=1)
+  router.get("/naver", (req, res) => {
+    const naverClientId = process.env.NAVER_CLIENT_ID;
+    const serverUrl = process.env.SERVER_URL || "http://localhost:8080";
+    const redirectURI = encodeURIComponent(`${serverUrl}/api/auth/naver/callback`);
+
+    const state = crypto.randomBytes(16).toString("hex");
+    req.session.naverState = state;
+
+    const force = req.query.force === "1";
+    const authType = force ? "&auth_type=reauthenticate" : "";
+
+    const api_url =
+      `https://nid.naver.com/oauth2.0/authorize?response_type=code` +
+      `&client_id=${naverClientId}&redirect_uri=${redirectURI}&state=${state}` +
+      authType;
+
+    return res.redirect(api_url);
+  });
+
+  // ✅ 3) 네이버 콜백: GET /api/auth/naver/callback
+  router.get("/naver/callback", async (req, res) => {
+    const naverClientId = process.env.NAVER_CLIENT_ID;
+    const naverClientSecret = process.env.NAVER_CLIENT_SECRET;
+    const { code, state } = req.query;
+
+    // ✅ state 검증(최소 보안)
+    if (!state || state !== req.session.naverState) {
+      return res.status(400).send("Invalid state");
+    }
+    delete req.session.naverState;
+
+    const token_api_url =
+      `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${naverClientId}` +
+      `&client_secret=${naverClientSecret}&code=${code}&state=${state}`;
+    const profile_api_url = "https://openapi.naver.com/v1/nid/me";
+
+    try {
+      // 1) 토큰 받기
+      const tokenRes = await axios.get(token_api_url);
+      const accessToken = tokenRes.data.access_token;
+      if (!accessToken) throw new Error("네이버 토큰 발급 실패");
+
+      // 2) 프로필 받기
+      const profileRes = await axios.get(profile_api_url, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+
+      const naverProfile = profileRes.data.response;
+      if (!naverProfile || !naverProfile.id) throw new Error("네이버 프로필 조회 실패");
+
+      // 3) DB에서 유저 찾기/생성
+      let user = await users.findOne({ naverId: naverProfile.id });
+
+      if (!user) {
+        const existingEmailUser = await users.findOne({ email: naverProfile.email });
+
+        if (existingEmailUser) {
+          await users.updateOne(
+            { _id: existingEmailUser._id },
+            { $set: { naverId: naverProfile.id, updatedAt: new Date() } }
+          );
+          user = await users.findOne({ _id: existingEmailUser._id });
+        } else {
+          const now = new Date();
+          await users.insertOne({
+            userId: `naver_${naverProfile.id.substring(0, 10)}`,
+            name: naverProfile.name || "네이버회원",
+            email: naverProfile.email,
+            phone: naverProfile.mobile || null,
+            naverId: naverProfile.id,
+            password: null,
+            skinType: null,
+            createdAt: now,
+            updatedAt: now,
+          });
+          user = await users.findOne({ naverId: naverProfile.id });
+        }
+      }
+
+      // ✅ (선택) 세션 새로 발급
+      await new Promise((resolve, reject) =>
+        req.session.regenerate((err) => (err ? reject(err) : resolve()))
+      );
+
+      // 4) 세션 저장
+      req.session.user = { userId: user.userId, name: user.name, email: user.email };
+      await new Promise((resolve, reject) =>
+        req.session.save((err) => (err ? reject(err) : resolve()))
+      );
+
+      return res.redirect(`/login-handler.html?userId=${encodeURIComponent(user.userId)}`);
+    } catch (err) {
+      console.error("NAVER CALLBACK ERR:", err.message);
+      console.error(err.response?.data);
+      return res.status(500).json({ ok: false, error: "네이버 로그인 처리 중 서버 오류" });
+    }
+
+  });
+  router.get("/me", (req, res) => {
+  res.json({ user: req.session?.user || null, sid: req.sessionID || null });
+});
   return router;
 }
