@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const headerPlaceholder = document.getElementById('header-placeholder');
     if (headerPlaceholder) {
-        fetch('head.html')
+        fetch('Hreader.html')
             .then(response => response.text())
             .then(htmlData => {
                 headerPlaceholder.innerHTML = htmlData;

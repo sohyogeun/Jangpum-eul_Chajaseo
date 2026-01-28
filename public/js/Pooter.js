@@ -55,7 +55,7 @@ function populateFooter(data) {
    ================================================================ */
 document.addEventListener('DOMContentLoaded', async () => {
   // 1) end.html을 #end에 로드(있을 때만)
-  await loadTemplate('end.html', '#end');
+  await loadTemplate('Pooter.html', '#end');
 
   // 2) 푸터 데이터 주입 (end.html을 로드했든, 기존 footer가 있든 둘 다 지원)
   populateFooter(footerData);

@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!mount) return;
 
   try {
-    const res = await fetch("head.html");
+    const res = await fetch("Header.html");
     if (!res.ok) throw new Error("HTTP " + res.status);
     const html = await res.text();
     mount.innerHTML = html;

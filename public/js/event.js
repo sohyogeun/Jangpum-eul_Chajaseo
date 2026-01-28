@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // 3. (HTML 요소 선택) 
-  // ★ HTML의 회색 영역에 id="event-content"를 꼭 넣어주세요.
   //    (코드 1의 "eventList" 대신 "event-content"를 사용합니다)
   const eventContentContainer = document.getElementById("event-content");
   const allTabs = document.querySelectorAll(".et"); // 모든 탭 버튼
