@@ -1,179 +1,183 @@
-/* 기존 그대로 유지 */
-.main-background {
+.main-background{
   width: 100%;
-  height: 900px;
+  min-height: 100vh;
 }
 
-.evnet-back {
+/* 상단 브랜드 카드 */
+.brand-strip{
   width: 1200px;
-  height: 300px;
+  margin: 24px auto 14px;
+  padding: 18px;
   background: #faebd7;
-  padding: 24px 16px;
-  margin: 0 auto;
-  border-bottom: 1px solid black;
-  position: relative;
-}
+  border: 1px solid #111;
+  border-radius: 14px;
 
-/* 그리드 */
-.evnet-back form {
-  max-width: 1200px;
-  margin: 0 auto;
-  margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
 }
 
-/* 카드(버튼) */
-.evnet-back form button {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+.brand-card{
+  border: 1px solid rgba(0,0,0,0.1);
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
+  border-radius: 12px;
+  padding: 10px;
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+
+  transition: transform .15s ease, box-shadow .15s ease;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
-.evnet-back form button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+.brand-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 14px 26px rgba(0,0,0,0.10);
 }
 
-/* 버튼 안의 이미지 */
-.evnet-back form button img {
+.brand-card img{
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4/3;
   object-fit: cover;
-  display: block;
+  border-radius: 10px;
 }
 
-/* 버튼 안의 a태그가 이미지 위로 안 겹치게 */
-.evnet-back form button a {
-  display: block;
-  width: 100%;
-  height: 100%;
+.brand-card span{
+  font-size: 14px;
+  color: #222;
+}
+
+/* coming soon 카드 */
+.brand-card.ghost{
   text-decoration: none;
   color: inherit;
+  cursor: default;
+}
+.ghost-box{
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 10px;
+  border: 1px dashed rgba(0,0,0,0.25);
+  display: grid;
+  place-items: center;
+  color: rgba(0,0,0,0.5);
+  background: rgba(255,255,255,0.6);
 }
 
-.evnet-back1 {
-  width: 1500px;
-  height: 100px;
-  background-color: #fff;
-  margin: 0 auto;
-  border-bottom: 1px solid black;
+/* 탭 */
+.event-tabs{
+  width: 1200px;
+  margin: 14px auto 8px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 25px;
+  gap: 12px;
 }
 
-.evnet-back1 .et {
-  padding: 10px 20px;
-  font-size: 17px;
-  border: 1px solid #aaa;
-  border-radius: 8px;
+.event-tabs .et{
+  padding: 10px 18px;
+  border: 1px solid rgba(0,0,0,0.25);
   background: #fff;
+  border-radius: 999px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all .15s ease;
 }
 
-.evnet-back1 .et:hover {
-  background: #f2f2f2;
+.event-tabs .et.active{
+  border-color: #111;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
 }
 
-/* 아래 이미지 목록 박스 */
-
-/* 이미지 카드 */
-/* ... (main-background, evnet-back, evnet-back1 등 상단 CSS는 모두 그대로) ... */
-
-/* 섹션 2: 탭 메뉴 (활성화 스타일 추가) */
-.evnet-back1 .et.active {
-  border-color: #000;
-  font-weight: bold;
-}
-
-/* * -------------------------------------------
- * ▼▼▼▼▼▼▼▼▼▼▼ Flex로 변경된 부분 ▼▼▼▼▼▼▼▼▼▼▼
- * -------------------------------------------
- */
-
-/* 섹션 3: 하단 이벤트 배경 */
-/* ★ 수정: display: grid 삭제! 그냥 배경 역할만 합니다. */
-.evnet-back2 {
+/* 툴바 */
+.event-toolbar{
   width: 1200px;
-  min-height: 400px;
-  background: #e0e0e0;
-  margin: 0 auto;
-  padding: 30px;
-  box-sizing: border-box;
-  /* display: grid; <- 삭제 */
-  /* grid-template-columns: ... <- 삭제 */
-  /* gap: 20px; <- 삭제 */
-}
-
-/* ★ 부활: 원래의 Flex 컨테이너 (JS 타겟) */
-.event_button_box {
-  width: 1200px;
-  /* 고정 너비 */
-  height: 300px;
+  margin: 8px auto 14px;
   display: flex;
-  text-align: center;
-  /* 가운데 정렬 */
+  justify-content: space-between;
   align-items: center;
-  gap: 30px;
-  margin-left: 20px;
-  /* 부모(.evnet-back2) 안에서 가운데 정렬 */
+  gap: 12px;
 }
 
-/* 아이템 카드 (원래 CSS) */
-/* ★ 수정: width: 100%가 아니라 고정 250px로 복원 */
-.event-item {
-  width: 200px;
-  height: 200px;
-  background-color: white;
-  border-radius: 20px;
+.event-toolbar .left{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+#event-count{
+  color: rgba(0,0,0,0.55);
+  font-size: 13px;
+}
+
+.event-area{
+  width: 1200px;
+  margin: 0 auto 40px;
+  padding: 22px;
+  background: #e0e0e0;
+  border-radius: 14px;
+}
+
+/* ✅ 이벤트 그리드 */
+.event-grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+/* 이벤트 카드 */
+.event-item{
+  background: #fff;
+  border-radius: 16px;
   overflow: hidden;
-  /* 둥근 모서리 */
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 
-.event-item:hover {
-  transform: translateY(-5px);
+.event-item:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.10);
 }
 
-/* 카드 안의 a 태그 */
-.event-item a {
+.event-item a{
+  display: block;
+  padding: 10px;
   text-decoration: none;
   color: inherit;
-  display: block;
-  height: 100%;
 }
 
-/* 아이템 카드 이미지 (원래 CSS) */
-.event-item img {
-  width: 200px;
-  height: 150px;
+.event-item img{
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.event-title{
   margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #222;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* 아이템 카드 제목 (JS가 생성하는 .event-title) */
-.event-item .event-title {
-  display: block;
-  text-align: center;
-  font-size: 15px;
-  color: #333;
-  margin-top: 8px;
-  /* 위쪽 여백 */
-  padding: 0 10px;
-  /* 좌우 여백 */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* 반응형 */
+@media (max-width: 1250px){
+  .brand-strip, .event-tabs, .event-toolbar, .event-area{
+    width: min(1200px, 94vw);
+  }
+  .event-grid{ grid-template-columns: repeat(3, 1fr); }
+  .brand-strip{ grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 640px){
+  .event-grid{ grid-template-columns: repeat(2, 1fr); }
+  .brand-strip{ grid-template-columns: repeat(2, 1fr); }
 }

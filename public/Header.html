@@ -1,76 +1,23 @@
-    <!-- head.html -->
 <div class="main-head">
-    <div class="name">
-        <button id="mpg">장품을 찾아서</button>
+    <div class="head-inner"> <div class="name">
+            <button id="mpg" type="button" onclick="location.href='/'">
+                <img src="img/장품을 찾아서 로고.jpg" alt="장품을 찾아서">
+            </button>
         </div>
-        <div class="main_head_right">
-            <form class="head-button">
-                <button type="button" id="FYSSelf">본인피부</button>
-                <button type="button" id="event">이벤트</button>
-                <button type="button" id="breand">브랜드</button>
-                <div class="sine">
-                    <button class="sinelo" type="button" id="login">로그인</button>
-                    <button class="sineOne" type="button" id="mypage">마이페이지</button>
-                    <button class="sineOne" type="button" id="out">로그아웃</button>
-                </div>
-            </form>
+
+        <div class="head-menu">
+            <button type="button" id="FYSSelf">본인피부</button>
+            <button type="button" id="event">이벤트</button>
+            <button type="button" id="breand">브랜드</button>
         </div>
+
+        <div class="user-menu">
+            <div class="sine">
+                <button class="sinelo" type="button" id="login">로그인</button>
+                <button class="sineOne" type="button" id="mypage">마이페이지</button>
+                <button class="sineOne" type="button" id="out">로그아웃</button>
+            </div>
+        </div>
+
     </div>
-<script>
-
-
-(function () {
-  // ✅ 다른 파일에서도 호출 가능하게 window에 노출
-  window.tryOpenChoiceFromQuery = function tryOpenChoiceFromQuery() {
-    const params = new URLSearchParams(location.search);
-    if (params.get('open') !== 'choice') return;
-
-    const mount = document.querySelector('.Ch_item');
-    const hasChoice = document.querySelectorAll('.ch-item').length > 0; // ✅ 주입 완료 체크
-    const canOpen = typeof window.openSkinModal === 'function';
-
-    if (!mount || !hasChoice || !canOpen) {
-      requestAnimationFrame(tryOpenChoiceFromQuery);
-      return;
-    }
-
-    mount.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.openSkinModal();
-    history.replaceState({}, '', location.pathname); // URL 정리
-  };
-
-  // ✅ FYSSelf: 이벤트 위임(헤더가 나중에 주입돼도 100% 클릭 잡힘)
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('#FYSSelf');
-    if (!btn) return;
-
-    e.preventDefault();
-
-    const isIndex =
-      location.pathname === '/' ||
-      location.pathname.endsWith('/index.html');
-
-    // ✅ 메인페이지면: 새로고침 이동 말고 그냥 열기(너가 원한 동작)
-    if (isIndex) {
-      // 바로 열 수 있으면 열고, 아니면 query 플로우로 동일하게 처리
-      if (typeof window.openSkinModal === 'function') {
-        const mount = document.querySelector('.Ch_item');
-        if (mount) mount.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        window.openSkinModal();
-        return;
-      }
-    }
-
-    // ✅ 서브페이지면: 네 방식 그대로 메인으로 이동
-    location.href = '/choice.html?open=choice';
-  });
-
-  // ✅ 메인에서 open=choice로 들어온 경우 자동 실행
-  document.addEventListener('DOMContentLoaded', () => {
-    window.tryOpenChoiceFromQuery();
-  });
-  console.log("tryOpenChoiceFromQuery:", typeof window.tryOpenChoiceFromQuery);
-console.log("openSkinModal:", typeof window.openSkinModal);
-})();
-
-</script>
+</div>

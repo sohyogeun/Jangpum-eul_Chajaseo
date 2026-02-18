@@ -1,48 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>brand</title>
+    <title>장품을 찾아서 - 브랜드 스토리</title>
+    
     <link href="css/brand.css" rel="stylesheet">
     <link href="css/Header.css" rel="stylesheet">
     <link href="css/Pooter.css" rel="stylesheet">
     <link href="css/FysOne.css" rel="stylesheet">
 
-    <script src="js/brand.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script src="js/head_log.js"></script>
     <script src="js/include.js" defer></script>
     <script src="js/command.js" defer></script>
-    <script src="js/head_log.js"></script>
     <script src="js/FindYourSkinOne.js" defer></script>
     <script src="js/mySkin.js" defer></script>
     <script src="js/Pooter.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <script src="js/brand.js" defer></script>
 </head>
 <body>
-  <form>
-      <div class="Ch_item"></div>
-  </form>
+
+    <form>
+        <div class="Modal-session" id="skinModal">
+            <div class="Modal" id="skinModalBox"></div>
+        </div>
+        <div class="Modal"></div>
+    </form>
+
     <div class="main-backroud">
-      <header id="site_header"></header>
-      <div class="QNA-picture"></div>
+        
+        <header id="site_header"></header>
+        
+        <div class="QNA-picture">
+            <div class="hero-overlay">
+                <h1 class="hero-title">장품을 찾아서</h1>
+                <p class="hero-sub">내 피부에 딱 맞는 화장품, 데이터로 찾다</p>
+            </div>
+        </div>
+
+        <div class="QNA1-sticky">
             <div class="QNA1">
-                <button class="my-wep" id="wep">
+                <button type="button" class="my-wep" id="wep">
                     소개
                 </button>
-                <button class="my-story" id="storytwo">
+                <button type="button" class="my-story" id="storytwo">
                     스토리
                 </button>
-                <button class="my-target" id="targetThree">
+                <button type="button" class="my-target" id="targetThree">
                     목표
                 </button>
             </div>
-            <div class="mw-Back">
-              <div class="mw"></div>
-            </div>
+        </div>
+
+        <div class="mw-Back">
+            
+            <section class="section-card" id="sec-intro">
+                <h3 class="section-title">소개</h3>
+                <div class="section-text">
+                    </div>
+            </section>
+
+            <section class="section-card" id="sec-story">
+                <h3 class="section-title">스토리</h3>
+                <div class="section-text">
+                    </div>
+            </section>
+
+            <section class="section-card" id="sec-goal">
+                <h3 class="section-title">목표</h3>
+                <div class="section-list">
+                    </div>
+            </section>
+
+        </div> </div> <div class="end_back">
+        <header id="end"></header>
     </div>
-            <div class="end_back">
-              <header id="end">
-            </header>
-    </div>
+
 </body>
 </html>

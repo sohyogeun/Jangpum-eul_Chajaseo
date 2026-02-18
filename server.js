@@ -131,16 +131,13 @@ app.use(
         ],
 
         // ✅ 스크립트 허용 (다음 + 네이버 SDK 추가!)
-        "script-src": [
+        "style-src": [
           "'self'",
           "'unsafe-inline'",
-          "data:",
-          "https://code.jquery.com",
           "https://cdn.jsdelivr.net",
-          "https://www.gstatic.com",
-          "https://www.google.com",
-          "https://t1.daumcdn.net",
-          "https://static.nid.naver.com",
+          "https://code.jquery.com",
+          "https://www.gstatic.com",      // ✅ Google Charts CSS
+          "https://fonts.googleapis.com", // ✅ Google Fonts CSS
         ],
         "script-src-elem": [
           "'self'",
@@ -154,11 +151,11 @@ app.use(
         ],
 
         // ✅ 다음 우편번호 + 네이버 로그인 프레임/팝업 대비
-        "frame-src": [
+        "font-src": [
           "'self'",
-          "https://postcode.map.daum.net",
-          "https://t1.daumcdn.net",
-          "https://nid.naver.com",
+          "data:",
+          "https://cdn.jsdelivr.net",
+          "https://fonts.gstatic.com",    // ✅ Google Fonts 파일(.woff2)
         ],
       },
     },

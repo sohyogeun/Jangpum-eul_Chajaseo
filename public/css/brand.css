@@ -1,95 +1,230 @@
-div{
-    box-sizing: border-box;
-}
-body{
-    margin: 0%;
-}
-.main-backroud{
-  width: 100%;
-  height: 1300px;
+/* =========================================
+   1. 기본 설정 및 변수
+   ========================================= */
+:root {
+    /* JS에서 계산된 헤더 높이가 --header-real에 들어옵니다 (기본값 0) */
+    --header-real: 0px; 
+    --header-base: 100px; /* 헤더가 로드되기 전 대략적인 높이 */
+    
+    /* 헤더와 탭 메뉴 사이의 간격 */
+    --top-gap: 0px; 
+    
+    /* 탭 메뉴(버튼)의 높이 (Sticky 계산용) */
+    --nav-height: 70px; 
 }
 
-/* 배경 이미지 */
+html, body { 
+    height: 100%; 
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    /* 배경을 완전한 흰색으로 변경 */
+    background: #ffffff;
+    color: #222;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 메인 배경 래퍼 */
+.main-backroud {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   2. HERO (상단 배너)
+   ========================================= */
 .QNA-picture {
-  width: 1200px;
-  height: 400px;
-  margin: 0px auto;
-  background-color: #111;
-  background-image: url('../img/laura-chouette-.jpg');
-  background-size: cover;
-  background-position: center;
+    width: min(1200px, 94%); /* 반응형 대응 */
+    height: 420px;
+    margin: 20px auto 0;
+    border-radius: 18px;
+    overflow: hidden;
+
+    /* 이미지 경로 확인 필요 */
+    background-image: url('../img/laura-chouette-.jpg');
+    background-size: cover;
+    background-position: center;
+
+    position: relative;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.10);
 }
 
-/* 버튼 3개 구역 */
+/* 배너 위 오버레이 (웜톤) */
+.QNA-picture::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(250,247,241,0.15) 0%,
+        rgba(250,247,241,0.55) 55%,
+        rgba(250,247,241,0.90) 100%
+    );
+}
+
+/* 배너 내부 텍스트 */
+.hero-overlay {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 34px;
+    z-index: 2;
+    width: min(900px, 92%);
+    text-align: center;
+}
+
+.hero-title {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.hero-sub {
+    margin: 10px 0 0;
+    font-size: 16px;
+    line-height: 1.4;
+    color: rgba(0,0,0,0.62);
+}
+
+
+/* =========================================
+   3. Sticky 네비게이션 (탭 버튼)
+   ========================================= */
+/* 스크롤 시 상단에 고정되는 껍데기 */
+.QNA1-sticky {
+    position: sticky;
+    /* JS로 계산된 헤더 높이 바로 아래에 붙음 */
+    top: var(--header-real, 0px); 
+    z-index: 1000;
+
+    background: rgba(250,247,241,0.85); /* 반투명 배경 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    
+    padding: 10px 0;
+    transition: top 0.2s ease;
+}
+
+/* 버튼들을 감싸는 컨테이너 */
 .QNA1 {
-  width: 1200px;
-  min-height: 100px;
-  margin: 0px auto;
-  background-color: #111;
-  display: flex;
-  justify-content: center;   /* 가로 중앙 */
-  align-items: center;       /* 세로 중앙 */
-  gap: 50px;                 /* 버튼 사이 간격 */
-  padding: 0 20px;           /* 좌우 여백 */
-  flex-wrap: wrap;           /* 작은 화면에서는 줄바꿈 */
-}
-.my-wep,
-.my-story,
-.my-target {
-  flex: 1 1 120px;           /* 최소 120px, 공간 차지 */
-  max-width: 200px;          /* 너무 커지지 않게 */
-  height: 50px;
-  background-color: #cfd8e3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-}
-#wep { font-size: 25px; }
-#storytwo, #targetThree { font-size: 20px; }
-
-.mw-Back{
-  width: 1200px;
-  height: 600px;
-  margin: 0px auto;
-  border-left: 1px solid #cfd8e3;
-  border-right: 1px solid #cfd8e3;
-}
-/* 메인 카드 */
-.mw {
-  width: 100%;
-  max-width: 600px;          /* 큰 화면에서도 적당히 제한 */
-  height: 500px;
-  border: 1px solid black;
-  background-color: antiquewhite;
-  margin: 60px auto 0;
-  border-radius: 30px;
+    width: min(1200px, 92%);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
 }
 
-/* 반응형 */
+/* 버튼 공통 스타일 */
+.QNA1 button {
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.14);
+    background: rgba(255,255,255,0.78);
+    padding: 12px 24px;
+    cursor: pointer;
+    
+    font-size: 18px; /* 요청하신 사이즈 */
+    font-weight: 600;
+    color: rgba(0,0,0,0.72);
+    
+    transition: all 0.2s ease;
+}
+
+.QNA1 button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background: #fff;
+}
+
+/* 활성화 된 버튼 (JS에서 is-active 클래스 부여) */
+.QNA1 button.is-active {
+    background: #222;
+    border-color: #222;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+
+/* =========================================
+   4. 본문 콘텐츠 (섹션 카드)
+   ========================================= */
+.mw-Back {
+    width: min(900px, 92%); /* 기존 1200px에서 가독성 위해 900px로 조정 추천 */
+    margin: 0 auto;
+    padding: 40px 0 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px; /* 섹션 간 간격 */
+}
+
+.section-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+
+    /* ✨ 핵심: 스크롤 이동 시 헤더+탭메뉴 높이만큼 공간 확보 */
+    scroll-margin-top: calc(var(--header-real, 100px) + var(--nav-height) + 20px);
+}
+
+.section-title {
+    margin: 0 0 20px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    border-bottom: 2px solid #222;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* 텍스트 및 리스트 공통 스타일 (중복 제거됨) */
+.section-text, 
+.section-list {
+    margin: 0;
+    line-height: 1.8;
+    color: #444;
+    font-size: 16px;
+}
+
+.section-list {
+    padding-left: 20px;
+}
+
+.section-list li {
+    margin: 8px 0;
+}
+
+/* 문단 간격 */
+.section-text p {
+    margin-bottom: 12px;
+}
+
+
+/* =========================================
+   5. 반응형 (모바일)
+   ========================================= */
 @media (max-width: 768px) {
-  .name button {
-    font-size: 20px;
-  }
-  #wep { font-size: 20px; }
-  #story, #target { font-size: 16px; }
-  .mw {
-    height: auto;           /* 모바일에서는 높이 자동 */
-  }
+    .hero-title { font-size: 28px; }
+    .hero-sub { font-size: 14px; }
+    
+    .QNA-picture { height: 300px; }
+    
+    /* 모바일에서 탭 버튼 줄바꿈 허용 */
+    .QNA1 { flex-wrap: wrap; }
+    .QNA1 button { 
+        flex: 1 1 auto; /* 버튼이 꽉 차게 */
+        font-size: 15px; 
+        padding: 10px 16px;
+    }
+    
+    .section-card { padding: 25px; }
 }
-/* 활성 탭 강조 */
-.QNA1 button.is-active { outline: 2px solid #222; font-weight: 700; border-radius: 30px; background: white;color: #007bff;}
-.QNA1 button{
-  border-radius: 30px;
-}
-/* 미디어쿼리에서 올바른 id로 교체 */
-@media (max-width: 768px) {
-  #wep { font-size: 20px; }
-  #storytwo, #targetThree { font-size: 16px; }
-  .mw { height: auto; }
-}
-
-/* 탭 내용 기본 타이포(선택) */
-.mw-inner { padding: 20px; }
-.mw-title { margin: 0 0 10px; font-size: 22px; }
-.mw-body p { margin: 8px 0; line-height: 1.6; }

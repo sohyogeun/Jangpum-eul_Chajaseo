@@ -1,131 +1,150 @@
-div{
-    box-sizing: border-box;
-}
-body{
-    margin: 0%;
-}
+div{ box-sizing: border-box; }
+body{ margin: 0; }
+
 .background{
   width: 1500px;
   height: 800px;
-  margin: 0px auto;
+  margin: 0 auto;
 }
-.Modal-session {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  visibility: hidden;
+
+/* 오버레이 */
+.Modal-session{
   position: fixed;
-  top: 0;      /* 추가: 화면 맨 위부터 시작 */
-  left: 0;     /* 추가: 화면 맨 왼쪽부터 시작 */
-  z-index: 9999; /* 핵심: 다른 어떤 요소보다 위에 오도록 매우 높은 숫자 부여 */
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.5);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
-.FYS1-head {
+
+/* 모달 내용 박스 래퍼 */
+.Modal{
+  width: min(650px, 92vw);
+}
+
+/* 헤더 */
+.FYS1-head{
   width: 100%;
   height: 80px;
   border: 1px solid black;
   background-color: aliceblue;
-
-  display: flex;             /* flex 컨테이너 */
-  justify-content: center;   /* 가로 중앙 */
-  align-items: center;       /* 세로 중앙 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .name{
   font-size: 30px;
   font-weight: bold;
 }
 
-.FYS1-head button {
+/* 헤더 버튼 */
+.FYS1-head button{
   font-size: 30px;
   background-color: transparent;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+
+  /* right/top 쓰려면 position 필요 */
+  position: relative;
+  left: auto;
+  right: 20px;
+  top: -20px;
 }
-/* 지성피부 */
+
+/* 모달 카드(안쪽 배경 박스) */
 .FYS1-head-back{
-    width: 40%;
-    height: 600px;
-    margin: 0 auto;
-    background-color: #F6F1E9;
-    position: relative;
-    top: 40px;
-    border-radius: 30px;
-    border: 1px solid black;
+  background: #F6F1E9;
+  border-radius: 30px;
+  border: 1px solid #111;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px 22px 18px;
 }
+
+/* 폼 정렬 */
+.FYS1-head-back form{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+/* (원본 유지) 혹시 HTML에서 from 클래스 쓰는 경우 대비 */
 .FYS1-oily .from{
   display:flex;
   flex-direction:column;
   gap:30px;
 }
 
-/* 한 줄을 '한 뭉치'처럼 보이게 */
+/* 질문 라벨 한 줄 카드 */
 .FYS1-oily label{
-  display:flex;
-  align-items:center;
-  padding:30px 20px;
-  border-radius:16px;              /* 둥근 캡슐 */
-  background:white;                /* 연한 배경 */
-  cursor:pointer;
-  margin-bottom: 20px;
-  position: relative;
-  top: 20px; 
-                    /* 전체 클릭 가능 */
-}
-
-/* 문구는 왼쪽, 체크박스는 오른쪽 끝 */
-.FYS1-oily span{
-  flex:1;                          /* 남는 공간 채움 → 체크박스가 오른쪽으로 붙음 */
-  font-size:16px;
-}
-
-/* 체크박스 모양/색(지원 브라우저에서) */
-.FYS1-oily input[type="checkbox"]{
-  width:18px; 
-  height:18px;
-  accent-color:#3b3b3b;            /* 체크 색상 */
-}
-.FYS1-oily{
-  display: block;
-}
-.btNest{
-  width:100px; 
-  height:50px;
-  accent-color:#3b3b3b;
-  position: relative;
-  left: 664px;
-  top: 15px;
-  border-radius: 20px;
-  border: 1px solid #4A5568;
+  display: flex;
+  align-items: center;
+  padding: 18px 16px;
+  border-radius: 16px;
+  background: white;
   cursor: pointer;
-}
-.FYS1-head-back {
-  max-width: min(600px, 90vw);   /* PC에선 40% 유지, 작은 화면에선 90vw */
-}
-
-/* 내부 레이블 줄바꿈 방지 + 모바일에서만 살짝 조정 */
-.FYS1-oily label {
+  margin-bottom: 14px;
   flex-wrap: nowrap;
 }
 
-/* 텍스트 크기: 모바일에서만 줄여 넘침 방지 */
-@media (max-width: 480px) {
-  .FYS1-oily span { font-size: 14px; }
-  .FYS1-oily label { padding: 20px 14px; }
+/* 질문 텍스트 */
+.FYS1-oily span{
+  flex:1;
+  font-size:16px;
 }
 
-/* 버튼 위치 보정: 화면 크기 줄어도 영역 안에서 중앙 정렬 */
-.FYS1-head button {
-  left: auto;
-  right: 20px;         /* 항상 오른쪽 여백 기준으로 배치 */
-  top: -20px;          /* 살짝 위로 */
+/* 체크박스 */
+.FYS1-oily input[type="checkbox"]{
+  width:18px; 
+  height:18px;
+  accent-color:#3b3b3b;
 }
 
-/* 다음 버튼 */
+.FYS1-oily{ display: block; }
+
+/* 버튼 영역 */
+.btnBC{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+/* 버튼 */
 .btNest{
-  left: 32%;
+  position: static;
+  width: 180px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid #4A5568;
+  cursor: pointer;
 }
-.btNest:hover {
-  background-color: #4A5568; /* 배경색 변경 */
-  color: white; /* 글자색 변경 */
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* 부드러운 색상 전환 효과 */
+
+/* hover (중복 제거) */
+.btNest:hover{
+  background-color: #4A5568;
+  color: white;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 다음 버튼 비활성 */
+#Nest.disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 모바일 */
+@media (max-width: 480px){
+  .FYS1-oily span{ font-size: 14px; }
+  .FYS1-oily label{ padding: 20px 14px; }
+
+  .btnBC{ justify-content: space-between; }
+  .btNest{ width: 48%; }
 }

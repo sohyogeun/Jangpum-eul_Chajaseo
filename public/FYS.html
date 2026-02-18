@@ -1,73 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>본인피부</title>
+    <title>피부 타입 결과 - 장품을 찾아서</title>
     <link href="css/FYS.css" rel="stylesheet">
     <link href="css/Header.css" rel="stylesheet">
-    <link href="css/Pooter.css" rel="stylesheet">
-
     <link href="css/FysOne.css" rel="stylesheet">
+    <link href="css/Pooter.css" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/head_log.js"></script>
+    <script src="js/include.js" defer></script>
+    <script src="js/command.js" defer></script>
     <script src="js/FindYourSkinOne.js" defer></script>
-    <script src="js/gotoSite.js" defer></script>
-
-    <script src="js/command.js"></script>
-    <script src="js/FindYourSkin.js" defer></script>
-    <script src="js/head_log.js" defer></script>
-    <script src="js/Pooter.js" defer></script>
-
-     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/FindYourSkin.js" defer></script> <script src="js/Pooter.js"></script>
 </head>
 <body>
-  <header id="site_header"></header>
-  <!-- 내 피부 어떤거지 보여주고, 다시 검사할건지 경고문 보여주고 확인 누르면 다시 검사 받는 방식으로 할거고, 장단점을 보여주는 방식으로 한다 -->
-  <div class="main-backroud">
-  <div class="my-Fys">
-          <div class="my-F-BA">
-
-            <!-- 관련된 피부 사진 넣기 -->
-            <div class="my-F">
-                <img id="oily" src="">
-            </div>
-            
-            <!-- 관련된 피부 피부 장단점 넣기 -->
-            <div class="my-f-t"></div>    
+    <form>
+        <div class="Modal-session" id="skinModal">
+        <!-- ✅ 안쪽 내용 박스(여기에 choice.html을 주입) -->
+            <div class="Modal" id="skinModalBox"></div>
         </div>
+        <div class="Modal"></div>
+    </form>
+    <header id="site_header"></header>
+
+    <div class="main-wrapper">
         
-        <!-- 피부 관련된 제품 보여주기 -->
-<!-- 피부 관련된 제품 보여주기 -->
-<div class="my-f-w">
-  <div class="my-f-w-o">
-    <button class="picture" id="one"></button>
-    <p class="rec-label" data-for="one"></p>
-  </div>
-  <div class="my-f-w-o">
-    <button class="picture" id="two"></button>
-    <p class="rec-label" data-for="two"></p>
-  </div>
-  <div class="my-f-w-o">
-    <button class="picture" id="three"></button>
-    <p class="rec-label" data-for="three"></p>
-  </div>
-  
-  <div class="my-f-w-o">
-    <button class="picture" id="four"></button>
-    <p class="rec-label" data-for="four"></p>
-  </div>
-  <div class="my-f-w-o">
-    <button class="picture" id="five"></button>
-    <p class="rec-label" data-for="five"></p>
-  </div>
-  <button class="retry-btn" id="FYSSelf">다시하기</button>
-  
-</div>
-</div>
-</div>
+        <section class="result-header">
+            <div class="result-img-box">
+                <div class="my-F">
+                    <img id="skin-img" src="" alt="피부 이미지">
+                </div>
+            </div>
 
-            <div class="end_back">
-            <header id="end">
-            </header>
-        </div>
+            <div class="result-text-box">
+                <div class="my-f-t"></div>
+            </div>
+        </section>
+
+        <section class="recommendation-section">
+            <h3 class="rec-title">당신의 피부를 위한 솔루션</h3>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <button class="prod-img-btn" id="one"></button>
+                    <p class="prod-name" data-for="one"></p>
+                </div>
+                <div class="product-card">
+                    <button class="prod-img-btn" id="two"></button>
+                    <p class="prod-name" data-for="two"></p>
+                </div>
+                <div class="product-card">
+                    <button class="prod-img-btn" id="three"></button>
+                    <p class="prod-name" data-for="three"></p>
+                </div>
+                <div class="product-card">
+                    <button class="prod-img-btn" id="four"></button>
+                    <p class="prod-name" data-for="four"></p>
+                </div>
+                <div class="product-card">
+                    <button class="prod-img-btn" id="five"></button>
+                    <p class="prod-name" data-for="five"></p>
+                </div>
+            </div>
+
+            <div class="action-area">
+                <button class="retry-btn" id="refresh">테스트 다시하기</button>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="end_back">
+        <header id="end"></header>
+    </div>
+
 </body>
 </html>

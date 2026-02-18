@@ -23,8 +23,12 @@
 </head>
 <body>
   <form>
-      <div class="Ch_item"></div>
-  </form>
+        <div class="Modal-session" id="skinModal">
+        <!-- ✅ 안쪽 내용 박스(여기에 choice.html을 주입) -->
+            <div class="Modal" id="skinModalBox"></div>
+        </div>
+        <div class="Modal"></div>
+    </form>
   <div class="main-background">
     <!-- 헤더 들어올 자리 -->
     <header id="site_header"></header>
@@ -32,113 +36,66 @@
     <div class="evnet-back">
       <!-- ✅ form을 제대로 열고, 그 안에 카드들을 넣습니다 -->
       <form>
-        <!-- 올리브영 이벤트화면 -->
-        <div class="even">
-          <button>
-            <a href="https://www.oliveyoung.co.kr/store/main/getEventList.do?t_page=%ED%99%88&t_click=GNB&t_gnb_type=%EC%9D%B4%EB%B2%A4%ED%8A%B8&t_swiping_type=N">
-              올리브영
-              <img src="img/올리브영1차.png" />
-            </a>
-          </button>
-        </div>
 
-        <!-- 아모레퍼시픽 이벤트 화면 -->
-        <div class="even">
-          <button>
-            <a href="https://www.amoremall.com/kr/ko/display/event">
-              아모레퍼시픽
-              <img src="img/아모레시퍼시픽1차.png" alt="아모레퍼시픽 이벤트" />
-            </a>
-          </button>
-        </div>
+    <!-- ✅ 상단 브랜드 카드(로고) : 클릭하면 탭과 연동 -->
+    <section class="brand-strip" aria-label="브랜드 이벤트 바로가기">
+      <button type="button" class="brand-card" data-brand="oreve">
+        <img src="img/올리브영1차.png" alt="올리브영" />
+        <span>올리브영</span>
+      </button>
 
-        <!-- 이니스프리 이벤트화면 -->
-        <div class="even">
-          <button>
-            <a href="https://www.innisfree.com/kr/ko/ca/event">
-              이니스프리
-              <img src="img/이니스프리1차.jpg" />
-            </a>
-          </button>
-        </div>
+      <button type="button" class="brand-card" data-brand="amola">
+        <img src="img/아모레시퍼시픽1차.png" alt="아모레퍼시픽" />
+        <span>아모레퍼시픽</span>
+      </button>
 
-        <!-- 제로이드 이벤트 화면 -->
-        <div class="even">
-          <button>
-            <a href="https://www.zeroid.co.kr/web/event/event_list.asp">
-              제로이드
-              <img src="img/제로이드1차.png" alt="제로이드 이벤트" />
-            </a>
-          </button>
-        </div>
+      <button type="button" class="brand-card" data-brand="inne">
+        <img src="img/이니스프리1차.jpg" alt="이니스프리" />
+        <span>이니스프리</span>
+      </button>
 
-        <!-- 개꿀 이벤트화면 -->
-        <div class="even">
-          <button>
-            <a href="#">
-              개꿀인 이벤트
-              <img src="" alt="" />
-            </a>
-          </button>
-        </div>
-      </form>
-    </div> <!-- ✅ 여기서 .evnet-back 닫기 -->
+      <button type="button" class="brand-card" data-brand="jalo">
+        <img src="img/제로이드1차.png" alt="제로이드" />
+        <span>제로이드</span>
+      </button>
 
-    <!-- ✅ .evnet-back 바로 “아래” 형제 요소 -->
-    <div class="evnet-back1">
-      <div>
-        <button type="button" id="oreve" class="et">올리브영</button>
+      <a class="brand-card ghost" href="#" aria-disabled="true">
+        <div class="ghost-box">coming soon</div>
+        <span>개꿀인 이벤트</span>
+      </a>
+    </section>
+
+    <!-- ✅ 브랜드 탭 -->
+    <section class="event-tabs" aria-label="브랜드 탭">
+      <button type="button" id="oreve" class="et">올리브영</button>
+      <button type="button" id="amola" class="et">아모레퍼시픽</button>
+      <button type="button" id="inne"  class="et">이니스프리</button>
+      <button type="button" id="jalo"  class="et">제로이드</button>
+    </section>
+
+    <!-- ✅ 툴바 -->
+    <section class="event-toolbar" aria-label="이벤트 목록 정보">
+      <div class="left">
+        <strong id="event-brand-title">올리브영</strong>
+        <span id="event-count">총 0건</span>
       </div>
-      <div>
-        <button type="button" id="amola" class="et">아모레퍼시픽</button>
+      <div class="right">
+        <select id="event-sort" aria-label="정렬">
+          <option value="default">추천순</option>
+          <option value="title">가나다순</option>
+        </select>
       </div>
-      <div>
-        <button type="button" id="inne" class="et">이니스프리</button>
-      </div>
-      <div>
-        <button type="button" id="jalo" class="et">제로이드</button>
-      </div>
-    </div>
-    <div class="evnet-back2">
-      <div class="event_button_box" id="event-content"> 
-        <div class="event-item">
-          <a href="[여기에 이벤트 상세페이지 주소]">
-            <img src="img/올리브영.jpeg" alt="이벤트 썸네일">
-            <span class="event-title">올리브영 관련 이벤트 제목</span>
-          </a>
-      </div>
-      <div class="event_button_box" id="event-content">
-          <a href="[여기에 이벤트 상세페이지 주소]">
-            <img src="img/올리브영.jpeg" alt="이벤트 썸네일">
-            <span class="event-title">올리브영 관련 이벤트 제목</span>
-          </a>
-      </div>
-      <div class="event_button_box" id="event-content">
-          <a href="[여기에 이벤트 상세페이지 주소]">
-            <img src="img/올리브영.jpeg" alt="이벤트 썸네일">
-            <span class="event-title">올리브영 관련 이벤트 제목</span>
-          </a>
-      </div>
-      <div class="event_button_box" id="event-content">
-          <a href="[여기에 이벤트 상세페이지 주소]">
-            <img src="img/올리브영.jpeg" alt="이벤트 썸네일">
-            <span class="event-title">올리브영 관련 이벤트 제목</span>
-          </a>
-      </div>
-      <div class="event_button_box" id="event-content">
-          <a href="[여기에 이벤트 상세페이지 주소]">
-            <img src="img/올리브영.jpeg" alt="이벤트 썸네일">
-            <span class="event-title">올리브영 관련 이벤트 제목</span>
-          </a>
-      </div>
-      </div>
-    </div>
-  </div> <!-- ✅ .main-background 닫기 -->
-    <!-- 푸터 영역이 필요하면 주석 해제 -->
-    
-    <div class="end_back">
-      <header id="end"></header>
-    </div>
-   
+    </section>
+
+    <!-- ✅ 이벤트 리스트 (JS가 여기만 채움) -->
+    <section class="event-area" aria-label="이벤트 카드 목록">
+      <div id="event-content" class="event-grid"></div>
+    </section>
+
+  </div>
+
+  <div class="end_back">
+    <header id="end"></header>
+  </div>
 </body>
 </html>

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/Header.css">
     <link rel="stylesheet" href="css/Pooter.css">
     
-    <link rel="stylesheet" href="css/FysOne.css">
     <link href="css/FysOne.css" rel="stylesheet">
     <script src="js/gotoSite.js" defer></script>
     
@@ -25,12 +24,18 @@
     
 <body>
     <form>
-        <div class="Ch_item"></div>
+        <div class="Modal-session" id="skinModal">
+        <!-- ✅ 안쪽 내용 박스(여기에 choice.html을 주입) -->
+            <div class="Modal" id="skinModalBox"></div>
+        </div>
+        <div class="Modal"></div>
     </form>
         
     <header id="site_header"></header>
         
-        <div class="main-body1"></div>
+        <div class="main-body1">
+            <img src="img/메인 히어로.jpg">
+        </div>
         <div class="main-background">
         <!-- js로 HTML로 만든뒤 BeautifulSoup으로 크룰링해서 db에 저장 안하고 사이트 자체에 저장하는 방식으로 허가-->
         <div class="mb2_3">
@@ -65,33 +70,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="thick_line">
+                        <h4>내 피부형을 아는데?</h4>
+                    </div>
                     <div class="main-body2">
                         <div class="check"></div>
 
                         <div class="skin-layout">
-                            <div class="body2_name">
-                            <p>내 피부형을 아는데?</p>
-                            </div>
 
                             <div class="skin-buttons" id="button">
-                            <button id="oily" type="button" class="skin-btn" data-skin="oily">지성</button>
-                            <button id="dry" type="button" class="skin-btn" data-skin="dry">건성</button>
-                            <button id="combo" type="button" class="skin-btn" data-skin="combo">복합성</button>
-                            <button id="normal" type="button" class="skin-btn" data-skin="normal">중성</button>
+                                <button id="oily" type="button" class="skin-btn" data-skin="oily">지성</button>
+                                <button id="dry" type="button" class="skin-btn" data-skin="dry">건성</button>
+                                <button id="combo" type="button" class="skin-btn" data-skin="combo">복합성</button>
+                                <button id="normal" type="button" class="skin-btn" data-skin="normal">중성</button>
                             </div>
 
-                            <!-- ✅ 버튼 아래에 위치할 미리보기 -->
                             <div class="skin-preview" id="skin-preview">
-                            <h4 id="skin-preview-title"></h4>
-                            <p id="skin-preview-text"></p>
+                                <div class="preview-img-area">
+                                </div>
+                                <h4 id="skin-preview-title"></h4>
+                                <p id="skin-preview-text"></p>
                             </div>
-                        </div>
-                    </div>
 
-
-
-                    
-                </div>
+                        </div></div>
                     <div class="end_back">
                         <header id="end"></header>
                     </div>

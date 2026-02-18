@@ -7,16 +7,27 @@
     <!-- CSS -->
     <link href="css/QNA.css" rel="stylesheet" />
     <link href="css/Header.css" rel="stylesheet" />
+    <link href="css/FysOne.css" rel="stylesheet" />
     <link href="css/Pooter.css" rel="stylesheet" />
 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
     <!-- JS -->
      <script src="js/qna.js" defer></script>
     <script src="js/head_log.js" defer></script>
     <script src="js/command.js" defer></script>
+    <script src="js/FindYourSkinOne.js" defer></script>
     <script src="js/Pooter.js" defer></script>
 
   </head>
   <body>
+    <form>
+        <div class="Modal-session" id="skinModal">
+        <!-- ✅ 안쪽 내용 박스(여기에 choice.html을 주입) -->
+            <div class="Modal" id="skinModalBox"></div>
+        </div>
+        <div class="Modal"></div>
+    </form>
+
     <div class="main-background">
       <!-- 공통 헤더 -->
       <header id="site_header"></header>
@@ -84,6 +95,7 @@
   <div class="badge" id="inquiry-title">1:1 상담</div>
 
   <form class="form" id="inquiryForm">
+    <!-- <h2 style="text-align:center; font-family:'Noto Serif KR'; color:#5A4D44; margin-bottom:20px;">1:1 맞춤 상담</h2> -->
     <div class="field">
       <label for="category">문의분류</label>
       <select id="category" required>

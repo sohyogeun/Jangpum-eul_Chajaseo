@@ -1,3 +1,5 @@
+    //  public/admin/managerJg.js
+    
     // 1. 구글 차트 로드
     google.charts.load('current', {'packages':['bar', 'geochart', 'corechart', 'table']});
 
