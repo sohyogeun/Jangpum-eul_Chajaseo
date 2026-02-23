@@ -16,18 +16,39 @@ document.addEventListener('DOMContentLoaded', function () {
   // [PART 1] 입력 페이지 기능 (이벤트 위임)
   // ============================================================
   // 모달이 나중에 열리더라도 버튼 클릭을 감지할 수 있도록 설정
-  document.addEventListener('click', function(e) {
-    const skinIds = ['oily', 'dry', 'combo', 'normal'];
-    
-    // 클릭된 요소의 ID가 피부 타입 중 하나라면
-    if (skinIds.includes(e.target.id)) {
-       const dataToSave = { winner: e.target.id };
-       localStorage.setItem('heve_skin_survey_result', JSON.stringify(dataToSave));
-       
-       // 저장 후 현재 페이지(FYS.html)를 새로고침 -> 새로운 결과가 뜸
-       window.location.reload(); 
+  // [PART 1] 입력 페이지 기능 (이벤트 위임) - 교체본
+// [PART 1] 입력 페이지 기능 (이벤트 위임) - 수정본
+document.addEventListener("click", function (e) {
+  // 1. 버튼 클릭 감지
+  const btn = e.target.closest("#oily, #dry, #combo, #normal");
+  if (!btn) return;
+
+  (async () => {
+    // 2. 저장할 데이터 생성
+    const dataToSave = { winner: btn.id, ts: Date.now() };
+
+    // 3. 로컬 스토리지 갱신 (브라우저 저장소)
+    localStorage.setItem("heve_skin_survey_result", JSON.stringify(dataToSave));
+
+    try {
+        // ✅ [핵심 변경] 4. 기존 DB 데이터 먼저 삭제
+        // (이전에 무엇이 저장되어 있든 깨끗하게 지웁니다)
+        await deleteUserSkinInDB();
+
+        // ✅ 5. 새로운 데이터 DB에 저장
+        const r = await saveUserSkinToDB(dataToSave);
+        console.log("DB 교체 완료:", r);
+
+        // 6. 화면 새로고침 (변경된 결과 보여주기)
+        window.location.reload();
+        
+    } catch (error) {
+        console.error("데이터 교체 중 오류:", error);
+        alert("저장에 실패했습니다. 다시 시도해주세요.");
     }
-  });
+  })();
+});
+
 
 
   // ============================================================
@@ -285,20 +306,55 @@ document.addEventListener('DOMContentLoaded', function () {
   // [PART 6] 다시하기 (수정됨: 모달 열기)
   // ============================================================
   if (retry) {
-    retry.addEventListener('click', () => {
+  retry.addEventListener('click', () => {
+    (async () => {
       if (confirm('다시 검사하시겠어요?')) {
-        // 1. 기존 데이터 삭제 (중요)
-        // 삭제를 해야, 만약 사용자가 모달 닫고 새로고침하면 [PART 0]에서 걸러져서 메인으로 감.
         localStorage.removeItem('heve_skin_survey_result');
-        
-        // 2. 메인으로 이동하지 않고, 모달만 띄움
-        // choice.html을 로드해서 #skinModalBox에 넣음
+
+        // ✅ DB 삭제 호출
+        const r = await deleteUserSkinInDB();
+        console.log("deleteUserSkinInDB result:", r);
+
         $("#skinModalBox").load("choice.html", function() {
-            // 로드 성공하면 모달 보이게 처리
-            $("#skinModal").css("display", "flex");
-            $("body").addClass("is-modal-open");
+          $("#skinModal").css("display", "flex");
+          $("body").addClass("is-modal-open");
         });
       }
-    });
+    })();
+  });
+}
+  async function fetchUserSkinFromDB() {
+  try {
+    const res = await fetch("/api/user-skin/me", { credentials: "include" });
+    if (res.status === 204) return null;
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
   }
+}
+
+async function saveUserSkinToDB(data) {
+  const res = await fetch("/api/user-skin/me", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify(data),
+  });
+
+  // ✅ 여기서 401/404/500을 바로 확인
+  const text = await res.text().catch(() => "");
+  return { ok: res.ok, status: res.status, text };
+}
+
+async function deleteUserSkinInDB() {
+  const res = await fetch("/api/user-skin/me", {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  const text = await res.text().catch(() => "");
+  return { ok: res.ok, status: res.status, text };
+}
+
 });

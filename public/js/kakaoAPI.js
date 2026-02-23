@@ -43,10 +43,16 @@ function sample6_execDaumPostcode(targetBtn) {
 }
 
 // ✅ 이벤트 위임: 동적으로 삽입된 버튼도 항상 동작
+// ✅ 이벤트 위임: 동적으로 삽입된 버튼도 항상 동작
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-line');
   if (!btn) return;
 
-  // "우편번호 찾기" 버튼인지 확인 (필요시 텍스트/위치로 추가 필터 가능)
-  sample6_execDaumPostcode(btn);
+  // 버튼 안에 '우편번호'라는 글자가 있을 때만 실행하도록 조건 추가 (권장)
+  if (btn.textContent.includes('우편번호')) {
+    // 🚀 가장 중요한 핵심 코드! 버튼의 기본 동작(폼 제출/새로고침)을 강제로 막음
+    e.preventDefault(); 
+    
+    sample6_execDaumPostcode(btn);
+  }
 });

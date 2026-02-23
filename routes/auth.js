@@ -59,7 +59,7 @@ export default function createAuthRouter(db) {
         question: question ?? null,
         answer:   answer   ?? null,
         skinType: skinType ?? null,   // 'oily' | 'dry' | 'combo' | 'normal'
-        skinResultDate: skinType ? now.toISOString() : null,
+        skinResultDate: skinType ? now : null,
         skinNotes: skinNotes ?? null,
         createdAt: now, updatedAt: now,
       };
@@ -241,8 +241,27 @@ router.get("/out", (req, res) => {
     }
 
   });
-  router.get("/me", (req, res) => {
-  res.json({ user: req.session?.user || null, sid: req.sessionID || null });
+  // ✅ 4) 내 정보 조회: GET /api/auth/me (DB에서 최신값 조회)
+router.get("/me", async (req, res) => {
+  try {
+    const sessUser = req.session?.user;
+    if (!sessUser?.userId) {
+      return res.json({ user: null, sid: req.sessionID || null });
+    }
+
+    // ✅ DB에서 최신 user 문서 조회 (민감정보 제외)
+    const u = await users.findOne(
+      { userId: sessUser.userId },
+      { projection: { password: 0 } } // password 전체 제거 (hash/salt 포함)
+    );
+
+    if (!u) return res.json({ user: null, sid: req.sessionID || null });
+
+    return res.json({ user: u, sid: req.sessionID || null });
+  } catch (err) {
+    console.error("ME ERR:", err);
+    return res.status(500).json({ user: null, error: "서버 오류" });
+  }
 });
   return router;
 }

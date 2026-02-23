@@ -12,7 +12,8 @@ import productsRouter from "./routes/products.js";
 import createInquiriesRouter from "./advice/member.js";
 import adminGuardRouter from "./routes/admin.js";
 import createAdminAuthRouter from "./routes/adminAuth.js";
-import createAdminAdviceRouter from './adminAdvice/advice.js'; // ✅ Import 이름 확인
+import createAdminAdviceRouter from './adminAdvice/advice.js'; 
+import createUserSkinRouter from "./routes/userSkin.js";
 
 const app = express();
 
@@ -74,8 +75,11 @@ try {
     faqDb.collection("comparison")
   ));
 
-  // 4. 관리자 어드바이스 (adminAdvice DB)
-  const adminAdviceDb = client.db("adminAdvice");
+// 4. 관리자 어드바이스 (adminAdvice DB)
+const adminAdviceDb = client.db("adminAdvice");
+
+// ✅ 여기로 옮겨야 함!
+app.use("/api/user-skin", createUserSkinRouter(db.collection("users")));
   
   // 🚨 [수정됨] Import한 이름(createAdminAdviceRouter)과 동일하게 사용해야 합니다.
   app.use('/api/admin-advice', createAdminAdviceRouter(
@@ -102,10 +106,8 @@ app.use(
     contentSecurityPolicy: {
       useDefaults: true,
       directives: {
-        // 기본값
         "default-src": ["'self'"],
 
-        // ✅ 이미지 허용 (올리브영 + 다음 + 네이버 리소스 대비)
         "img-src": [
           "'self'",
           "data:",
@@ -114,31 +116,33 @@ app.use(
           "https://static.nid.naver.com",
         ],
 
-        // 스타일/폰트
+        // ✅ style-src 하나로 합치기
         "style-src": [
           "'self'",
           "'unsafe-inline'",
           "https://cdn.jsdelivr.net",
           "https://code.jquery.com",
+          "https://www.gstatic.com",
+          "https://fonts.googleapis.com",
         ],
-        "font-src": ["'self'", "data:", "https://cdn.jsdelivr.net"],
 
-        // ✅ API 호출(내 서버 + 네이버 로그인 통신 대비)
+        // ✅ font-src 하나로 합치기
+        "font-src": [
+          "'self'",
+          "data:",
+          "https://cdn.jsdelivr.net",
+          "https://fonts.gstatic.com",
+        ],
+
+        // ✅ fetch('/api/...')는 'self'면 되긴 하는데,
+        // 혹시 프론트가 다른 포트/도메인에서 호출하면 그걸 추가해야 함
         "connect-src": [
           "'self'",
           "https://nid.naver.com",
           "https://openapi.naver.com",
+          "https://cdn.jsdelivr.net",
         ],
 
-        // ✅ 스크립트 허용 (다음 + 네이버 SDK 추가!)
-        "style-src": [
-          "'self'",
-          "'unsafe-inline'",
-          "https://cdn.jsdelivr.net",
-          "https://code.jquery.com",
-          "https://www.gstatic.com",      // ✅ Google Charts CSS
-          "https://fonts.googleapis.com", // ✅ Google Fonts CSS
-        ],
         "script-src-elem": [
           "'self'",
           "'unsafe-inline'",
@@ -148,19 +152,17 @@ app.use(
           "https://www.google.com",
           "https://t1.daumcdn.net",
           "https://static.nid.naver.com",
+          
         ],
-
-        // ✅ 다음 우편번호 + 네이버 로그인 프레임/팝업 대비
-        "font-src": [
+        "frame-src": [
           "'self'",
-          "data:",
-          "https://cdn.jsdelivr.net",
-          "https://fonts.gstatic.com",    // ✅ Google Fonts 파일(.woff2)
+          "https://postcode.map.daum.net" 
         ],
       },
     },
   })
 );
+
 
 
 // ✅ 그 다음에 가드/정적서빙

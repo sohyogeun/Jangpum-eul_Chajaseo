@@ -23,6 +23,40 @@ document.addEventListener('DOMContentLoaded', async function () {
   let currentSet = 0;
 
   // =========================
+  // [API] DB 통신 함수 (추가됨)
+  // =========================
+  async function saveUserSkinToDB(data) {
+    try {
+      const res = await fetch("/api/user-skin/me", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(data),
+      });
+      const text = await res.text();
+      console.log("DB 저장 결과:", res.status, text);
+      return res.ok;
+    } catch (e) {
+      console.error("DB 저장 실패:", e);
+      return false;
+    }
+  }
+
+  async function deleteUserSkinInDB() {
+    try {
+      const res = await fetch("/api/user-skin/me", {
+        method: "DELETE",
+        credentials: "include",
+      });
+      console.log("DB 삭제 결과:", res.status);
+      return res.ok;
+    } catch (e) {
+      console.error("DB 삭제 실패:", e);
+      return false;
+    }
+  }
+
+  // =========================
   // [2] 저장/로드
   // =========================
   const loadAll = () => {
@@ -55,30 +89,31 @@ document.addEventListener('DOMContentLoaded', async function () {
   // =========================
   // [3] 모달 열기/닫기
   // =========================
-  async function openModal() {
-    // 내용이 없으면 choice.html을 box에 주입
-    if (box.querySelectorAll(".ch-item").length === 0) {
-      try {
-        const res = await fetch("choice.html");
-        if (!res.ok) throw new Error("choice.html 로드 실패: " + res.status);
-        box.innerHTML = await res.text();
-
-        // 주입 직후 내부 이벤트 연결
-        initSurveyElements();
-      } catch (e) {
-        console.error("모달 로딩 에러:", e);
-        return;
-      }
+async function openModal() {
+  // 1. 내용이 없으면 choice.html을 box에 주입
+  if (box.querySelectorAll(".ch-item").length === 0) {
+    try {
+      const res = await fetch("choice.html");
+      if (!res.ok) throw new Error("choice.html 로드 실패: " + res.status);
+      box.innerHTML = await res.text();
+    } catch (e) {
+      console.error("모달 로딩 에러:", e);
+      return;
     }
-
-    // 오버레이 표시
-    overlay.style.display = 'flex';
-    overlay.style.visibility = 'visible';
-
-    // 첫 세트부터 시작
-    currentSet = 0;
-    updateQuestions();
   }
+
+  // ✅ 핵심 수정 포인트: HTML 주입 여부와 상관없이 무조건 이벤트 연결 시도
+  // (내부에 안전장치가 있어서 여러 번 불려도 1번만 연결됨)
+  initSurveyElements();
+
+  // 2. 오버레이 표시
+  overlay.style.display = 'flex';
+  overlay.style.visibility = 'visible';
+
+  // 3. 첫 세트부터 시작
+  currentSet = 0;
+  updateQuestions();
+}
 
   function closeModal() {
     overlay.style.display = 'none';
@@ -138,6 +173,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           currentSet++;
           updateQuestions();
         } else {
+          // 마지막 페이지에서 클릭 시 저장하고 이동
           await finalizeAndGo();
         }
       });
@@ -192,7 +228,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   // =========================
-  // [6] 완료 처리(너 기존 로직 스타일 유지)
+  // [6] 완료 및 저장 처리 (수정됨: DB 저장 추가)
   // =========================
   async function finalizeAndGo() {
     saveCurrentSet();
@@ -208,43 +244,65 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const winner = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
 
-    // 결과 저장
-    localStorage.setItem('heve_skin_survey_result', JSON.stringify({
+    const finalData = {
       winner,
       scores: counts,
       ts: Date.now()
-    }));
+    };
+
+    // 1. 로컬 스토리지 저장 (기존 유지)
+    localStorage.setItem('heve_skin_survey_result', JSON.stringify(finalData));
+
+    // 2. ✅ DB 저장 (추가됨) - 비동기로 처리
+    // await를 써서 저장이 완료된 후 페이지 이동하거나,
+    // 실패해도 이동은 하도록 try-catch 감싸기
+    try {
+        await saveUserSkinToDB(finalData);
+    } catch (err) {
+        console.log("DB 저장 중 오류 발생(페이지는 이동함):", err);
+    }
 
     alert(`설문 완료! "${LABEL[winner]}" 입니다.`);
     location.assign('./FYS.html');
   }
+
   function resetSurvey() {
-  // 1) 설문 저장값 삭제
-  localStorage.removeItem(STORE_KEY);
+    // 1) 설문 저장값 삭제
+    localStorage.removeItem(STORE_KEY);
 
-  // 2) 결과 저장값도 삭제 (FYS페이지에서 결과 표시할 때 쓰는 값)
-  localStorage.removeItem("heve_skin_survey_result");
+    // 2) 결과 저장값도 삭제 (FYS페이지에서 결과 표시할 때 쓰는 값)
+    localStorage.removeItem("heve_skin_survey_result");
 
-  // 3) 현재 페이지 인덱스 초기화
-  currentSet = 0;
+    // 3) 현재 페이지 인덱스 초기화
+    currentSet = 0;
 
-  // 4) 모달 안 체크박스 전부 해제 (현재 주입된 DOM 기준)
-  const inputs = box.querySelectorAll("input[type='checkbox']");
-  inputs.forEach(i => i.checked = false);
+    // 4) 모달 안 체크박스 전부 해제 (현재 주입된 DOM 기준)
+    const inputs = box.querySelectorAll("input[type='checkbox']");
+    inputs.forEach(i => i.checked = false);
 
-  // 5) 버튼 상태/질문 갱신
-  updateQuestions();
-}
-document.addEventListener("click", async (e) => {
-  const retry = e.target.closest("#refresh");
-  if (!retry) return;
+    // 5) 버튼 상태/질문 갱신
+    updateQuestions();
+  }
 
-  e.preventDefault();
+  // =========================
+  // [7] 다시하기(Retry) 버튼 처리 (수정됨: DB 삭제 추가)
+  // =========================
+  document.addEventListener("click", async (e) => {
+    const retry = e.target.closest("#refresh");
+    if (!retry) return;
 
-  // 모달이 아직 로드 안 됐을 수도 있으니 먼저 열어서 box에 DOM 만들고
-  await openModal();
+    e.preventDefault();
 
-  // 그리고 초기화
-  resetSurvey();
-});
+    if (confirm("기존 결과를 삭제하고 다시 검사하시겠습니까?")) {
+        // ✅ DB 데이터 삭제 요청
+        await deleteUserSkinInDB();
+        
+        // 모달이 아직 로드 안 됐을 수도 있으니 먼저 열어서 box에 DOM 만들고
+        await openModal();
+
+        // 초기화
+        resetSurvey();
+    }
+  });
+
 });
