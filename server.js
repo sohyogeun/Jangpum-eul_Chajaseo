@@ -14,6 +14,7 @@ import adminGuardRouter from "./routes/admin.js";
 import createAdminAuthRouter from "./routes/adminAuth.js";
 import createAdminAdviceRouter from './adminAdvice/advice.js'; 
 import createUserSkinRouter from "./routes/userSkin.js";
+import createReplyAdminRouter from "./advice/replyAdmin.js";
 
 const app = express();
 
@@ -72,9 +73,11 @@ try {
     faqDb.collection("member"),
     faqDb.collection("inquire"),
     faqDb.collection("ownSkin"),
-    faqDb.collection("comparison")
+    faqDb.collection("comparison"),
+    faqDb.collection("replyAdmin")
   ));
 
+app.use("/api/reply-admin", createReplyAdminRouter(faqDb.collection("replyAdmin")));
 // 4. 관리자 어드바이스 (adminAdvice DB)
 const adminAdviceDb = client.db("adminAdvice");
 
@@ -107,6 +110,7 @@ app.use(
       useDefaults: true,
       directives: {
         "default-src": ["'self'"],
+        "script-src-attr": ["'self'", "'unsafe-inline'"],
 
         "img-src": [
           "'self'",
@@ -114,6 +118,7 @@ app.use(
           "https://image.oliveyoung.co.kr",
           "https://t1.daumcdn.net",
           "https://static.nid.naver.com",
+          
         ],
 
         // ✅ style-src 하나로 합치기
@@ -154,6 +159,7 @@ app.use(
           "https://static.nid.naver.com",
           
         ],
+        
         "frame-src": [
           "'self'",
           "https://postcode.map.daum.net" 

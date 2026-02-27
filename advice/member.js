@@ -6,7 +6,8 @@ export default function createInquiriesRouter(
   memberCol,
   inquireCol,
   ownSkinCol,
-  comparisonCol
+  comparisonCol,
+  replyAdminCol // ✅ 관리자 답장 컬렉션 꼭 받아야 합니다!
 ) {
   const router = Router();
 
@@ -39,7 +40,7 @@ export default function createInquiriesRouter(
   // ✅ 문서 내려줄 때 형태 통일
   // =========================
   const mapDoc = (doc) => ({
-    id: String(doc._id), // ✅ 중복 방지: email 대신 _id 사용
+    id: String(doc._id),
 
     category: doc.category,
     title: doc.title,
@@ -53,31 +54,17 @@ export default function createInquiriesRouter(
     email: doc.email ?? null,
   });
 
-  // ✅ (선택) 특정 컬렉션이 여러 category를 같이 담는다면 여기서 필터링
-  // 현재 구조에서는 inquireCol(기타문의)에만 category 필터 걸어도 충분
   const buildFilter = (targetCol, category) => {
     if (!targetCol) return {};
     return targetCol === inquireCol ? { category } : {};
   };
 
-  // ✅ ALL(4개 컬렉션) 합치기 공통 함수
   const fetchMergedSorted = async (take) => {
     const tasks = [
-      memberCol
-        ? memberCol.find({}).sort({ createdAt: -1 }).limit(take).toArray()
-        : Promise.resolve([]),
-
-      inquireCol
-        ? inquireCol.find({}).sort({ createdAt: -1 }).limit(take).toArray()
-        : Promise.resolve([]),
-
-      ownSkinCol
-        ? ownSkinCol.find({}).sort({ createdAt: -1 }).limit(take).toArray()
-        : Promise.resolve([]),
-
-      comparisonCol
-        ? comparisonCol.find({}).sort({ createdAt: -1 }).limit(take).toArray()
-        : Promise.resolve([]),
+      memberCol ? memberCol.find({}).sort({ createdAt: -1 }).limit(take).toArray() : Promise.resolve([]),
+      inquireCol ? inquireCol.find({}).sort({ createdAt: -1 }).limit(take).toArray() : Promise.resolve([]),
+      ownSkinCol ? ownSkinCol.find({}).sort({ createdAt: -1 }).limit(take).toArray() : Promise.resolve([]),
+      comparisonCol ? comparisonCol.find({}).sort({ createdAt: -1 }).limit(take).toArray() : Promise.resolve([])
     ];
 
     const [m, i, o, c] = await Promise.all(tasks);
@@ -90,20 +77,14 @@ export default function createInquiriesRouter(
   // =========================
   // ✅ 페이지네이션 목록
   // =========================
-  // GET /api/inquiries/list?page=1&limit=5
-  // GET /api/inquiries/list?category=기타문의&page=2&limit=5
-  // GET /api/inquiries/list?category=회원/계정&page=3&limit=5
-  // GET /api/inquiries/list?category=나의 피부 문의&page=1&limit=5
-  // GET /api/inquiries/list?category=화장품 비교 문의&page=1&limit=5
   router.get("/list", async (req, res) => {
     try {
       const page = parsePage(req);
       const limit = parseLimit(req);
       const skip = (page - 1) * limit;
 
-      const category = req.query.category; // undefined면 ALL
+      const category = req.query.category; 
 
-      // ✅ category가 있으면 해당 컬렉션만 페이지네이션
       if (category) {
         const targetCol = resolveTargetCol(category);
         if (!targetCol) {
@@ -113,28 +94,17 @@ export default function createInquiriesRouter(
         const filter = buildFilter(targetCol, category);
 
         const [list, total] = await Promise.all([
-          targetCol
-            .find(filter)
-            .sort({ createdAt: -1 })
-            .skip(skip)
-            .limit(limit)
-            .toArray(),
+          targetCol.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).toArray(),
           targetCol.countDocuments(filter),
         ]);
 
         const totalPages = Math.max(Math.ceil(total / limit), 1);
 
         return res.json({
-          ok: true,
-          list: list.map(mapDoc),
-          total,
-          totalPages,
-          page,
-          limit,
+          ok: true, list: list.map(mapDoc), total, totalPages, page, limit,
         });
       }
 
-      // ✅ category 없으면(ALL) 4개 컬렉션 합쳐서 페이지네이션
       const [mTotal, iTotal, oTotal, cTotal] = await Promise.all([
         memberCol?.countDocuments({}) ?? Promise.resolve(0),
         inquireCol?.countDocuments({}) ?? Promise.resolve(0),
@@ -150,12 +120,7 @@ export default function createInquiriesRouter(
       const pageList = mergedSorted.slice(skip, skip + limit).map(mapDoc);
 
       return res.json({
-        ok: true,
-        list: pageList,
-        total,
-        totalPages,
-        page,
-        limit,
+        ok: true, list: pageList, total, totalPages, page, limit,
       });
     } catch (e) {
       console.error(e);
@@ -166,8 +131,6 @@ export default function createInquiriesRouter(
   // =========================
   // ✅ 최신 문의
   // =========================
-  // GET /api/inquiries/latest?limit=5
-  // GET /api/inquiries/latest?category=기타문의&limit=5
   router.get("/latest", async (req, res) => {
     try {
       const limit = parseLimit(req);
@@ -180,12 +143,7 @@ export default function createInquiriesRouter(
         }
 
         const filter = buildFilter(targetCol, category);
-
-        const list = await targetCol
-          .find(filter)
-          .sort({ createdAt: -1 })
-          .limit(limit)
-          .toArray();
+        const list = await targetCol.find(filter).sort({ createdAt: -1 }).limit(limit).toArray();
 
         return res.json({ ok: true, list: list.map(mapDoc) });
       }
@@ -201,7 +159,6 @@ export default function createInquiriesRouter(
   // =========================
   // ✅ 저장
   // =========================
-  // POST /api/inquiries
   router.post("/", async (req, res) => {
     try {
       const { category, title, content } = req.body;
@@ -219,27 +176,83 @@ export default function createInquiriesRouter(
       if (!email) return res.status(401).json({ ok: false, message: "로그인이 필요합니다." });
 
       const doc = {
-        category,
-        title: title.trim(),
-        content: content.trim(),
-        email,
-        status: "NEW",
-        createdAt: new Date(),
+        category, title: title.trim(), content: content.trim(), email, status: "NEW", createdAt: new Date(),
       };
 
       const result = await targetCol.insertOne(doc);
 
       return res.status(201).json({
-        ok: true,
-        insertedId: result.insertedId,
-        savedTo: targetCol.collectionName,
+        ok: true, insertedId: result.insertedId, savedTo: targetCol.collectionName,
       });
     } catch (e) {
       console.error(e);
       return res.status(500).json({ message: "서버 오류" });
     }
   });
-   router.get("/:id", async (req, res) => {
+
+  // --------------------------------------------------------
+  // ✅ [최종 완성본] 내 문의 내역 + 관리자 답장 매칭 API
+  // 🚨 순서 주의: 반드시 /:id 라우터보다 위에 있어야 합니다!
+  // --------------------------------------------------------
+  router.get("/my-inquiries", async (req, res) => {
+    try {
+      const email = req.session?.user?.email; 
+      
+      if (!email) {
+        return res.status(401).json({ ok: false, message: "로그인이 필요합니다." });
+      }
+
+      const tasks = [
+        memberCol ? memberCol.find({ email }).toArray() : Promise.resolve([]),
+        inquireCol ? inquireCol.find({ email }).toArray() : Promise.resolve([]),
+        ownSkinCol ? ownSkinCol.find({ email }).toArray() : Promise.resolve([]),
+        comparisonCol ? comparisonCol.find({ email }).toArray() : Promise.resolve([])
+      ];
+      const [m, i, o, c] = await Promise.all(tasks);
+      
+      const myAllInquiries = [...m, ...i, ...o, ...c].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      let adminReplies = [];
+      if (replyAdminCol) {
+        adminReplies = await replyAdminCol.find({ email }).sort({ createdAt: -1 }).toArray();
+      }
+
+      const list = myAllInquiries.map((doc, index) => {
+        const mapped = mapDoc(doc);
+        mapped.replies = []; 
+        
+        if (adminReplies[index]) {
+          const reply = adminReplies[index];
+          mapped.status = 'answered'; 
+          const plainText = (reply.content || "").replace(/<[^>]*>?/gm, ''); 
+          
+          const d = new Date(reply.createdAt);
+          const replyDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+
+          mapped.replies.push({
+            at: replyDate, 
+            from: reply.name || '관리자',
+            summary: plainText.substring(0, 30) + (plainText.length > 30 ? '...' : '')
+          });
+        } else {
+          mapped.status = mapped.status || 'NEW'; 
+        }
+
+        return mapped;
+      });
+
+      return res.json({ ok: true, list: list });
+      
+    } catch (e) {
+      console.error(e);
+      return res.status(500).json({ ok: false, message: "서버 오류" });
+    }
+  });
+
+  // =========================
+  // ✅ 상세조회 (무조건 가장 아래에 있어야 합니다!)
+  // =========================
+  router.get("/:id", async (req, res) => {
     try {
       const { id } = req.params;
       const { category } = req.query;
@@ -258,7 +271,7 @@ export default function createInquiriesRouter(
         return res.status(404).json({ ok: false, message: "데이터 없음" });
       }
 
-      return res.json({ ok: true, data: mapDoc(doc) }); // ✅ content 포함
+      return res.json({ ok: true, data: mapDoc(doc) }); 
     } catch (e) {
       console.error(e);
       return res.status(500).json({ ok: false, message: "서버 오류" });

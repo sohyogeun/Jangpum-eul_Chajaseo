@@ -4,46 +4,44 @@ document.addEventListener('DOMContentLoaded', () => {
   const counselBtn = document.getElementById('counselBtn');
   if (!mainArea || !counselBtn) return;
 
-  // 예시 데이터 (나중에 fetch로 교체 가능)
-  const COUNSEL_DATA = [
-    {
-      id: 'Q2024-001',
-      title: '지성 피부 저녁 루틴 상담',
-      createdAt: '2024-09-02 15:21',
-      status: 'answered', // answered | pending
-      replies: [
-        { at: '2024-09-03 11:02', from: '장품을 찾아서 상담사', summary: '세럼 용량 조절과 수분크림 권장' },
-      ],
-    },
-    {
-      id: 'Q2024-002',
-      title: '여드름 흉터 제품 추천',
-      createdAt: '2024-09-10 09:10',
-      status: 'pending',
-      replies: [],
-    },
-    {
-      id: 'Q2024-003',
-      title: '선크림 재도포 방법',
-      createdAt: '2024-09-21 18:44',
-      status: 'answered',
-      replies: [
-        { at: '2024-09-22 10:00', from: '장품을 찾아서 상담사', summary: '2~3시간 간격, 톤업형 주의' },
-        { at: '2024-09-22 17:26', from: '장품을 찾아서 상담사', summary: '수정메이크업 팁 추가' },
-      ],
-    },
-  ];
+  // 상태 관리를 위한 변수
+  let myInquiries = [];
 
-  // 렌더: 내가 보낸 상담 리스트
+  // ✅ 1. 백엔드에서 데이터 가져오는 함수
+  async function fetchMyInquiries() {
+    try {
+      const response = await fetch('/api/inquiries/my-inquiries'); 
+      const result = await response.json();
+
+      if (result.ok) {
+        myInquiries = result.list; // 가져온 데이터를 변수에 저장
+        renderCounselList();       // 화면에 그리기
+      } else {
+        alert("상담 내역을 불러오는데 실패했습니다: " + result.message);
+      }
+    } catch (error) {
+      console.error("데이터 가져오기 에러:", error);
+    }
+  }
+
+  // ✅ 2. 렌더: 내가 보낸 상담 리스트
   function renderCounselList() {
-    const rows = COUNSEL_DATA.map(item => `
-      <tr>
-        <td class="c-id">${item.id}</td>
-        <td class="c-title">${item.title}</td>
-        <td class="c-date">${item.createdAt}</td>
-        <td class="c-status ${item.status}">${item.status === 'answered' ? '답변완료' : '대기중'}</td>
-      </tr>
-    `).join('');
+    const rows = myInquiries.map((item, index) => {
+      // 날짜 포맷
+      const date = new Date(item.createdAt);
+      const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+      
+      return `
+        <tr>
+          <td class="c-id">${String(item.id).substring(0,8)}</td> 
+          <td class="c-title">${item.title}</td>
+          <td class="c-date">${formattedDate}</td>
+          <td class="c-status ${item.status === 'NEW' ? 'pending' : 'answered'}">
+            ${item.status === 'NEW' ? '대기중' : '답변완료'}
+          </td>
+        </tr>
+      `;
+    }).join('');
 
     mainArea.innerHTML = `
       <section class="counsel">
@@ -55,9 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <thead>
             <tr><th>번호</th><th>제목</th><th>작성일</th><th>상태</th></tr>
           </thead>
-          <tbody>${rows}</tbody>
+          <tbody>
+            ${rows || '<tr><td colspan="4" style="text-align:center; padding:20px;">상담 내역이 없습니다.</td></tr>'}
+          </tbody>
         </table>
-        <p class="c-hint">최근 상담 50개까지 표시됩니다.</p>
+        <p class="c-hint">최근 상담 내역이 표시됩니다.</p>
       </section>
     `;
 
@@ -65,14 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
     mainArea.querySelector('.btn-replies').addEventListener('click', renderRepliesList);
   }
 
-  // 렌더: 답장 받은 리스트
+  // ✅ 3. 렌더: 답장 받은 리스트 (수정된 부분!)
   function renderRepliesList() {
-    // 답장이 1건 이상 있는 상담만 추려서, reply 단위로 flatten
-    const replyRows = COUNSEL_DATA
+    // 🚨 COUNSEL_DATA 대신 진짜 데이터가 담긴 myInquiries를 사용합니다!
+    const replyRows = myInquiries
       .filter(item => item.replies && item.replies.length)
       .flatMap(item =>
         item.replies.map(rep => ({
-          id: item.id,
+          id: String(item.id).substring(0,8), // 아이디 짧게
           title: item.title,
           at: rep.at,
           from: rep.from,
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td class="c-summary">${r.summary}</td>
           </tr>
         `).join('')
-      : `<tr><td colspan="5" class="empty">아직 받은 답장이 없습니다.</td></tr>`;
+      : `<tr><td colspan="5" class="empty" style="text-align:center; padding:20px;">아직 받은 답장이 없습니다.</td></tr>`;
 
     mainArea.innerHTML = `
       <section class="counsel">
@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mainArea.querySelector('.btn-back')?.addEventListener('click', renderCounselList);
   }
 
-  // 사이드바 버튼 클릭 시 진입
-  counselBtn.addEventListener('click', renderCounselList);
+  // ✅ 4. 사이드바 버튼 클릭 시 진입 (수정된 부분!)
+  // 곧바로 그리지 않고, 데이터를 먼저 가져오는 함수를 연결합니다.
+  counselBtn.addEventListener('click', fetchMyInquiries);
 });

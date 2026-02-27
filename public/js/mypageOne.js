@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // 2) active 토글 헬퍼
+  // 2) active 토글 헬퍼 (메뉴 색상 변경)
   function setActiveButton(clickedButton) {
     document.querySelectorAll('.menuBtn').forEach(btn => btn.classList.remove('active'));
     if (clickedButton) clickedButton.classList.add('active');
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('compareIds', JSON.stringify(next));
   }
 
-  // 4) 뷰 렌더러
+  // 4) 뷰 렌더러 (나만의 화장품 비교)
   async function loadMyCosmetics() {
     const ids = getCompareIds();
     if (!ids.length) {
@@ -77,20 +77,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btn.id === 'editInfoBtn') {
       setActiveButton(btn);
       contentPane.innerHTML = '<h2>회원정보 수정</h2><p>회원정보 수정 폼이 여기에 표시됩니다.</p>';
+      
     } else if (btn.id === 'counselBtn') {
+      // ✅ [수정됨] 1:1 상담 화면 그리기는 oneVSone.js가 하므로, 여기서는 색상만 바꿔줍니다!
       setActiveButton(btn);
-      contentPane.innerHTML = '<h2>1대1 상담 내용</h2><p>상담 내역이 여기에 표시됩니다.</p>';
+      
     } else if (btn.id === 'FYS') {
       setActiveButton(btn);
       contentPane.innerHTML = '<h2>나의 피부</h2><p>나의 피부(FYS) 정보가 여기에 표시됩니다.</p>';
+      
     } else if (btn.id === 'myProductBtn') {
       setActiveButton(btn);
       loadMyCosmetics();
+      
     } else if (btn.classList.contains('removeBtn')) {
       removeFromCompare(btn.dataset.id);
-      function renderCounsel() {
-        contentPane.innerHTML = '<h2>1대1 상담 내용</h2><p>상담 내역이 여기에 표시됩니다.</p>';
-}
+      loadMyCosmetics(); // ✅ 비교에서 제거한 뒤 화면을 새로고침하여 즉시 반영되게 합니다.
     }
   });
 
