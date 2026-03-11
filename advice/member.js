@@ -195,59 +195,76 @@ export default function createInquiriesRouter(
   // 🚨 순서 주의: 반드시 /:id 라우터보다 위에 있어야 합니다!
   // --------------------------------------------------------
   router.get("/my-inquiries", async (req, res) => {
-    try {
-      const email = req.session?.user?.email; 
-      
-      if (!email) {
-        return res.status(401).json({ ok: false, message: "로그인이 필요합니다." });
-      }
-
-      const tasks = [
-        memberCol ? memberCol.find({ email }).toArray() : Promise.resolve([]),
-        inquireCol ? inquireCol.find({ email }).toArray() : Promise.resolve([]),
-        ownSkinCol ? ownSkinCol.find({ email }).toArray() : Promise.resolve([]),
-        comparisonCol ? comparisonCol.find({ email }).toArray() : Promise.resolve([])
-      ];
-      const [m, i, o, c] = await Promise.all(tasks);
-      
-      const myAllInquiries = [...m, ...i, ...o, ...c].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-      let adminReplies = [];
-      if (replyAdminCol) {
-        adminReplies = await replyAdminCol.find({ email }).sort({ createdAt: -1 }).toArray();
-      }
-
-      const list = myAllInquiries.map((doc, index) => {
-        const mapped = mapDoc(doc);
-        mapped.replies = []; 
-        
-        if (adminReplies[index]) {
-          const reply = adminReplies[index];
-          mapped.status = 'answered'; 
-          const plainText = (reply.content || "").replace(/<[^>]*>?/gm, ''); 
-          
-          const d = new Date(reply.createdAt);
-          const replyDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-
-          mapped.replies.push({
-            at: replyDate, 
-            from: reply.name || '관리자',
-            summary: plainText.substring(0, 30) + (plainText.length > 30 ? '...' : '')
-          });
-        } else {
-          mapped.status = mapped.status || 'NEW'; 
-        }
-
-        return mapped;
-      });
-
-      return res.json({ ok: true, list: list });
-      
-    } catch (e) {
-      console.error(e);
-      return res.status(500).json({ ok: false, message: "서버 오류" });
+  try {
+    const email = req.session?.user?.email;
+    if (!email) {
+      return res.status(401).json({ ok: false, message: "로그인이 필요합니다." });
     }
-  });
+
+    // 1) 내 문의들(4개 컬렉션) 가져오기
+    const tasks = [
+      memberCol ? memberCol.find({ email }).toArray() : Promise.resolve([]),
+      inquireCol ? inquireCol.find({ email }).toArray() : Promise.resolve([]),
+      ownSkinCol ? ownSkinCol.find({ email }).toArray() : Promise.resolve([]),
+      comparisonCol ? comparisonCol.find({ email }).toArray() : Promise.resolve([]),
+    ];
+    const [m, i, o, c] = await Promise.all(tasks);
+
+    const myAllInquiries = [...m, ...i, ...o, ...c].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+
+    // 2) 내 답장들 가져오기 (replyAdminCol에는 inquiryId가 있음)
+    let adminReplies = [];
+    if (replyAdminCol) {
+      adminReplies = await replyAdminCol
+        .find({ email })
+        .sort({ createdAt: -1 })
+        .toArray();
+    }
+
+    // 3) inquiryId 기준으로 replies를 묶기(Map)
+    const repliesByInquiryId = new Map(); // key: String(inquiryId) -> replies[]
+    for (const r of adminReplies) {
+      const key = r.inquiryId ? String(r.inquiryId) : null;
+      if (!key) continue;
+
+      const plainText = (r.content || "").replace(/<[^>]*>?/gm, "");
+      const now = new Date(r.createdAt);
+      const replyDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
+      const replyObj = {
+        at: replyDate,
+        from: r.name || "관리자",
+        summary: plainText.length > 30 ? plainText.substring(0, 30) + "..." : plainText,
+        content: r.content || "", // ✅ 핵심: 상세용 전체 HTML 포함
+      };
+
+      const arr = repliesByInquiryId.get(key) || [];
+      arr.push(replyObj);
+      repliesByInquiryId.set(key, arr);
+    }
+
+    // 4) 내 문의에 replies 붙이기 (id로 매칭)
+    const list = myAllInquiries.map((doc) => {
+      const mapped = mapDoc(doc);
+
+      // ✅ 혹시 원본 문서에 doc.replies가 이미 있으면 그것도 살릴 수 있음(선택)
+      // 여기서는 replyAdminCol 기준 매칭을 우선으로 사용
+      const matchedReplies = repliesByInquiryId.get(mapped.id) || [];
+
+      mapped.replies = matchedReplies;
+      mapped.status = matchedReplies.length ? "ANSWERED" : (mapped.status || "NEW");
+
+      return mapped;
+    });
+
+    return res.json({ ok: true, list });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ ok: false, message: "서버 오류" });
+  }
+});
 
   // =========================
   // ✅ 상세조회 (무조건 가장 아래에 있어야 합니다!)

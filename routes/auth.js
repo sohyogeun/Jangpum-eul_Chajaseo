@@ -81,8 +81,40 @@ export default function createAuthRouter(db) {
     }
   });
 
-  // 2) 로그인: POST /api/auth/login
-  // 2) 로그인: POST /api/auth/login
+// 로그인 실패 제한용 메모리 저장소
+const loginFailStore = new Map();
+
+const MAX_LOGIN_FAIL = 5;
+const LOCK_TIME_MS = 30 * 1000;
+
+// key 생성: 아이디 + IP 조합
+function getLoginFailKey(userId, req) {
+  return `${userId}::${req.ip}`;
+}
+
+function getLoginFailInfo(key) {
+  const info = loginFailStore.get(key);
+  if (!info) return { count: 0, lockUntil: 0 };
+
+  // 잠금 시간이 지났으면 초기화
+  if (info.lockUntil && info.lockUntil <= Date.now()) {
+    loginFailStore.delete(key);
+    return { count: 0, lockUntil: 0 };
+  }
+
+  return info;
+}
+
+function setLoginFailInfo(key, info) {
+  loginFailStore.set(key, info);
+}
+
+function clearLoginFailInfo(key) {
+  loginFailStore.delete(key);
+}
+
+
+// 2) 로그인: POST /api/auth/login
 router.post('/login', async (req, res) => {
   try {
     const { userId, password } = req.body;
@@ -90,10 +122,50 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ ok:false, error: 'userId/password 필요' });
     }
 
-    const u = await users.findOne({ userId });
-    if (!u || !u.password || !verifyPassword(password, u.password)) {
-      return res.status(401).json({ ok:false, error: '아이디 또는 비밀번호가 올바르지 않습니다.' });
+    const failKey = getLoginFailKey(userId, req);
+    const failInfo = getLoginFailInfo(failKey);
+
+    // 1. 잠금 상태 먼저 확인
+    if (failInfo.lockUntil > Date.now()) {
+      const remainSec = Math.ceil((failInfo.lockUntil - Date.now()) / 1000);
+      return res.status(429).json({
+        ok: false,
+        error: `로그인 5회 실패로 인해 ${remainSec}초 후 다시 시도해 주세요.`
+      });
     }
+
+    const u = await users.findOne({ userId });
+
+    // 2. 로그인 실패 처리
+    if (!u || !u.password || !verifyPassword(password, u.password)) {
+      const nextCount = failInfo.count + 1;
+
+      // 5회 실패 시 30초 잠금
+      if (nextCount >= MAX_LOGIN_FAIL) {
+        setLoginFailInfo(failKey, {
+          count: 0,
+          lockUntil: Date.now() + LOCK_TIME_MS
+        });
+
+        return res.status(429).json({
+          ok: false,
+          error: '로그인 5번 실패했습니다. 30초 후 다시 시도해 주세요.'
+        });
+      }
+
+      setLoginFailInfo(failKey, {
+        count: nextCount,
+        lockUntil: 0
+      });
+
+      return res.status(401).json({
+        ok:false,
+        error: `아이디 또는 비밀번호가 올바르지 않습니다. (${nextCount}/${MAX_LOGIN_FAIL})`
+      });
+    }
+
+    // 3. 로그인 성공 시 실패 기록 초기화
+    clearLoginFailInfo(failKey);
 
     // ✅✅✅ 이 2줄 추가 (세션에 저장해야 쿠키가 발급됨)
     req.session.user = { userId: u.userId, name: u.name, email: u.email };

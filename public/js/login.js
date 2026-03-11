@@ -38,31 +38,91 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!form) return;
 
-  // ✅ 로그인 처리
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+const LOGIN_FAIL_KEY = "loginFailInfo";
 
-    const fd = new FormData(form);
-    const userId = String(fd.get("userid") || "").trim();
-    const password = String(fd.get("password") || "").trim();
-    if (!userId || !password) return alert("아이디/비밀번호를 입력해 주세요.");
+// 실패 정보 읽기
+function getLoginFailInfo() {
+  const raw = localStorage.getItem(LOGIN_FAIL_KEY);
+  if (!raw) return { count: 0, lockUntil: 0 };
 
-    try {
-      const r = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ userId, password }),
-      });
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return { count: 0, lockUntil: 0 };
+  }
+}
 
-      const data = await r.json().catch(() => ({}));
-      if (!r.ok || !data.ok) return alert(data?.error || "로그인 실패");
+// 실패 정보 저장
+function setLoginFailInfo(info) {
+  localStorage.setItem(LOGIN_FAIL_KEY, JSON.stringify(info));
+}
 
-      localStorage.setItem("currentUser", JSON.stringify(data.user));
-      location.href = "/mainpage.html";
-    } catch (err) {
-      console.error(err);
-      alert("네트워크/서버 오류");
+// 실패 정보 초기화
+function resetLoginFailInfo() {
+  localStorage.removeItem(LOGIN_FAIL_KEY);
+}
+
+// 남은 잠금 시간(초)
+function getRemainSeconds() {
+  const { lockUntil } = getLoginFailInfo();
+  const now = Date.now();
+  return lockUntil > now ? Math.ceil((lockUntil - now) / 1000) : 0;
+}
+
+// ✅ 로그인 처리
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  // 잠금 상태 체크
+  const remain = getRemainSeconds();
+  if (remain > 0) {
+    return alert(`로그인 5회 실패로 인해 ${remain}초 후 다시 시도할 수 있습니다.`);
+  }
+
+  const fd = new FormData(form);
+  const userId = String(fd.get("userid") || "").trim();
+  const password = String(fd.get("password") || "").trim();
+
+  if (!userId || !password) {
+    return alert("아이디/비밀번호를 입력해 주세요.");
+  }
+
+  try {
+    const r = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ userId, password }),
+    });
+
+    const data = await r.json().catch(() => ({}));
+
+    // 로그인 실패
+    if (!r.ok || !data.ok) {
+      const failInfo = getLoginFailInfo();
+      failInfo.count += 1;
+
+      if (failInfo.count >= 5) {
+        failInfo.count = 0;
+        failInfo.lockUntil = Date.now() + 30 * 1000; // 30초 잠금
+        setLoginFailInfo(failInfo);
+        return alert("로그인 5번 실패했습니다. 30초 후 다시 시도해 주세요.");
+      }
+
+      setLoginFailInfo(failInfo);
+      return alert(
+        data?.error || `로그인 실패 (${failInfo.count}/5)`
+      );
     }
-  });
+
+    // 로그인 성공
+    resetLoginFailInfo();
+
+    localStorage.setItem("currentUser", JSON.stringify(data.user));
+    location.href = "/mainpage.html";
+  } catch (err) {
+    console.error(err);
+    alert("네트워크/서버 오류");
+  }
+});
 });

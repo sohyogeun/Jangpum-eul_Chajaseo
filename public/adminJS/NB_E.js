@@ -102,76 +102,84 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------
   document.body.addEventListener('click', async (e) => {
     
-    // 클릭된 요소가 등록 버튼인지 확인 ('btn-submit' 아이디)
-    if (e.target.id === 'btn-submit') {
-      console.log("✅ 등록 버튼 클릭 감지됨!");
+  // 클릭된 요소가 등록 버튼인지 확인 ('btn-submit' 아이디)
+  if (e.target.id === 'btn-submit') {
+    console.log("✅ 등록 버튼 클릭 감지됨!");
 
-      // 1. 입력 폼의 데이터 가져오기 (RE.js에서 적어준 id와 정확히 일치시킵니다!)
-      const title = document.querySelector('#title')?.value;
-      
-      // ✅ 공지글 체크박스 id가 "noticeCheck" 였습니다.
-      const isNotice = document.querySelector('#noticeCheck')?.checked || false; 
-      
-      const name = document.querySelector('#name')?.value;
-      const email = document.querySelector('#email')?.value;
-      const password = document.querySelector('#password')?.value;
-      
-      // ✅ 썸머노트 아이디가 "summernote-editor" 였습니다. 이 코드로 변경해주세요!
-      const content = $('#summernote-editor').summernote('code');
+    // 1. 입력 폼의 데이터 가져오기
+    const title = document.querySelector('#title')?.value;
+    const isNotice = document.querySelector('#noticeCheck')?.checked || false; 
+    const name = document.querySelector('#name')?.value;
+    const email = document.querySelector('#email')?.value;
+    const password = document.querySelector('#password')?.value;
+    const content = $('#summernote-editor').summernote('code');
 
-      console.log("수집된 데이터:", { title, name, content }); 
+    // 💡 [추가됨] 숨겨둔 원본 게시글 ID 가져오기!
+    const inquiryId = document.querySelector('#targetInquiryId')?.value;
 
-      // 2. 필수 값 확인
-      if (!title || !name || !content) {
-        return alert('제목, 이름, 내용을 모두 입력해주세요.');
-      }
-      // --------------------------------------------------------
-      // ✅ [추가된 부분] 이메일 형식 검사 로직
-      // --------------------------------------------------------
-      // 이메일 칸에 무언가 입력되었을 때만 검사합니다.
-      if (email && email.trim() !== '') {
-        // 이메일 형식을 검사하는 정규표현식 (알파벳/숫자 @ 알파벳/숫자 . 알파벳)
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        // 입력한 이메일이 형식에 맞지 않으면 경고를 띄우고 함수를 종료(return)합니다.
-        if (!emailRegex.test(email)) {
-          return alert('올바른 이메일 형식이 아닙니다. (예: example@test.com)');
-        }
-      }
+    console.log("수집된 데이터:", { title, name, content, inquiryId }); 
 
-      // 3. 백엔드 API로 데이터 전송
-      try {
-        const response = await fetch('/api/reply-admin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title, isNotice, name, email, password, content })
-        });
+    // 2. 필수 값 확인
+    if (!title || !name || !content) {
+      return alert('제목, 이름, 내용을 모두 입력해주세요.');
+    }
 
-        const result = await response.json();
-
-        if (result.success) {
-          alert('게시글이 성공적으로 등록되었습니다.');
-          
-          // 4. 입력 폼 비우기
-          if(document.querySelector('#title')) document.querySelector('#title').value = '';
-          if(document.querySelector('#isNotice')) document.querySelector('#isNotice').checked = false;
-          if(document.querySelector('#name')) document.querySelector('#name').value = '';
-          if(document.querySelector('#email')) document.querySelector('#email').value = '';
-          if(document.querySelector('#password')) document.querySelector('#password').value = '';
-          if(document.querySelector('#content')) document.querySelector('#content').value = '';
-
-          // 5. 목록 화면으로 돌아가고 최신 데이터 다시 불러오기
-          switchView('list');
-          loadPage(1); 
-        } else {
-          alert('등록 실패: ' + result.message);
-        }
-      } catch (error) {
-        console.error('서버 전송 에러:', error);
-        alert('데이터를 저장하는 중 오류가 발생했습니다.');
+    // 이메일 형식 검사 로직
+    if (email && email.trim() !== '') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return alert('올바른 이메일 형식이 아닙니다. (예: example@test.com)');
       }
     }
-  });
+
+    // 💡 [수정됨] 서버로 보낼 데이터(payload)에 inquiryId를 꼭 포함시킵니다.
+    const payload = { inquiryId, title, isNotice, name, email, password, content };
+    console.log("🚀 서버로 전송하는 데이터(payload):", payload);
+
+    // 3. 백엔드 API로 데이터 전송
+    try {
+      const response = await fetch('/api/reply-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // ... (아래 에러 처리 및 폼 비우기 로직은 기존과 동일하게 유지) ...
+      if (!response.ok) {
+        const errorText = await response.text(); 
+        console.error(`❌ 서버 에러 응답 (${response.status}):`, errorText);
+        throw new Error(`상태 코드 ${response.status}: ${errorText}`);
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert('게시글이 성공적으로 등록되었습니다.');
+        
+        if(document.querySelector('#title')) document.querySelector('#title').value = '';
+        if(document.querySelector('#noticeCheck')) document.querySelector('#noticeCheck').checked = false;
+        if(document.querySelector('#name')) document.querySelector('#name').value = '';
+        if(document.querySelector('#email')) document.querySelector('#email').value = '';
+        if(document.querySelector('#password')) document.querySelector('#password').value = '';
+        
+        // 💡 폼 비울 때 숨겨진 ID도 비워주는 것이 좋습니다.
+        if(document.querySelector('#targetInquiryId')) document.querySelector('#targetInquiryId').value = '';
+        
+        if($('#summernote-editor').length) {
+          $('#summernote-editor').summernote('reset'); 
+        }
+
+        switchView('list');
+        loadPage(1); 
+      } else {
+        alert('등록 실패: ' + result.message);
+      }
+    } catch (error) {
+      console.error('⚠️ 서버 전송 에러:', error);
+      alert('데이터를 저장하는 중 오류가 발생했습니다. 개발자 도구의 콘솔 창을 확인해주세요.');
+    }
+  }
+});
   // --------------------------------------------------------
 
   // 첫 로드
@@ -202,6 +210,7 @@ function renderTableRows(body, rows) {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.dataset.email = r.user;
+    checkbox.dataset.id = r.id;
     liCheck.append(checkbox);
 
     const liNo = document.createElement('li');
